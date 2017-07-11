@@ -1,14 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import allReducers from './src/reducers/index.js';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk'
+import promise from 'redux-promise-middleware'
+import {Provider, connect} from 'react-redux';
+
+import Router from './src/routes/router';
+
+const middleware = applyMiddleware(promise(),thunk)
+const store = createStore(allReducers, middleware);
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store= {store}>
+        <Router />
+     </Provider>
     );
   }
 }
@@ -21,3 +29,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+// export default connect(( state ) => {
+// 	return {
+// 		listData: state.listData,
+		
+// 	}
+// })(App);
+
