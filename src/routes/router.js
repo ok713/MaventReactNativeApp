@@ -2,6 +2,7 @@ import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import Login from './auth/login';
+import Signup from './auth/signup';
 // import WelcomeScreen from './auth/WelcomeScreen';
 
 
@@ -41,6 +42,7 @@ const RouterComponent = () => {
         onRight={() => { Actions.ActivityPage(); }}
       >
         <Scene key="login" component={Login} hideNavBar rightButtonImage={null} />
+        <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
 
         
       </Scene>
