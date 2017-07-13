@@ -51,7 +51,7 @@ export default function (state = INITIAL_STATE, action) {
       alert('success');
       return { ...state, userID: action.payload.user_id, token: action.payload.token, email: '', password: '' };
     case REG_USER_FAIL:
-      alert('failed');
+      // alert('failed');
       return { email: '', password: '' };
     case REG_USER:
       console.log(state);

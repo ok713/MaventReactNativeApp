@@ -16,10 +16,11 @@ import * as ractions from '../../actions';
 import IconBadge from 'react-native-icon-badge';
 import {ImagePicker} from 'expo';
 import DatePicker from 'react-native-datepicker'
+import {connect} from 'react-redux';
 
-export default class Signup extends Component {
-  constructor() {
-     super();
+class Signup extends Component {
+  constructor(props) {
+     super(props);
      this.state = {
          profileUrl:require('../../../assets/images/avatar.png'),
          showLoginModal: false,
@@ -40,7 +41,7 @@ export default class Signup extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+      console.log("sdfsdfsdfsdf",nextProps)
   }
 
   _openCameraRoll = async () => {
@@ -50,11 +51,21 @@ export default class Signup extends Component {
       }
   }
 
+  takePhoto = async () => {
+      let image = await ImagePicker.launchCameraAsync();
+
+  }
+
   onPrivacy = () => {
 
   }
 
   onTerms = () => {
+      
+  }
+
+  register = () => {
+      this.props.registerUser({ email:this.state.email, password:this.state.password });
       
   }
  
@@ -64,13 +75,16 @@ export default class Signup extends Component {
             <Container>
                 <Content>
                     <View style={{flexDirection:'row',  alignItems:'center'}}>
-                        <TouchableOpacity onPress={this._openCameraRoll}>
                             <IconBadge
                                 MainElement={
-                                <Image source={this.state.profileUrl} style={styles.profileImage} />
+                                    <TouchableOpacity onPress={this._openCameraRoll}>
+                                        <Image source={this.state.profileUrl} style={styles.profileImage} />
+                                    </TouchableOpacity>
                                 }
                                 BadgeElement={
-                                <Icon name='md-camera' style={{color:'#fff', fontSize:19}} />
+                                    <TouchableOpacity onPress={this.takePhoto}>
+                                        <Icon name='md-camera' style={{color:'#fff', fontSize:19}} />
+                                    </TouchableOpacity>
                                 }
                                 IconBadgeStyle={
                                 {width:30,
@@ -80,8 +94,8 @@ export default class Signup extends Component {
                                 backgroundColor: '#ff0000', borderWidth:2, borderColor:'#b22222'}
                                 }
                                 />
-                            
-                        </TouchableOpacity>
+
+
                         <View style={{marginLeft:10}}>
                             <Text style={{fontSize:12}}>Smile, add a photo!</Text>
                             <Text style={{fontSize:12, color:'#808080'}}>We'll attach your photo with the gifts you send</Text>
@@ -170,7 +184,7 @@ export default class Signup extends Component {
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.text}>We'll give you better recommendations.</Text>
-                    <TouchableOpacity style={styles.btn} onPress={(e)=>this.onShowLoginDialog()}>
+                    <TouchableOpacity style={styles.btn} onPress={(e)=>this.register()}>
                         <Text style={{color:'#fff', fontWeight:'bold'}}>JOIN MAVENT</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection:'row', justifyContent:"center", alignItems:'center', marginTop:10}}>
@@ -193,7 +207,13 @@ export default class Signup extends Component {
     );
   }
 }
-
+export default connect(( state ) => {
+	return {
+		auth: state.auth,
+    reg:state.reg
+		
+	}
+},ractions )(Signup);
 const styles = StyleSheet.create({
     profileImage: {
         height: 66,
@@ -202,7 +222,7 @@ const styles = StyleSheet.create({
         borderColor:'#fff',
         borderRadius:33
     },
-    textInput:{backgroundColor:'#fff', paddingHorizontal:10, height: 40, borderColor: '#a9a9a9', borderWidth: 1, borderRadius:5},
+    textInput:{backgroundColor:'#fff', paddingHorizontal:10, height: 40, borderColor: '#a9a9a9', borderWidth: 0.5, borderRadius:5},
     text:{paddingVertical:10, fontSize:12, color:'#808080'},
     genderItemView:{ flexDirection:'row',
         flex:1, backgroundColor:'#fff', padding:5, justifyContent:'center', alignItems:'center'

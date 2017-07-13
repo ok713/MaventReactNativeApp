@@ -1,60 +1,67 @@
 import React from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
-import {connect} from 'react-redux';
+import { Scene, Router, Actions, Reducer } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+
 import Login from './auth/login';
 import Signup from './auth/signup';
-// import WelcomeScreen from './auth/WelcomeScreen';
+
+import CategoryView from './mainUI/categoryView';
+import Discovery from './mainUI/discovery';
+import Profile from './mainUI/profile';
+import ActivityPage from './mainUI/activity';
+
+import TabIcon from '../components/tabIcon';
 
 
-// import registerMain from './auth/registerMain';
-// import registerName from './auth/registerName';
-// import registerEmail from './auth/registerEmail';
-// import registerGender from './auth/registerGender';
-// import registerDOB from './auth/registerDOB';
-// import registerPassword from './auth/registerPassword';
-// import registerTnC from './auth/registerTnC';
-// import registerMobile from './auth/registerMobile';
-// import registerOTP from './auth/registerOTP';
+const reducerCreate = params => {
+  const defaultReducer = Reducer(params);
+  return (state, action) => {
+    console.log("ACTION:", action);
+    return defaultReducer(state, action);
+  }
+};
 
-// import MainCategories from './mainUI/MainCategories';
-// import ListSkill from './mainUI/ListSkill';
-// import ActivityPage from './mainUI/ActivityPage';
-
-// import comfy from './mainUI/SubCategories/comfy';
-// import Care from './mainUI/SubCategories/Care';
-// import enEvent from './mainUI/SubCategories/enEvent';
-// import fillTummy from './mainUI/SubCategories/fillTummy';
-// import health from './mainUI/SubCategories/health';
-// import helpHand from './mainUI/SubCategories/helpHand';
-// import lookBetter from './mainUI/SubCategories/lookBetter';
-// import enKnowledge from './mainUI/SubCategories/enKnowledge';
-
-// import GenericView from './mainUI/SubCategories/GenericView';
-// import GenericBookingPage from './mainUI/SubCategories/GenericBookingPage';
+const TabIcon1 = (props) => {
+  return <TabIcon  {...props} icon={'md-browsers'} />
+};
+const TabIcon2 = (props) => {
+  return <TabIcon  {...props} icon={'md-pin'} />
+};
+const TabIcon3 = (props) => {
+  return <TabIcon  {...props} icon={'ios-contact'} />
+};
 
 const RouterComponent = () => {
   return (
-    <Router>
-      <Scene
-        key='auth'
-        navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0 }}
-        titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
-        onRight={() => { Actions.ActivityPage(); }}
-      >
-        <Scene key="login" component={Login} hideNavBar rightButtonImage={null} />
-        <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
+    <Router createReducer={reducerCreate}>
+      <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage(); }} rightButtonImage={require('../../assets//icons/mailoutline.png')}>
+        <Scene
+          key='auth'
+          navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0 }}
+          titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
+          onRight={() => { Actions.ActivityPage(); }}
+        >
+          <Scene key="login" component={Login} hideNavBar rightButtonImage={null} />
+          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
+        </Scene>
+        <Scene key="ActivityPage" component={ActivityPage} title="Join Mavent" hideNavBar rightButtonImage={null} />
+        <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
+          navigationBarStyle={{ backgroundColor: '#0B486B' }} showLabel={false} initial>
+          <Scene key="categoryView" component={CategoryView} title="M A V E N T" titleStyle={{ color: 'white' }}
+            icon={TabIcon1}
+          />
+          <Scene key="discovery" component={Discovery} title="M A V E N T" titleStyle={{ color: 'white' }}
+            icon={TabIcon2}
+          />
+          <Scene key="profile" component={Profile} title="M A V E N T" titleStyle={{ color: 'white' }}
+            icon={TabIcon3}
 
-        
+          />
+        </Scene>
       </Scene>
-
     </Router>
   );
 };
 
 
-export default connect(( state ) => {
-	return {
-		listData: state.listData,
-		
-	}
-})(RouterComponent);
+export default RouterComponent;

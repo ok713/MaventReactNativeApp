@@ -42,7 +42,8 @@ export default class Login extends Component {
   }
 
   onLogin = () => {
-      
+      Actions.main();      
+      this.setState({showLoginModal:false});
   }
 
 
