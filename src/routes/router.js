@@ -8,7 +8,7 @@ import Signup from './auth/signup';
 import CategoryView from './mainUI/categoryView';
 import Discovery from './mainUI/discovery';
 import Profile from './mainUI/profile';
-import ActivityPage from './mainUI/activity';
+import MySkills from './mainUI/mySkills';
 
 import TabIcon from '../components/tabIcon';
 
@@ -22,26 +22,36 @@ const reducerCreate = params => {
 };
 
 const TabIcon1 = (props) => {
-  return <TabIcon  {...props} icon={'md-browsers'} />
+  return <TabIcon  {...props} icon={'md-browsers'} type='main' />
 };
 const TabIcon2 = (props) => {
-  return <TabIcon  {...props} icon={'md-pin'} />
+  return <TabIcon  {...props} icon={'md-pin'} type='main' />
 };
 const TabIcon3 = (props) => {
-  return <TabIcon  {...props} icon={'ios-contact'} />
+  return <TabIcon  {...props} icon={'ios-contact'} type='main' />
+};
+
+const AcitivityIcon1 = (props) => {
+  return <TabIcon  {...props} title={'My Skills'} type='activity' />
+};
+const AcitivityIcon2 = (props) => {
+  return <TabIcon  {...props} title={'Requested Skills'} type='activity' />
+};
+const AcitivityIcon3 = (props) => {
+  return <TabIcon  {...props} title={'ALL'} type='activity' />
 };
 
 const RouterComponent = () => {
   return (
     <Router createReducer={reducerCreate}>
-      <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage()}}
+      <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage() }}
         navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0 }}
         titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
         rightButtonImage={require('../../assets//icons/mailoutline.png')}>
 
         <Scene key='auth' >
-          <Scene key="login" component={Login} hideNavBar  />
-          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null}/>
+          <Scene key="login" component={Login} hideNavBar />
+          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
         <Scene key='home' initial >
@@ -56,18 +66,19 @@ const RouterComponent = () => {
             showLabel={false}  >
             <Scene key="tab1" component={ActivityPage} icon={TabIcon1} title="M A V E N T" />
             </Scene>*/}
-            <Scene key="ActivityPage" title="Activity" gestureEnabled={false} tabs hideNavBar={false}
-             tabBarPosition='top' labelStyle={{fontSize:15}} tabBarStyle={{padding:10}} rightButtonImage={null} >
-            <Scene key="MySkills" component={ActivityPage} tabBarLabel='My Skills' tabStyle={{backgroundColor:'red'}}
-              navigationBarStyle={{height:0}} rightButtonImage={null} title=''
-               />
-               <Scene key="RequestedSkills" component={ActivityPage} tabBarLabel='Requested Skills'
-              navigationBarStyle={{height:0}} rightButtonImage={null} title=''
-               />
-               <Scene key="ALL" component={ActivityPage} tabBarLabel='ALL'
-              navigationBarStyle={{height:0}} rightButtonImage={null} title=''
-               />
-            </Scene>
+          <Scene key="ActivityPage" title="Activity" gestureEnabled={false} tabs hideNavBar={false}
+            showLabel={false} tabBarPosition='top' tabBarStyle={{ paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
+             rightButtonImage={null} >
+            <Scene key="MySkills" component={MySkills} 
+              navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon1}
+            />
+            <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills'
+              navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon2}
+            />
+            <Scene key="ALL" component={MySkills} tabBarLabel='ALL'
+              navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon3}
+            />
+          </Scene>
 
         </Scene>
       </Scene>
