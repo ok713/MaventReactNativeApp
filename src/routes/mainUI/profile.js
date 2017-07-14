@@ -61,7 +61,7 @@ class Profile extends Component {
                 <Text style={styles.socialTextValue}>223</Text>
                 <Text style={styles.socialTextTitle}>FOLLOWING</Text>
               </View>
-              <View style={{ justifyContent: 'center', padding: 5, alignItems: 'center' }}>
+              <View style={{flex:1, justifyContent: 'center', padding: 5, alignItems: 'center' }}>
                 <Text style={styles.socialTextValue}>88</Text>
                 <Text style={styles.socialTextTitle}>LIKES</Text>
               </View>
