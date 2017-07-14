@@ -56,7 +56,7 @@ const RouterComponent = () => {
 
         <Scene key='home' initial >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
-            showLabel={false} hideNavBar >
+            animationEnabled showLabel={false} hideNavBar >
             <Scene key="categoryView" component={CategoryView} icon={TabIcon1} title="M A V E N T" />
             <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
             <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
@@ -66,9 +66,9 @@ const RouterComponent = () => {
             showLabel={false}  >
             <Scene key="tab1" component={ActivityPage} icon={TabIcon1} title="M A V E N T" />
             </Scene>*/}
-          <Scene key="ActivityPage" title="Activity" gestureEnabled={false} tabs hideNavBar={false}
+          <Scene key="ActivityPage" title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
             showLabel={false} tabBarPosition='top' tabBarStyle={{ paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
-             rightButtonImage={null} >
+             rightButtonImage={null} animationEnabled >
             <Scene key="MySkills" component={MySkills} 
               navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon1}
             />
