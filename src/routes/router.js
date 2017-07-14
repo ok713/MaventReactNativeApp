@@ -34,29 +34,41 @@ const TabIcon3 = (props) => {
 const RouterComponent = () => {
   return (
     <Router createReducer={reducerCreate}>
-      <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage(); }} rightButtonImage={require('../../assets//icons/mailoutline.png')}>
-        <Scene
-          key='auth'
-          navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0 }}
-          titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
-          onRight={() => { Actions.ActivityPage(); }}
-        >
-          <Scene key="login" component={Login} hideNavBar rightButtonImage={null} />
-          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
-        </Scene>
-        <Scene key="ActivityPage" component={ActivityPage} title="Join Mavent" hideNavBar rightButtonImage={null} />
-        <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
-          navigationBarStyle={{ backgroundColor: '#0B486B' }} showLabel={false} initial>
-          <Scene key="categoryView" component={CategoryView} title="M A V E N T" titleStyle={{ color: 'white' }}
-            icon={TabIcon1}
-          />
-          <Scene key="discovery" component={Discovery} title="M A V E N T" titleStyle={{ color: 'white' }}
-            icon={TabIcon2}
-          />
-          <Scene key="profile" component={Profile} title="M A V E N T" titleStyle={{ color: 'white' }}
-            icon={TabIcon3}
+      <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage()}}
+        navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0 }}
+        titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
+        rightButtonImage={require('../../assets//icons/mailoutline.png')}>
 
-          />
+        <Scene key='auth' >
+          <Scene key="login" component={Login} hideNavBar  />
+          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null}/>
+        </Scene>
+
+        <Scene key='home' initial >
+          <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
+            showLabel={false} hideNavBar >
+            <Scene key="categoryView" component={CategoryView} icon={TabIcon1} title="M A V E N T" />
+            <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
+            <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
+          </Scene>
+          {/*<Scene key="ActivityPage" gestureEnabled={false} tabs
+           tabBarStyle={{  top:0 }}
+            showLabel={false}  >
+            <Scene key="tab1" component={ActivityPage} icon={TabIcon1} title="M A V E N T" />
+            </Scene>*/}
+            <Scene key="ActivityPage" title="Activity" gestureEnabled={false} tabs hideNavBar={false}
+             tabBarPosition='top' labelStyle={{fontSize:15}} tabBarStyle={{padding:10}} rightButtonImage={null} >
+            <Scene key="MySkills" component={ActivityPage} tabBarLabel='My Skills' tabStyle={{backgroundColor:'red'}}
+              navigationBarStyle={{height:0}} rightButtonImage={null} title=''
+               />
+               <Scene key="RequestedSkills" component={ActivityPage} tabBarLabel='Requested Skills'
+              navigationBarStyle={{height:0}} rightButtonImage={null} title=''
+               />
+               <Scene key="ALL" component={ActivityPage} tabBarLabel='ALL'
+              navigationBarStyle={{height:0}} rightButtonImage={null} title=''
+               />
+            </Scene>
+
         </Scene>
       </Scene>
     </Router>
