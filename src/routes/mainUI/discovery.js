@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ActivityIndicator, Text, Image, Dimensions, StyleSheet } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
-import { Container, Content, Tab, Tabs, Header, Icon } from 'native-base';
+import { Container, Content, Icon } from 'native-base';
 
 import ItemRow from '../../components/discoveryItem'
 import data from '../../services/provider.json';
@@ -66,7 +66,7 @@ class Discovery extends React.Component {
                         <Text style={{ fontSize: 13, color: 'white' }}>Mavens in this area!</Text>
                     </View>
                     <Container>
-                        <Content>
+                        <Content padder>
                             {
                                 data.map((item, index)=>{
                                     return <ItemRow key={index} data={item}/>

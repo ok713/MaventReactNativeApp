@@ -1,10 +1,11 @@
 import React from 'react';
-import { Icon } from 'native-base';
+import { Icon, Card } from 'native-base';
 import { View, Text, Image } from 'react-native';
 
 const ItemRow = (props) => {
   let provider = props.data;
   return (
+    <Card>
     <View key={provider.id} style={{ height: 80, backgroundColor: 'white', margin: 1, flexDirection: 'row' }}>
       <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
         <Image source={require('../../assets/images/profile.png')} style={{ height: 45, width: 45, borderRadius: 22 }} />
@@ -19,6 +20,7 @@ const ItemRow = (props) => {
         <Icon name='md-chatbubbles' size={40} />
       </View>
     </View>
+    </Card>
   );
 };
 
