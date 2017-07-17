@@ -9,7 +9,7 @@ import CategoryView from './mainUI/categoryView';
 import Discovery from './mainUI/discovery';
 import Profile from './mainUI/profile';
 import MySkills from './mainUI/mySkills';
-
+import SkillList from './mainUI/skillList';
 import TabIcon from '../components/tabIcon';
 
 
@@ -58,14 +58,9 @@ const RouterComponent = () => {
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showLabel={false} hideNavBar >
             <Scene key="categoryView" component={CategoryView} icon={TabIcon1} title="M A V E N T" />
-            <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
+            <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" hideNavBar />
             <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
-          {/*<Scene key="ActivityPage" gestureEnabled={false} tabs
-           tabBarStyle={{  top:0 }}
-            showLabel={false}  >
-            <Scene key="tab1" component={ActivityPage} icon={TabIcon1} title="M A V E N T" />
-            </Scene>*/}
           <Scene key="ActivityPage" title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
             showLabel={false} tabBarPosition='top' tabBarStyle={{ paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
              rightButtonImage={null} animationEnabled >
@@ -79,6 +74,7 @@ const RouterComponent = () => {
               navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon3}
             />
           </Scene>
+          <Scene key="skillList" component={SkillList} title="Monetizing" />
 
         </Scene>
       </Scene>

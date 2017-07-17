@@ -4,6 +4,8 @@ import { Container, Content } from 'native-base';
 import Carousel from 'react-native-looped-carousel';
 import { Actions } from 'react-native-router-flux';
 import RenderItem from '../../components/categoryItem'
+import Search from 'react-native-search-box';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -57,9 +59,30 @@ class CategoryView extends Component {
 
     }
 
+    onSearch = (text) => {
+        return new Promise((resolve, reject) => {
+            console.log('onSearch', text);
+            resolve();
+        });
+    }
+
+    onChangeText = (text) => {
+        return new Promise((resolve, reject) => {
+            console.log('onChangeText', text);
+            resolve();
+        });
+    }
+
+
     render() {
         return (
             <View style={{flex:1}}>
+                <Search
+                ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
+                    placeholderTextColor="#d3d3d3"
+                    tintColorSearch="#fff"
+                    tintColorDelete="#fff"
+                onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
                 <Carousel
                     delay={6000}
                     style={styles.carouselItem}

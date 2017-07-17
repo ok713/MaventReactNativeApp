@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Platform, Text, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Icon } from 'native-base';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import RateComponent from '../../components/rateComponent';
 import ReviewComponent from '../../components/reviewComponent';
 import data from '../../services/reviews.json';
@@ -93,7 +94,7 @@ class Profile extends Component {
                     return <RateComponent key={index} data={item} />
                   })
                 }
-                <TouchableOpacity onPress={() => Actions.ListSkill()}>
+                <TouchableOpacity onPress={() => Actions.skillList()}>
                   <View style={{ marginVertical: 5, padding: 5, backgroundColor: 'rgba(177, 183, 185, 0.1)', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)', borderRadius: 8 }}>
                     <Icon name='md-add-circle' style={{ color: 'rgba(177, 183, 185, 0.6)' }} />
                   </View>

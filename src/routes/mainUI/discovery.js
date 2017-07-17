@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ActivityIndicator, Text, Image, Dimensions, StyleSheet } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
 import { Container, Content, Icon } from 'native-base';
-
+import Search from 'react-native-search-box';
 import ItemRow from '../../components/discoveryItem'
 import data from '../../services/provider.json';
 
@@ -49,9 +49,31 @@ class Discovery extends React.Component {
         }
     }
 
+    onSearch = (text) => {
+        return new Promise((resolve, reject) => {
+            console.log('onSearch', text);
+            resolve();
+        });
+    }
+
+    onChangeText = (text) => {
+        return new Promise((resolve, reject) => {
+            console.log('onChangeText', text);
+            resolve();
+        });
+    }
+
     render() {
         return (
             <View style={styles.mapContainer}>
+                <View style={{backgroundColor:'#0B486B', padding:5, paddingTop:15}}>
+                <Search
+                ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
+                    placeholderTextColor="#d3d3d3"
+                    tintColorSearch="#fff"
+                    tintColorDelete="#fff"
+                onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
+                </View>
                 <MapView
                     // provider="google"
                     region={this.state.region}
@@ -66,7 +88,7 @@ class Discovery extends React.Component {
                         <Text style={{ fontSize: 13, color: 'white' }}>Mavens in this area!</Text>
                     </View>
                     <Container>
-                        <Content padder>
+                        <Content>
                             {
                                 data.map((item, index)=>{
                                     return <ItemRow key={index} data={item}/>
