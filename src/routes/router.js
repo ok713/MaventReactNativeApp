@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Login from './auth/login';
 import Signup from './auth/signup';
+import Otp from './auth/OTP';
 
 import CategoryView from './mainUI/categoryView';
 import Discovery from './mainUI/discovery';
@@ -45,20 +46,21 @@ const RouterComponent = () => {
   return (
     <Router createReducer={reducerCreate}>
       <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage() }}
-        navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0 }}
+        navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0}}
         titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
         rightButtonImage={require('../../assets//icons/mailoutline.png')}>
 
         <Scene key='auth' >
           <Scene key="login" component={Login} hideNavBar />
           <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
+          <Scene key="OTP" initial component={Otp} title="ACTIVATION" back={true} hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
-        <Scene key='home' initial >
+        <Scene key='home'  >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showLabel={false} hideNavBar >
             <Scene key="categoryView" component={CategoryView} icon={TabIcon1} title="M A V E N T" />
-            <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" hideNavBar />
+            <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
             <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
           <Scene key="ActivityPage" title="Activity"  gestureEnabled={false} tabs hideNavBar={false}

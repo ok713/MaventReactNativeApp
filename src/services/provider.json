@@ -3,54 +3,72 @@
     "id": 0,
     "Name": "John Lim",
     "Service": "#Dim Sum Teacher",
-    "Dist": "0.2 km"
+    "tags":"Administrative, Data process",
+    "Dist": "0.2 km",
+    "price":39
   },
   {
     "id": 1,
     "Name": "Xiao Hei",
     "Service": "#Math Tutor",
-    "Dist": "0.3 km"
+    "tags":"Administrative, Data process",
+    "Dist": "0.3 km",
+    "price":39
   },
   {
     "id": 2,
     "Name": "Muhd Asraf",
     "Service": "#Chinese Tutor",
-    "Dist": "0.4 km"
+    "tags":"Administrative, Data process",
+    "Dist": "0.4 km",
+    "price":39
   },
   {
     "id": 3,
     "Name": "Ben Tan",
     "Service": "#Photographer",
-    "Dist": "0.5 km"
+    "tags":"Administrative, Data process",
+    "Dist": "0.5 km",
+    "price":39
   },
   {
     "id": 4,
     "Name": "Lee Wei Men",
     "Service": "#Entertainer",
-    "Dist": "0.8 km"
+    "tags":"Administrative, Data process",
+    "Dist": "0.8 km",
+    "price":39
   },
   {
     "id": 5,
     "Name": "Jayden Cok",
     "Service": "#Cleaner",
-    "Dist": "1 km"
+    "tags":"Administrative, Data process",
+    "Dist": "1 km",
+    "price":39
   },
   {
     "id": 6,
     "Name": "Ng Jun Hao",
     "Service": "#Fake Developer",
-    "Dist": "1.5 km"
+    "tags":"Administrative, Data process",
+    "Dist": "1.5 km",
+    "price":39
   },
   {
     "id": 7,
     "Name": "Ang Wei Wei",
     "Service": "#Handyman ",
-    "Dist": "1.8 km"
+    "tags":"Administrative, Data process",
+    "Dist": "1.8 km",
+    "price":39
   },
   {
     "id": 8,
     "Name": "Lim Jun Kai",
     "Service": "#Plumber",
-    "Dist": "2 km"
+    "tags":"Administrative, Data process",
+    "Dist": "2 km",
+    "price":39
   }
 ]

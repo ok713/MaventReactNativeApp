@@ -66,6 +66,7 @@ class Signup extends Component {
 
   register = () => {
       this.props.registerUser({ email:this.state.email, password:this.state.password });
+      Actions.OTP();
       
   }
  

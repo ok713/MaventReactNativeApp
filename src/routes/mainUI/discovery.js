@@ -66,15 +66,7 @@ class Discovery extends React.Component {
     render() {
         return (
             <View style={styles.mapContainer}>
-                <View style={{backgroundColor:'#0B486B', padding:5, paddingTop:15}}>
-                <Search
-                ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
-                    placeholderTextColor="#d3d3d3"
-                    tintColorSearch="#fff"
-                    tintColorDelete="#fff"
-                onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
-                </View>
-                <MapView
+               <MapView
                     // provider="google"
                     region={this.state.region}
                     showsMyLocationButton
@@ -84,8 +76,13 @@ class Discovery extends React.Component {
                     style={{ height: 0.3 * SCREEN_H }}
                 />
                 <View style={styles.listContainer}>
-                    <View style={{ height: 40, borderTopWidth: 1, borderColor: 'gray', backgroundColor: '#0B486B', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 13, color: 'white' }}>Mavens in this area!</Text>
+                    <View style={{backgroundColor:'#0B486B', padding:3}}>
+                        <Search
+                            ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
+                                placeholderTextColor="#d3d3d3"
+                                tintColorSearch="#fff"
+                                tintColorDelete="#fff"
+                            onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
                     </View>
                     <Container>
                         <Content>
