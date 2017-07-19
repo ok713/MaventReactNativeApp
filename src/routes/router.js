@@ -7,10 +7,12 @@ import Signup from './auth/signup';
 import Otp from './auth/OTP';
 
 import CategoryView from './mainUI/categoryView';
+import SubCategory from './mainUI/subCategory';
 import Discovery from './mainUI/discovery';
 import Profile from './mainUI/profile';
 import MySkills from './mainUI/mySkills';
 import SkillList from './mainUI/skillList';
+
 import TabIcon from '../components/tabIcon';
 
 
@@ -53,10 +55,10 @@ const RouterComponent = () => {
         <Scene key='auth' >
           <Scene key="login" component={Login} hideNavBar />
           <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
-          <Scene key="OTP" initial component={Otp} title="ACTIVATION" back={true} hideNavBar={false} rightButtonImage={null} />
+          <Scene key="OTP"  component={Otp} title="ACTIVATION" back={true} hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
-        <Scene key='home'  >
+        <Scene key='home' initial >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showLabel={false} hideNavBar >
             <Scene key="categoryView" component={CategoryView} icon={TabIcon1} title="M A V E N T" />
@@ -77,7 +79,7 @@ const RouterComponent = () => {
             />
           </Scene>
           <Scene key="skillList" component={SkillList} title="Monetizing" />
-
+          <Scene key="subCategory" component={SubCategory} title="Monetizing" />
         </Scene>
       </Scene>
     </Router>
