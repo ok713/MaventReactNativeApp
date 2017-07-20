@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Container, Content, Icon } from 'native-base';
 import data from '../../services/request.json';
+import { Actions } from 'react-native-router-flux';
 
 class MySkills extends Component {
   constructor() {
@@ -18,7 +19,7 @@ class MySkills extends Component {
     };
   }
   // This is to remove fb token for retry purposes
-  componentWillMount() {
+  componentDidMount() {
 
   }
 

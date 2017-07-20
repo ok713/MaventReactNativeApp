@@ -23,10 +23,11 @@ class SubCategory extends Component {
   }
 
   componentDidMount(){
-    Actions.refresh({title:this.props.title})
+
    }
 
-  navigate = (index) => {
+  navigate = (data) => {
+    Actions.genericView({data:data, title:data.name});
     
   }
 
@@ -34,7 +35,7 @@ class SubCategory extends Component {
     const { renderItemContainer, itemImageStyle, placeholderItemNameStyle } = styles;
     return (
       <View style={renderItemContainer}>
-        <TouchableOpacity onPress={() => this.navigate(data.id)}>
+        <TouchableOpacity onPress={() => this.navigate(data)}>
           <Image source={data.image} style={itemImageStyle} >
             <Text style={placeholderItemNameStyle}> {data.name} </Text>
           </Image>

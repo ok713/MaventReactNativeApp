@@ -12,6 +12,7 @@ import Discovery from './mainUI/discovery';
 import Profile from './mainUI/profile';
 import MySkills from './mainUI/mySkills';
 import SkillList from './mainUI/skillList';
+import GenericView from './mainUI/genericView';
 
 import TabIcon from '../components/tabIcon';
 
@@ -65,21 +66,22 @@ const RouterComponent = () => {
             <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
             <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
-          <Scene key="ActivityPage" title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
+          <Scene key="ActivityPage" back={true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
             showLabel={false} tabBarPosition='top' tabBarStyle={{ paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
-             rightButtonImage={null} animationEnabled >
-            <Scene key="MySkills" component={MySkills} 
+             rightButtonImage={null} animationEnabled>
+            <Scene key="MySkills" component={MySkills} back={false} 
               navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon1}
             />
-            <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills'
+            <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills' back={false} 
               navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon2}
             />
-            <Scene key="ALL" component={MySkills} tabBarLabel='ALL'
+            <Scene key="ALL" component={MySkills} tabBarLabel='ALL' back={false} 
               navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon3}
             />
           </Scene>
           <Scene key="skillList" component={SkillList} title="Monetizing" />
-          <Scene key="subCategory" component={SubCategory} title="Monetizing" />
+          <Scene key="subCategory" component={SubCategory} title="Subcategory" />
+          <Scene key="genericView" component={GenericView} back={true} title="GenericView" />
         </Scene>
       </Scene>
     </Router>
