@@ -13,6 +13,7 @@ import Profile from './mainUI/profile';
 import MySkills from './mainUI/mySkills';
 import SkillList from './mainUI/skillList';
 import GenericView from './mainUI/genericView';
+import GenericBooking from './mainUI/genericBookingPage';
 
 import TabIcon from '../components/tabIcon';
 
@@ -82,6 +83,7 @@ const RouterComponent = () => {
           <Scene key="skillList" component={SkillList} title="Monetizing" />
           <Scene key="subCategory" component={SubCategory} title="Subcategory" />
           <Scene key="genericView" component={GenericView} back={true} title="GenericView" />
+          <Scene key="genericBooking" component={GenericBooking} back={true} title="GenericBookingPage" />
         </Scene>
       </Scene>
     </Router>

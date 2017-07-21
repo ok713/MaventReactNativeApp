@@ -94,6 +94,33 @@ class GenericView extends Component {
     );
   };
 
+  renderHeader = () => {
+   return <View style={{backgroundColor:'#0B486B', padding:3}}>
+                        <Search
+                            backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
+                                placeholderTextColor="#d3d3d3"
+                                tintColorSearch="#fff"
+                                tintColorDelete="#fff"
+                            onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
+                    </View>
+ };
+
+  renderFooter = () => {
+    if (!this.state.loading) return null;
+
+    return (
+      <View
+        style={{
+          paddingVertical: 20,
+          borderTopWidth: 1,
+          borderColor: '#CED0CE'
+        }}
+      >
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
+  };
+
   onSearch = (text) => {
         return new Promise((resolve, reject) => {
             console.log('onSearch', text);
@@ -133,7 +160,7 @@ class GenericView extends Component {
         </View>
         <View style={{backgroundColor:'#0B486B', padding:3}}>
                         <Search
-                            ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
+                             backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
                                 placeholderTextColor="#d3d3d3"
                                 tintColorSearch="#fff"
                                 tintColorDelete="#fff"
@@ -142,7 +169,7 @@ class GenericView extends Component {
 
         <Container>
           <Content>
-            {this.state.data.map((item, index)=>{
+            {/*{this.state.data.map((item, index)=>{
               return <Card key={index} style={{marginTop:0}}>
               <View  style={{ height: 100, width: SCREEN_WIDTH, flexDirection: 'row' }}>
                 <View style={{ flex: 1.2, justifyContent: 'center', alignItems: 'center' }}>
@@ -163,7 +190,7 @@ class GenericView extends Component {
                       starSize={20}
                       starColor="#FFDD44"
                     />
-                    <View style={{ backgroundColor: '#00CCE4', marginLeft: 8, borderRadius: 4, justifyContent: 'center', alignItems: 'center', width: 110, padding: 5 }}>
+                    <View style={{ backgroundColor: '#00CCE4', marginLeft: 8, borderRadius: 4, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
                       <Text style={{ color: 'white' }}>Event: Wedding</Text>
                     </View>
                   </View>
@@ -171,9 +198,9 @@ class GenericView extends Component {
 
                 <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center' }}>
 
-                  <View style={{ marginTop: 4, flexDirection: 'row', justifyContent: 'space-around', width: 80 }}>
-                      <TouchableOpacity onPress={() => Actions.GenericBookingPage({ title: `${item.name.first} ${item.name.last}` })}>
-                        <Icon name='md-chatboxes' style={{fontSize:34}}  />
+                  <View style={{ marginTop: 4, flexDirection: 'row', justifyContent: 'center'}}>
+                      <TouchableOpacity onPress={() => Actions.genericBooking({ title: `${item.name.first} ${item.name.last}` })}>
+                        <Icon name='md-chatboxes' style={{fontSize:34, paddingRight:10}}  />
                       </TouchableOpacity>
                       <Icon name='ios-arrow-forward' style={{fontSize:30}}/>
                   </View>
@@ -182,7 +209,54 @@ class GenericView extends Component {
               </View>
               </Card>
             })
-            }
+            }*/}
+          <FlatList
+            data={this.state.data}
+            renderItem={({ item }) => (
+              <View style={{ height: 100, width: SCREEN_WIDTH, flexDirection: 'row' }}>
+                <View style={{ flex: 1.2, justifyContent: 'center', alignItems: 'center' }}>
+                  <Image source={{ uri: item.picture.thumbnail }} style={{ height: 60, width: 60, borderRadius: 30 }} />
+                  <Text>x.x km</Text>
+                </View>
+
+                <View style={{ flex: 3, paddingLeft: 3, paddingTop: 10 }}>
+                  <Text style={{ fontSize: 14, color: '#8C8C8C' }}>{`${item.name.first} ${item.name.last}`}</Text>
+                  <View style={{ height: 2 }}></View>
+                  <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.props.cat}</Text>
+                  <View style={{ height: 8 }}></View>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <StarRating
+                      disabled
+                      maxStars={5}
+                      rating={3.5}
+                      starSize={20}
+                      starColor="#FFDD44"
+                    />
+                   <View style={{ backgroundColor: '#00CCE4', marginLeft: 8, borderRadius: 4, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+                      <Text style={{ color: 'white' }}>Event: Wedding</Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center' }}>
+
+                  <View style={{ marginTop: 4, flexDirection: 'row', justifyContent: 'space-around', }}>
+                      <TouchableOpacity onPress={() => Actions.genericBooking({ title: `${item.name.first} ${item.name.last}` })}>
+                        <Icon name='md-chatboxes' style={{fontSize:34, paddingRight:15}}  />
+                      </TouchableOpacity>
+                      <Icon name='ios-arrow-forward' style={{fontSize:30}}/>
+                  </View>
+
+                </View>
+              </View>
+            )}
+            keyExtractor={item => item.email}
+            ItemSeparatorComponent={this.renderSeparator}
+            ListFooterComponent={this.renderFooter}
+           
+            onEndReached={this.handleLoadMore}
+            onEndReachedThreshold={0.1}
+          />  
         </Content>
       </Container>
 
