@@ -62,11 +62,12 @@ const RouterComponent = () => {
 
         <Scene key='auth' >
           <Scene key="login" component={Login} hideNavBar />
-          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} />
-          <Scene key="OTP"  component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true} hideNavBar={false} rightButtonImage={null} />
+          <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} renderRightButton={null} />
+          <Scene key="OTP"  component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true} 
+           renderRightButton={null} hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
-        <Scene key='home' initial >
+        <Scene key='home'  >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showIcon={true} showLabel={false} hideNavBar tabBarPosition='bottom'>
             <Scene key="categoryView"  component={CategoryView} icon={TabIcon1} title="M A V E N T" />

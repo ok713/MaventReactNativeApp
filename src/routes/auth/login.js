@@ -55,7 +55,7 @@ export default class Login extends Component {
   
   render() {
     return (
-        <View style={{flex:1, justifyContent:'center'}}>
+        <View style={{flex:1, justifyContent:'center', marginTop:Platform.OS==="android"?23:0}}>
             <View style={{ flex:1, width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B486B' }}>
                 <Image source={require('../../../assets/images/mavent_logo.png')} style={styles.LogoImage} />
                 <View style={{ alignItems: 'center', width: '100%', paddingTop: 40 }}>
