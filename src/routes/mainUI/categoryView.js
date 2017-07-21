@@ -55,8 +55,8 @@ const imageDetails = [
 
 class CategoryView extends Component {
     
-    componentWillMount() {
-
+    componentDidMount() {
+        Actions.refresh({rightButtonImage:require('../../../assets//icons/mailoutline.png')})
     }
 
     onSearch = (text) => {
