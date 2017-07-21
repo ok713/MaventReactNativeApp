@@ -47,8 +47,8 @@ const AcitivityIcon3 = (props) => {
 };
 
 const renderRightButton = ()=>{
-  return <TouchableOpacity onPress={(e)=> Actions.ActivityPage()} style={{padding:5}}>
-            <Image source={require("../../assets//icons/mailoutline.png")} style={{width:30, height:30}}/>
+  return <TouchableOpacity onPress={(e)=> Actions.ActivityPage()} style={{padding:10}}>
+            <Image source={require("../../assets//icons/mailoutline.png")} style={{width:25, height:25}}/>
         </TouchableOpacity>
 }
 
@@ -58,7 +58,7 @@ const RouterComponent = () => {
       <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage() }}
         navigationBarStyle={{marginTop:Platform.OS==="android"?23:0, backgroundColor: '#0B486B', borderBottomWidth: 0}}
         titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
-        rightButtonImage={require('../../assets//icons/mailoutline.png')} renderRightButton={renderRightButton} >
+         renderRightButton={renderRightButton} >
 
         <Scene key='auth' >
           <Scene key="login" component={Login} hideNavBar />
@@ -69,23 +69,23 @@ const RouterComponent = () => {
         <Scene key='home' initial >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showIcon={true} showLabel={false} hideNavBar tabBarPosition='bottom'>
-            <Scene key="categoryView" rightButtonImage={require('../../assets//icons/mailoutline.png')}  component={CategoryView} icon={TabIcon1} title="M A V E N T" />
+            <Scene key="categoryView"  component={CategoryView} icon={TabIcon1} title="M A V E N T" />
             <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
             <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
           <Scene key="ActivityPage" back={Platform.OS==="android"?false:true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
-            showIcon={false} showLabel={true} tabBarPosition='top' activeBackgroundColor='#f4f4f4'
+            showIcon={Platform.OS==="android"?false:true} showLabel={Platform.OS==="android"?true:false} tabBarPosition='top' activeBackgroundColor='#f4f4f4'
             tabBarStyle={{backgroundColor:"#f4f4f4", paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
             activeTintColor="#000080" inactiveTintColor="#000" indicatorStyle={{backgroundColor:'#000080'}} labelStyle={{fontWeight:'bold'}}
              rightButtonImage={null} animationEnabled>
             <Scene key="MySkills" component={MySkills} back={false} iconStyle={{width:200, height:'100%'}}
-              navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon1}
+              navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon1}
             />
             <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills' back={false} 
-              navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon2}
+              navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon2}
             />
             <Scene key="ALL" component={MySkills} tabBarLabel='ALL' back={false} 
-              navigationBarStyle={{ height: 0 }} rightButtonImage={null} title='' icon={AcitivityIcon3}
+              navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon3}
             />
           </Scene>
           <Scene key="skillList" component={SkillList} title="Monetizing" />
