@@ -23,8 +23,8 @@ const ItemRow = (props) => {
             <Icon name='md-pin' style={{fontSize:23, paddingRight:2, color:'gray'}} />
             <Text style={{ fontSize: 15, color:'gray', }}>{provider.Dist}</Text>
           </View>
-          <View style={{width:'100%', alignItems:'center', borderWidth:1, borderRadius:8, borderColor:'#ccc', padding:5}}>
-            <Text style={{color:'#0B486B', fontWeight:"800"}}>${provider.price}</Text>
+          <View style={{backgroundColor:'#32cd32', width:'100%', alignItems:'center', borderWidth:1, borderRadius:8, borderColor:'#ccc', padding:5}}>
+            <Text style={{color:'blue', fontWeight:"800"}}>${provider.price}/hr</Text>
           </View>
           {/*<Icon name='md-thumbs-up' size={35} style={{ padding: 4 }} />
           <Icon name='md-chatbubbles' size={40} />*/}

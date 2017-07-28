@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import {Container, Content, Icon} from 'native-base';
+import { Container, Content, Icon } from 'native-base';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const { width, height } = Dimensions.get('window');
 const HORIZONTAL_PADDING = 10;
@@ -17,18 +17,18 @@ const HORIZONTAL_PADDING = 10;
 class SubCategory extends Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
 
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
-   }
+  }
 
   navigate = (data) => {
-    Actions.genericView({data:data, title:data.name});
-    
+    Actions.genericView({ data: data, title: data.name });
+
   }
 
   renderItem(data, index) {
@@ -52,42 +52,39 @@ class SubCategory extends Component {
           <View style={styles.imageContainer}>
             <Image source={require('../../../assets/images/chatImage.jpg')} style={styles.chatImageStyle} />
           </View>
-          <View style={styles.contentContainer}>
-            <View style={{ backgroundColor: 'white', borderRadius: 5, flex: 2, justifyContent: 'center' }}>
-              <View style={{ padding: 5, alignItems: 'center' }}>
-                <Text style={{ fontSize: (Platform.OS === 'ios' ? 15 : 13), fontWeight: 'bold' }}>#ComfyHomeChatRoom</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text>652</Text>
-                  <Text> people in chatroom</Text>
+          <View style={{flex:1, paddingHorizontal:10}} >
+            <Text style={{fontSize:18}}>{this.props.title} chatroom</Text>
+            <View style={{flex:1, justifyContent:'flex-end'}}> 
+              <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                <View style={{flexDirection:'row'}}>
+                  <Icon name='ios-beaker' style={{color:'#00ced1', fontSize:20}}/>
+                  <Text style={{color:'#00ced1', fontSize:17, marginLeft:3}} >10</Text>
                 </View>
-                <Text>5 minutes ago</Text>
+                <TouchableOpacity style={{ borderRadius:5, backgroundColor:'#00ced1', paddingVertical:5, paddingHorizontal:20}} onPress={(e)=>{}}>
+                  <Text style={{color:'#fff', fontSize:17}} >Chat</Text>
+                </TouchableOpacity>
               </View>
             </View>
-            <TouchableOpacity style={styles.buttonStyle}>
-              <Text style={{color:'#fff', fontSize:17}} >Join Chat</Text>
-              <Icon name='arrow-forward' style={{color:'#fff', fontSize:20}}/>
-
-            </TouchableOpacity>
           </View>
         </View>
 
         <View style={{ flex: 2.4 }}>
-            <Container>
-                <Content>
-                    {
-                      this.props.data.map((item, index)=>{
-                        if(index % 2 ==0){
-                          return <View key={index} style={{paddingHorizontal:5, width:width, flexDirection:'row', paddingTop:5, justifyContent:'space-between', alignItems:'flex-start'}}>
-                                  {this.renderItem(this.props.data[index], index)}
-                                  {this.props.data[index+1] &&
-                                    this.renderItem(this.props.data[index+1], index)
-                                  }
-                            </View>
-                        }
-                      })
-                    }
-                </Content>
-            </Container>
+          <Container style={{backgroundColor:'#fff'}}>
+            <Content>
+              {
+                this.props.data.map((item, index) => {
+                  if (index % 2 == 0) {
+                    return <View key={index} style={{ paddingHorizontal: 5, width: width, flexDirection: 'row', paddingTop: 5, justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                      {this.renderItem(this.props.data[index], index)}
+                      {this.props.data[index + 1] &&
+                        this.renderItem(this.props.data[index + 1], index)
+                      }
+                    </View>
+                  }
+                })
+              }
+            </Content>
+          </Container>
         </View>
       </View>
     );
@@ -104,37 +101,36 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     justifyContent: 'space-between',
     paddingVertical: 10,
-    paddingHorizontal:5,
+    paddingHorizontal: 5,
     alignItems: 'flex-start',
-    backgroundColor: 'rgba(196, 219, 231, 0.9)'
-  },
-  imageContainer: {
-    borderRadius: 10,
-    height: 180,
-    width: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: '#fff',
+    borderBottomColor: '#dcdcdc',
+    borderBottomWidth:3,
     shadowColor: 'black',
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 2
+  },
+  imageContainer: {
+    borderRadius: 10,
+    height: 180,
+    width: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding:5
   },
   contentContainer: {
     height: 180,
     width: (Platform.OS === 'ios' ? SCREEN_WIDTH / 2.3 : SCREEN_WIDTH / 2.4),
   },
   chatImageStyle: {
-    height: 170,
-    width: 190,
-    borderRadius: 10,
-    position: 'absolute'
+    height: '100%',
+    width: '100%',
   },
   buttonStyle: {
-    flexDirection:'row',
-    marginTop:10, padding:10, backgroundColor:'#1F57A0', justifyContent: 'space-around', alignItems: 'center',
-    borderRadius:5
+    flexDirection: 'row',
+    marginTop: 10, padding: 10, backgroundColor: '#1F57A0', justifyContent: 'space-around', alignItems: 'center',
+    borderRadius: 5
   },
   item: {
     flex: 1,
@@ -142,9 +138,9 @@ const styles = StyleSheet.create({
   },
   renderItemContainer: {
 
-  	justifyContent: 'center',
-  	alignItems: 'center',
-  	paddingTop: 5
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 5
   },
   itemImageStyle: {
     flexDirection: 'row',
