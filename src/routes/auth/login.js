@@ -76,7 +76,7 @@ export default class Login extends Component {
                     <TouchableOpacity style={[styles.loginBtn,{borderWidth:1.5, borderColor:'#0B486B', padding:10, shadowRadius:1}]} onPress={(e)=>{Actions.signup()}}>
                         <Text style={{color:'#0B486B', fontWeight:'bold'}}>Sign up</Text>
                     </TouchableOpacity>
-                    <Modal animationType={'slide'}
+                    <Modal animationType={'slide'} onRequestClose={() => null} 
                         transparent={true}
                         visible={this.state.showLoginModal}>
                         <View style={styles.loginModal}>

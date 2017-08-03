@@ -39,7 +39,7 @@ class GenericView extends Component {
 
   makeRemoteRequest = () => {
     const { page, seed } = this.state;
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=50`;
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=30`;
     this.setState({ loading: true });
     data = this.state.data;
 

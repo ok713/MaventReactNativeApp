@@ -12,7 +12,7 @@ export default class ListModal extends React.Component {
    }
    render() {
     return (
-     <Modal animationType={'slide'} transparent={true} visible={this.state.showLoginModal}>
+     <Modal animationType={'slide'} transparent={true} visible={this.state.showLoginModal} onRequestClose={() => null} >
        <View style={styles.listModal}>
          <View style={{backgroundColor:'#fff', borderRadius:10, width:'100%', padding:10}}>
          <ScrollView style={{marginBottom:20}}>

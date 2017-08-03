@@ -67,7 +67,7 @@ const RouterComponent = () => {
            renderRightButton={null} hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
-        <Scene key='home' initial >
+        <Scene key='home'  >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showIcon={true} showLabel={false} hideNavBar tabBarPosition='bottom'>
             <Scene key="categoryView"  component={CategoryView} icon={TabIcon1} title="M A V E N T" />
