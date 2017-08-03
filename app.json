@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "18.0.0"
+    "name": "Mavent",
+    "icon": "./assets/images/mavent_logo.png",
+    "version": "1.0.0",
+    "slug": "mavent-app-slug",
+    "sdkVersion": "18.0.0",
+    "ios": {
+      "bundleIdentifier": "com.okdev.mavent"
+    },
+    "android": {
+      "package": "com.okdev.mavent"
+    }
   }
 }

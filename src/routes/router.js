@@ -67,7 +67,7 @@ const RouterComponent = () => {
            renderRightButton={null} hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
-        <Scene key='home'  >
+        <Scene key='home' initial >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
             animationEnabled showIcon={true} showLabel={false} hideNavBar tabBarPosition='bottom'>
             <Scene key="categoryView"  component={CategoryView} icon={TabIcon1} title="M A V E N T" />
@@ -78,7 +78,7 @@ const RouterComponent = () => {
             showIcon={Platform.OS==="android"?false:true} showLabel={Platform.OS==="android"?true:false} tabBarPosition='top' activeBackgroundColor='#f4f4f4'
             tabBarStyle={{backgroundColor:"#f4f4f4", paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
             activeTintColor="#000080" inactiveTintColor="#000" indicatorStyle={{backgroundColor:'#000080'}} labelStyle={{fontWeight:'bold'}}
-             rightButtonImage={null} animationEnabled>
+             rightButtonImage={null} renderRightButton={null} animationEnabled>
             <Scene key="MySkills" component={MySkills} back={false} iconStyle={{width:200, height:'100%'}}
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon1}
             />

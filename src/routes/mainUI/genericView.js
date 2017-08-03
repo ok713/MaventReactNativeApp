@@ -39,14 +39,16 @@ class GenericView extends Component {
 
   makeRemoteRequest = () => {
     const { page, seed } = this.state;
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=8`;
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=50`;
     this.setState({ loading: true });
+    data = this.state.data;
 
     fetch(url)
       .then(res => res.json())
       .then(res => {
+
         this.setState({
-          data: page === 1 ? res.results : [...this.state.data, ...res.results],
+          data: page === 1 ? res.results : [...data, ...res.results],
           error: res.error || null,
           loading: false,
           refreshing: false
@@ -71,14 +73,14 @@ class GenericView extends Component {
   };
 
   handleLoadMore = () => {
-    this.setState(
-      {
-        page: this.state.page + 1
-      },
-      () => {
-        this.makeRemoteRequest();
-      }
-    );
+    // this.setState(
+    //   {
+    //     page: this.state.page + 1
+    //   },
+    //   () => {
+    //     this.makeRemoteRequest();
+    //   }
+    // );
   };
 
   renderSeparator = () => {
@@ -158,14 +160,14 @@ class GenericView extends Component {
 
           </View>
         </View>
-        <View style={{backgroundColor:'#0B486B', padding:3}}>
+        {/*<View style={{backgroundColor:'#0B486B', padding:3}}>
                         <Search
                              backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
                                 placeholderTextColor="#d3d3d3"
                                 tintColorSearch="#fff"
                                 tintColorDelete="#fff"
                             onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
-                    </View>
+                    </View>*/}
 
         <Container>
           <Content>
@@ -252,10 +254,13 @@ class GenericView extends Component {
             )}
             keyExtractor={item => item.email}
             ItemSeparatorComponent={this.renderSeparator}
+            ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
-           
+            onRefresh={this.handleRefresh}
+            refreshing={this.state.refreshing}
             onEndReached={this.handleLoadMore}
-            onEndReachedThreshold={0.1}
+            onEndReachedThreshold={0.9}
+            
           />  
         </Content>
       </Container>
