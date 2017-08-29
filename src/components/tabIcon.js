@@ -6,7 +6,7 @@ const TabIcon = (props) => {
   if (props.type === 'main') {
     return <Icon
       name={props.icon}
-      style={{ color: props.focused ? '#2399E6' : '#fff' }}
+      style={{ color: props.focused ? '#084E70' : '#bbbbbb' }}
     >
     </Icon>
   }

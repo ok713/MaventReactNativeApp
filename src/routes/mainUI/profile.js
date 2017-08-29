@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Platform, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Platform, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { Container, Content, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -7,18 +7,20 @@ import RateComponent from '../../components/rateComponent';
 import ReviewComponent from '../../components/reviewComponent';
 import data from '../../services/reviews.json';
 
+const { width, height } = Dimensions.get('window');
+
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
       id: 1,
-      details: [],
+      details: { name: 'Harvey Lawrence', email: 'person@example.com'},
       rateData: [{ name: 'Photographer', rate: 3.5 }, { name: 'React', rate: 5 }, { name: 'Angular 2/4', rate: 4.5 }],
       reviewData: data.slice(0, 4),
     };
   }
   componentWillMount() {
-    this.fetchdetails();
+    // this.fetchdetails();
   }
 
   componentDidMount() {
@@ -42,63 +44,58 @@ class Profile extends Component {
     return (
       <Container>
         <Content>
-          <View style={{ backgroundColor: '#0B486B', padding: 10 }} >
+          <View style={{ paddingHorizontal: 10, marginTop:Platform.OS==="android"?23:0 }} >
+            <Image source={require('../../../assets/images/CarouselView/Image1.jpg')} style={{ position:'absolute',flex:1, width: width}}>
+              <View style={{ backgroundColor:'rgba(11, 72, 107, 0.9)', width:'100%', height:'100%'}}/>
+            </Image>
+            <View style={{flexDirection:'row', justifyContent:'flex-end', paddingTop:10}}>
+              <TouchableOpacity onPress={(e)=> Actions.ActivityPage()}>
+                <Icon name = "md-mail" style={{ fontSize: 25, color:'#fff' }}/>
+              </TouchableOpacity>
+            </View>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
-              <View style={styles.ball} />
-              <Image source={require('../../../assets/images/profile.png')} style={{ height: 150, width: 150, borderRadius: 75, position: 'absolute' }} />
+              <Image source={require('../../../assets/images/profile.png')} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
             </View>
-            <View style={{ alignItems: 'center', justifyContent: 'flex-start', paddingTop: 2 }}>
-              <Text style={{ fontSize: 26, color: 'white', fontWeight: 'bold', textShadowColor: 'black', textShadowOffset: { width: 2, height: 1 } }}>{this.state.details.name}</Text>
-              <Text style={{ fontSize: 18, color: 'white', paddingBottom: 2 }}>{this.state.details.email}</Text>
+            <View style={{ flexDirection:'row', alignItems: 'center', justifyContent:'center', paddingTop: 2 }}>
+              <Text style={{ fontSize: 20, color: 'white', fontWeight: '500' }}>{this.state.details.name}</Text>
+              <Icon name="md-checkmark-circle" style={{ fontSize:15, color:'#FFA838', marginLeft:5, marginTop:4}} />
             </View>
-          </View>
-          <View style={{ backgroundColor: 'rgba(17, 109, 161, 0.9)' }}>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', justifyContent:'center' }}>
+              <Text style={{ fontSize: 13, color:'#fff' }}>Member since </Text>
+              <Text style={{ fontSize: 13, color:'#fff' }}>12 Jun 2017</Text>
+            </View>
+            <View style={{ flexDirection: 'row', marginTop:20 }}>
               <View style={styles.socialView}>
                 <Text style={styles.socialTextValue}>1094</Text>
-                <Text style={styles.socialTextTitle}>FOLLOWERS</Text>
+                <Text style={styles.socialTextTitle}>Followers</Text>
               </View>
               <View style={styles.socialView}>
                 <Text style={styles.socialTextValue}>223</Text>
-                <Text style={styles.socialTextTitle}>FOLLOWING</Text>
+                <Text style={styles.socialTextTitle}>Following</Text>
               </View>
               <View style={{flex:1, justifyContent: 'center', padding: 5, alignItems: 'center' }}>
                 <Text style={styles.socialTextValue}>88</Text>
-                <Text style={styles.socialTextTitle}>LIKES</Text>
+                <Text style={styles.socialTextTitle}>Saved</Text>
               </View>
             </View>
           </View>
-          <View style={{ backgroundColor: 'rgba(196, 219, 231, 0.9)', padding: 12 }}>
-            <View style={{ backgroundColor: 'white', padding: 5, borderRadius: 8 }}>
-              <View style={[styles.wrapper, { alignItems: 'center' }]}>
-                <Text style={{ fontSize: 16 }}>Verified</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Icon name='logo-facebook' style={{ marginRight: 10, color: '#3B5895' }} />
-                  <Icon name='md-mail' />
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontSize: 16 }}>Member since </Text>
-                  <Text style={{ fontSize: 16 }}>12/06/2017</Text>
-                </View>
-              </View>
+          <View style={{ backgroundColor: 'white', padding: 5 }}>
               <View style={styles.wrapper}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', padding: 5 }}>About</Text>
-                <Text style={{ textAlign: 'center', fontSize: 16 }}>"I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills...."</Text>
+                <Text style={{ fontSize: 18, fontWeight: '500', color:"#b5b5b5" }}>About</Text>
+                <Text style={{ fontSize: 16, color:"#b5b5b5" }}>I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills....</Text>
               </View>
               <View style={[styles.wrapper]}>
-                <View style={{ paddingBottom: 3 }}>
-                  <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Skills and Expertise!</Text>
+                <View style={{ paddingBottom: 3, flexDirection:'row', alignItems:'center', justifyContent:'space-between' }}>
+                  <Text style={{ fontSize: 18, fontWeight: 'bold', color:'#515151' }}>Skills and Expertise!</Text>
+                  <TouchableOpacity  onPress={() => Actions.skillList()}>
+                    <Text style={{ color:'#FFA838' }} >Add</Text>
+                  </TouchableOpacity>
                 </View>
                 {
                   this.state.rateData.map((item, index) => {
                     return <RateComponent key={index} data={item} />
                   })
                 }
-                <TouchableOpacity onPress={() => Actions.skillList()}>
-                  <View style={{ marginVertical: 5, padding: 5, backgroundColor: 'rgba(177, 183, 185, 0.1)', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)', borderRadius: 8 }}>
-                    <Icon name='md-add-circle' style={{ color: 'rgba(177, 183, 185, 0.6)' }} />
-                  </View>
-                </TouchableOpacity>
               </View>
               <View>
                 <View style={{ paddingBottom: 10 }}>
@@ -119,8 +116,6 @@ class Profile extends Component {
                   </View>
                 </View>
               </View>
-            </View>
-
           </View>
 
         </Content>
@@ -140,24 +135,22 @@ const styles = StyleSheet.create({
     borderRadius: 80,
     borderWidth: 80,
     borderColor: 'white',
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
+    // shadowColor: 'black',
+    // shadowOpacity: 0.5,
+    // shadowRadius: 5,
   },
 
   socialTextValue: { fontSize: 20, color: 'white', fontWeight: 'bold' },
 
   socialTextTitle: {
-    fontSize: 13, color: 'white', textShadowColor: 'black',
-    textShadowOffset: { width: 1, height: 1 }
+    fontSize: 13, color: 'white'
   },
 
   socialView: {
-    flex: 1, justifyContent: 'center', alignItems: 'center',
-    borderColor: 'rgba(31, 95, 97, 0.9)', borderRightWidth: 1, padding: 5
+    flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5
   },
 
-  wrapper: { padding: 5, borderBottomWidth: 1, borderColor: '#EDF4F7' }
+  wrapper: { padding: 10, borderBottomWidth: 1, borderColor: '#EDF4F7' }
 });
 
 function mapStateToProps({ auth }) {

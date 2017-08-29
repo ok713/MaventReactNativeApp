@@ -9,7 +9,7 @@ import {
   Dimensions
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-const HORIZONTAL_PADDING = 6;
+const HORIZONTAL_PADDING = 3;
 const { width, height } = Dimensions.get('window');
 const compy = [
       {
@@ -174,6 +174,7 @@ class RenderItem extends React.Component {
         return (
             <TouchableOpacity onPress={() => this.navigate(this.props.data.id)}>
                 <Image source={this.props.data.image} style={styles.itemImageStyle} >
+                  <View style={{ position:'absolute', width:'100%', height:'100%', backgroundColor:'rgba(0,0,0,0.3)' }}/>
                     <Text style={styles.placeholderItemNameStyle}> {this.props.data.name} </Text>
                 </Image>
             </TouchableOpacity>
@@ -189,21 +190,14 @@ const styles = StyleSheet.create({
   itemImageStyle: {
   	flexDirection: 'row',
   	justifyContent: 'center',
-  	alignItems: 'flex-end',
+  	alignItems: 'center',
   	width: (width / 2) - HORIZONTAL_PADDING,
-  	height: 160,
+  	height: 180,
   },
   placeholderItemNameStyle: {
   	textAlign: 'center',
-  	justifyContent: 'center',
-  	marginBottom: 5,
-  	fontSize: 15,
-  	color: 'white',
+  	fontSize: 18,
+  	color: '#fff',
   	fontWeight: 'bold',
-  	backgroundColor: '#0000007F',
-  	borderRadius: 5,
-  	paddingLeft: 1,
-  	paddingRight: 3,
-  	overflow: 'hidden'
   },
 });

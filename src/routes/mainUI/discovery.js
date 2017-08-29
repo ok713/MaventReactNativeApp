@@ -76,13 +76,14 @@ class Discovery extends React.Component {
                     style={{ height: 0.3 * SCREEN_H }}
                 />
                 <View style={styles.listContainer}>
-                    <View style={{backgroundColor:'#0B486B', padding:3}}>
+                    <View style={{backgroundColor:'#f8f8f8', padding:3}}>
                         <Search
-                            ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
-                                placeholderTextColor="#d3d3d3"
-                                tintColorSearch="#fff"
-                                tintColorDelete="#fff"
-                            onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
+                            ref="search_box" backgroundColor={'#f8f8f8'} inputStyle={{ backgroundColor:'#fff', borderWidth:1, borderColor:'#ececec'}}  
+                                placeholderTextColor="#a4a4a4"
+                                tintColorSearch="#a4a4a4"
+                                tintColorDelete="#e5e5e5"
+                                titleCancelColor="#a4a4a4"
+                                onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
                     </View>
                     <Container>
                         <Content>
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     },
 
     listContainer: {
-        backgroundColor: '#D5DED9',
+        backgroundColor: '#f8f8f8',
         flex: 1,
     }
 });

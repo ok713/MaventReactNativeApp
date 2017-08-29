@@ -1,7 +1,8 @@
 import React from 'react';
 import { Scene, Router, Actions, Reducer } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import {Text, TouchableOpacity, Image, Platform} from 'react-native'
+import { Text, TouchableOpacity, Image, Platform } from 'react-native';
+import { Icon } from 'native-base';
 import Login from './auth/login';
 import Signup from './auth/signup';
 import Otp from './auth/OTP';
@@ -27,13 +28,13 @@ const reducerCreate = params => {
 };
 
 const TabIcon1 = (props) => {
-  return <TabIcon  {...props} icon={'md-browsers'} type='main' />
+  return <TabIcon  {...props} icon={'ios-home-outline'} type='main' />
 };
 const TabIcon2 = (props) => {
-  return <TabIcon  {...props} icon={'md-pin'} type='main' />
+  return <TabIcon  {...props} icon={'ios-search-outline'} type='main' />
 };
 const TabIcon3 = (props) => {
-  return <TabIcon  {...props} icon={'ios-contact'} type='main' />
+  return <TabIcon  {...props} icon={'ios-person-outline'} type='main' />
 };
 
 const AcitivityIcon1 = (props) => {
@@ -48,7 +49,8 @@ const AcitivityIcon3 = (props) => {
 
 const renderRightButton = ()=>{
   return <TouchableOpacity onPress={(e)=> Actions.ActivityPage()} style={{padding:10}}>
-            <Image source={require("../../assets//icons/mailoutline.png")} style={{width:25, height:25}}/>
+            {/* <Image source={require("../../assets//icons/mailoutline.png")} style={{width:25, height:25}}/> */}
+            <Icon name = "md-mail" style={{ fontSize: 25, color:'#fff' }}/>
         </TouchableOpacity>
 }
 
@@ -68,11 +70,11 @@ const RouterComponent = () => {
         </Scene>
 
         <Scene key='home'  >
-          <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#0B486B' tabBarStyle={{ backgroundColor: '#0B486B' }}
-            animationEnabled showIcon={true} showLabel={false} hideNavBar tabBarPosition='bottom'>
-            <Scene key="categoryView"  component={CategoryView} icon={TabIcon1} title="M A V E N T" />
-            <Scene key="discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
-            <Scene key="profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
+          <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#fff' tabBarStyle={{ backgroundColor: '#fff' }}
+          activeTintColor="#084E70" inactiveTintColor="#bbbbbb" animationEnabled showIcon={true} showLabel={true} hideNavBar tabBarPosition='bottom'  >
+            <Scene key="categoryView" tabBarLabel="Home"  component={CategoryView} icon={TabIcon1} title="M A V E N T" initial />
+            <Scene key="discovery" tabBarLabel="Discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
+            <Scene key="profile" hideNavBar tabBarLabel="Profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
           <Scene key="ActivityPage" back={Platform.OS==="android"?false:true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
             showIcon={Platform.OS==="android"?false:true} showLabel={Platform.OS==="android"?true:false} tabBarPosition='top' activeBackgroundColor='#f4f4f4'
