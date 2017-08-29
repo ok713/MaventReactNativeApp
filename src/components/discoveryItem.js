@@ -12,9 +12,9 @@ const ItemRow = (props) => {
           <Image source={require('../../assets/images/profile.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
         </View>
         <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>
-          <TextInput defaultValue={provider.tags.toString()} editable={false} style={{ color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
-          <TextInput defaultValue={provider.Service} editable={false} style={{ color:'#145775', height:23,width:150, fontWeight:'400' }}></TextInput>
-          <Text style={{ fontSize: 15, color:'#b5b5b5' }}>{provider.Name}</Text>
+          <TextInput defaultValue={provider.tags.toString()} editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
+          <TextInput defaultValue={provider.Service} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
+          <Text style={{ fontSize: 12, color:'#b5b5b5' }}>{provider.Name}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center'}}>
             <StarRating
               disabled
@@ -28,8 +28,8 @@ const ItemRow = (props) => {
         </View>
         <View style={{ justifyContent: 'space-around', flex: 1, alignItems: 'flex-end', paddingHorizontal:10 }}>
           <View style={{flexDirection:'row', alignItems:'center'}}>
-            <Text style={{color:'#FFA838', fontWeight:"700", fontSize:20}}>${provider.price}</Text>
-            <Text style={{ color:'#b5b5b5', fontWeight:'400', fontSize:15 }}>/hr</Text>
+            <Text style={{color:'#FFA838', fontWeight:"700", fontSize:15}}>${provider.price}</Text>
+            <Text style={{ color:'#b5b5b5', fontWeight:'400', fontSize:12 }}>/hr</Text>
           </View>
           <TouchableOpacity style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
             <Icon name = "ios-chatbubbles-outline" style={{ fontSize: 29, color:'#3F6A86', paddingRight:5 }}/>

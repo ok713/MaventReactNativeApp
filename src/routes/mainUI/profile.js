@@ -3,7 +3,7 @@ import { StyleSheet, View, Platform, Text, Image, TouchableOpacity, Dimensions }
 import { Container, Content, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import RateComponent from '../../components/rateComponent';
+import SkillRowComponent from '../../components/skillRowComponent';
 import ReviewComponent from '../../components/reviewComponent';
 import data from '../../services/reviews.json';
 
@@ -15,7 +15,8 @@ class Profile extends Component {
     this.state = {
       id: 1,
       details: { name: 'Harvey Lawrence', email: 'person@example.com'},
-      rateData: [{ name: 'Photographer', rate: 3.5 }, { name: 'React', rate: 5 }, { name: 'Angular 2/4', rate: 4.5 }],
+      rateData: [ { category:"Learn a Skill", data:[{ name: 'Photographer', rate: 3.5 }]},
+       { category:"Get a Service", data:[{ name: 'Angular 2/4', rate: 4.5 }, { name: 'React', rate: 4.0 }]} ],
       reviewData: data.slice(0, 4),
     };
   }
@@ -81,28 +82,25 @@ class Profile extends Component {
           </View>
           <View style={{ backgroundColor: 'white', padding: 5 }}>
               <View style={styles.wrapper}>
-                <Text style={{ fontSize: 18, fontWeight: '500', color:"#b5b5b5" }}>About</Text>
-                <Text style={{ fontSize: 16, color:"#b5b5b5" }}>I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills....</Text>
+                <Text style={{ fontSize: 16, color:"#515151" }}>About</Text>
+                <Text style={{ fontSize: 13, color:"#b5b5b5" }}>I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills....</Text>
               </View>
-              <View style={[styles.wrapper]}>
-                <View style={{ paddingBottom: 3, flexDirection:'row', alignItems:'center', justifyContent:'space-between' }}>
-                  <Text style={{ fontSize: 18, fontWeight: 'bold', color:'#515151' }}>Skills and Expertise!</Text>
-                  <TouchableOpacity  onPress={() => Actions.skillList()}>
-                    <Text style={{ color:'#FFA838' }} >Add</Text>
-                  </TouchableOpacity>
-                </View>
                 {
                   this.state.rateData.map((item, index) => {
-                    return <RateComponent key={index} data={item} />
+                    return <SkillRowComponent key={index} data={item} />
                   })
                 }
-              </View>
               <View>
                 <View style={{ paddingBottom: 10 }}>
-                  <View style={{ padding: 5, flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Reviews</Text>
-                    <Text> (</Text><Text>{data.length}</Text><Text>)</Text>
-                  </View>
+                  <View style={{ padding: 10, flexDirection:'row', alignItems:'center', justifyContent:'space-between' }}>
+                    <View style={{  flexDirection: 'row', alignItems:'center' }}>
+                      <Text style={{ fontSize: 16, color:'#515151' }}>Reviews</Text>
+                      <Text style={{color:'#b5b5b5'}}> (</Text><Text style={{color:'#b5b5b5'}}>{data.length}</Text><Text style={{color:'#b5b5b5'}}>)</Text>
+                    </View>
+                    <TouchableOpacity onPress={() => this.setState({ reviewData: data })}>
+                      <Text style={{ color:'#FFA838' }} >View all</Text>
+                    </TouchableOpacity>
+                  </View>  
                   <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     {
                       this.state.reviewData.map((item, index)=>{
@@ -110,9 +108,6 @@ class Profile extends Component {
 
                       })
                     }
-                    <TouchableOpacity onPress={() => this.setState({ reviewData: data })}>
-                      <Icon name='ios-more' color='rgba(177, 183, 185, 0.6)' />
-                    </TouchableOpacity>
                   </View>
                 </View>
               </View>

@@ -4,12 +4,13 @@ import {
   View,
   Image,
   Platform,
-  Text,
+  Text, TextInput,
   TouchableOpacity
 } from 'react-native';
 import { Container, Content, Icon } from 'native-base';
 import data from '../../services/request.json';
 import { Actions } from 'react-native-router-flux';
+import StarRating from 'react-native-star-rating';
 
 class MySkills extends Component {
   constructor() {
@@ -28,39 +29,47 @@ class MySkills extends Component {
       <Container>
         <Content>
           {
-            data.map((request) => {
+            data.map((provider) => {
               return (
-                <View key={request.id} style={{backgroundColor:'#fff', paddingVertical:5, width: '100%', borderTopWidth: 1, borderColor: '#ccc', flexDirection: 'row' }}>
-                  <View style={{ flex: 1.2, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={require('../../../assets/images/profile.png')} style={{ height: 60, width: 60, borderRadius: 30 }} />
-                    <Text>{request.Dist}</Text>
+                <View key={provider.id} style = {{ paddingHorizontal:10, backgroundColor:'#fff' }}>
+                <View key={provider.id} style={{ paddingVertical:5, flexDirection: 'row', borderBottomWidth:1, borderBottomColor: '#ececec' }}>
+                  <View style={{ justifyContent: 'flex-start', flex: 1, alignItems: 'center' }}>
+                    <Image source={require('../../../assets/images/profile.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
                   </View>
-
-                  <View style={{ flex: 3, paddingLeft: 3, paddingTop: 4 }}>
-                    <Text style={{ fontSize: 12, color: '#ccc' }}>{request.Name}</Text>
-                    <View style={{ height: 2 }}></View>
-                    <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{request.Title}</Text>
-                    <View style={{ height: 2 }}></View>
-                    <Text style={{ fontSize: 13 }}>{request.Message}</Text>
-                  </View>
-
-                  <View style={{ flex: 1.5, alignItems: 'center' }}>
-                    <View style={(request.offered === 'true') ? styles.offered : styles.n_offered}>
-                      <Text style={{ fontSize: 12, color: 'white' }}>Offer:</Text>
-                      <Text style={{ fontSize: 16, color: 'white' }}>{request.price}</Text>
+                  <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>
+                    <TextInput defaultValue={provider.tags.toString()} editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
+                    <TextInput defaultValue={provider.Service} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
+                    <Text style={styles.text}>{provider.Name}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical:3}}>
+                      <StarRating
+                        disabled
+                        maxStars={5}
+                        rating={provider.rate}
+                        starSize={15}
+                        starColor="#FFA838"
+                      />
+                      <Text style={{ color:'#b5b5b5'}}>({provider.rate})</Text>
                     </View>
-
-                    <View style={{ marginTop: 4, flexDirection: 'row', justifyContent: 'space-around', width: 80 }}>
-                      <TouchableOpacity style={[styles.icon,{paddingHorizontal:7}]}>
-                        <Icon name='md-close'/>
-                      </TouchableOpacity>
-                      <TouchableOpacity style={[styles.icon,{paddingHorizontal:5}]}>
-                        <Icon name='md-checkmark'/>
-                      </TouchableOpacity>
+                    <Text style={styles.text}>{provider.Message}</Text>
+                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                      <Text style={ styles.text} >Offer:</Text>
+                      <Text style={{ color:'#FFA838', fontSize:15 }} >${provider.price}</Text>
                     </View>
                   </View>
-
+                  <View style={{ justifyContent: 'space-around', flex: 1, alignItems: 'flex-end', paddingHorizontal:10 }}>
+                    <View style={{ justifyContent:'center', alignItems:'center'}}>
+                      <TouchableOpacity>
+                        <Icon name="ios-checkmark-circle" style={{ color:'#00B356' }}/>
+                        <Icon name="ios-close-circle" style={{ color:'#F52422' }}/>
+                      </TouchableOpacity>
+                    </View>                    
+                    <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                      <Icon name='md-pin' style={{fontSize:15, paddingRight:2, color:'#BFD9E7'}} />
+                      <Text style={{ fontSize: 15, color:'#b5b5b5', }}>{provider.Dist}</Text>
+                    </View>
+                  </View>
                 </View>
+              </View>
               );
             })}
         </Content>
@@ -71,28 +80,7 @@ class MySkills extends Component {
 }
 
 const styles = {
-  listContainer: {
-    flex: 1,
-  },
-  offered: {
-    height: 40,
-    width: 80,
-    borderRadius: 3,
-    marginTop: 4,
-    backgroundColor: '#4CAF50',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  n_offered: {
-    height: 40,
-    width: 80,
-    borderRadius: 3,
-    marginTop: 4,
-    backgroundColor: '#bdc3c7',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  icon:{borderWidth: 1, borderRadius: 3, borderColor: '#ccc' }
+  text:{ fontSize: 12, color:'#b5b5b5' }
 };
 
 export default MySkills;

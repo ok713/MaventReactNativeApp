@@ -73,7 +73,7 @@ const RouterComponent = () => {
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#fff' tabBarStyle={{ backgroundColor: '#fff' }}
           activeTintColor="#084E70" inactiveTintColor="#bbbbbb" animationEnabled showIcon={true} showLabel={true} hideNavBar tabBarPosition='bottom'  >
             <Scene key="categoryView" tabBarLabel="Home"  component={CategoryView} icon={TabIcon1} title="M A V E N T" initial />
-            <Scene key="discovery" tabBarLabel="Discovery" component={Discovery} icon={TabIcon2} title="M A V E N T" />
+            <Scene key="discovery" tabBarLabel="Discovery" component={Discovery} icon={TabIcon2} title="Discovery" />
             <Scene key="profile" hideNavBar tabBarLabel="Profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
           <Scene key="ActivityPage" back={Platform.OS==="android"?false:true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
@@ -81,7 +81,7 @@ const RouterComponent = () => {
             tabBarStyle={{backgroundColor:"#f4f4f4", paddingTop: 10, borderBottomWidth:1.5, borderColor:'#ccc' }}
             activeTintColor="#000080" inactiveTintColor="#000" indicatorStyle={{backgroundColor:'#000080'}} labelStyle={{fontWeight:'bold'}}
              rightButtonImage={null} renderRightButton={null} animationEnabled>
-            <Scene key="MySkills" component={MySkills} back={false} iconStyle={{width:200, height:'100%'}}
+            <Scene key="MySkills" component={MySkills} tabBarLabel='My Skills' back={false} iconStyle={{width:200, height:'100%'}}
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon1}
             />
             <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills' back={false} 

@@ -11,159 +11,113 @@ import {
 import { Actions } from 'react-native-router-flux';
 const HORIZONTAL_PADDING = 3;
 const { width, height } = Dimensions.get('window');
-const compy = [
+const service = [
+      {
+        name: 'Cooking & Baking',
+        id: 'cooking',
+        image: require('../../assets/images/subCategories/get_a_service/Cooking_Baking.jpeg')
+      },
+      {
+        name: 'Installation & reparation of gadgets',
+        id: 'gadgets',
+        image: require('../../assets/images/subCategories/get_a_service/Gadgets.jpg')
+      },
+      {
+        name: 'Home Improvement',
+        id: 'improvement',
+        image: require('../../assets/images/subCategories/get_a_service/Home_Improvement.jpg')
+      },
       {
         name: 'Cleaning',
         id: 'clean',
-        image: require('../../assets/images/subCategories/comfy/cleaning.jpg')
+        image: require('../../assets/images/subCategories/get_a_service/cleaning.jpg')
       },
       {
-        name: 'Plumber',
-        id: 'plumber',
-        image: require('../../assets/images/subCategories/comfy/plumber.jpg')
+        name: 'Beauty',
+        id: 'beauty',
+        image: require('../../assets/images/subCategories/get_a_service/Beauty.jpg')
       },
+      {
+        name: 'Photography & videography',
+        id: 'photography',
+        image: require('../../assets/images/subCategories/get_a_service/Photography_videography.jpeg')
+      },
+      {
+        name: 'Art & Design',
+        id: 'art',
+        image: require('../../assets/images/subCategories/get_a_service/Art_Design.jpeg')
+      },
+      {
+        name: 'Home Care',
+        id: 'care',
+        image: require('../../assets/images/subCategories/get_a_service/Homecare.jpg')
+      },
+      {
+        name: 'Pet related',
+        id: 'pet',
+        image: require('../../assets/images/subCategories/get_a_service/Pet_related.jpeg')
+      },
+      {
+        name: 'Others',
+        id: 'others',
+        image: require('../../assets/images/subCategories/get_a_service/Others.jpeg')
+      },
+      
     ];
-const enKnowledge = [
+const learn = [
+      {
+        name: 'School subjects',
+        id: 'scholl',
+        image: require('../../assets/images/subCategories/Learn_a_skill/School_Subjects.jpg')
+      },
+      {
+        name: 'Art & Design',
+        id: 'art',
+        image: require('../../assets/images/subCategories/Learn_a_skill/Art_design_class.jpeg')
+      },
+      {
+        name: 'Information Technology',
+        id: 'information',
+        image: require('../../assets/images/subCategories/Learn_a_skill/Information_Technology.jpg')
+      },
+      {
+        name: 'Sports & Fitness',
+        id: 'sports',
+        image: require('../../assets/images/subCategories/Learn_a_skill/Sports_fitness.jpeg')
+      },
       {
         name: 'Music',
         id: 'music',
-        image: require('../../assets/images/subCategories/enKnowledge/music.jpg')
+        image: require('../../assets/images/subCategories/Learn_a_skill/music.jpeg')
       },
       {
-        name: 'Tuition',
-        id: 'tuition',
-        image: require('../../assets/images/subCategories/enKnowledge/tuition.jpg')
-      },
-      {
-        name: 'Others',
-        id: 'others',
-        image: require('../../assets/images/subCategories/enKnowledge/others.jpg')
-      },
-    ];
-const enEvent = [
-      {
-        name: 'Makeup Artist',
-        id: 'makeup',
-        image: require('../../assets/images/subCategories/enEvent/makeup.jpg')
-      },
-      {
-        name: 'Performer',
-        id: 'performer',
-        image: require('../../assets/images/subCategories/enEvent/performer.jpg')
-      },
-      {
-        name: 'Photographer',
-        id: 'photog',
-        image: require('../../assets/images/subCategories/enEvent/photog.jpg')
+        name: 'Cooking & Baking',
+        id: 'cooking',
+        image: require('../../assets/images/subCategories/Learn_a_skill/cooking_baking_classes.jpg')
       },
       {
         name: 'Others',
         id: 'others',
-        image: require('../../assets/images/subCategories/enEvent/others.jpg')
+        image: require('../../assets/images/subCategories/Learn_a_skill/Other_skills.jpeg')
       },
+      
     ];
-const care = [
-      {
-        name: 'Midwives',
-        id: 'midwives',
-        image: require('../../assets/images/subCategories/Care/midwives.jpg')
-      },
-      {
-        name: 'Elderly Care',
-        id: 'elderly',
-        image: require('../../assets/images/subCategories/Care/elderlycare.jpg')
-      },
-      {
-        name: 'Baby Care',
-        id: 'baby',
-        image: require('../../assets/images/subCategories/Care/babycare.jpg')
-      },
-    ];
-const fillTummy = [
-      {
-        name: 'Home Cooked',
-        id: 'homecook',
-        image: require('../../assets/images/subCategories/fillTummy/HomeCooked.jpg')
-      },
-      {
-        name: 'Cooking Classes',
-        id: 'cookingclass',
-        image: require('../../assets/images/subCategories/fillTummy/cookingClass.jpg')
-      },
-    ];
-const health = [
-      {
-        name: 'Gym',
-        id: 'gym',
-        image: require('../../assets/images/subCategories/health/gym.jpg')
-      },
-      {
-        name: 'Exercise Expert',
-        id: 'exercise',
-        image: require('../../assets/images/subCategories/health/Running.jpg')
-      },
-      {
-        name: 'Sports',
-        id: 'sports',
-        image: require('../../assets/images/subCategories/health/Sports.jpg')
-      },
-    ];
-const helpHand = [
-      {
-        name: 'Grocery Shopper',
-        id: 'grocery',
-        image: require('../../assets/images/subCategories/helpHand/grocery.jpg')
-      },
-      {
-        name: 'Pet Walker',
-        id: 'petwalker',
-        image: require('../../assets/images/subCategories/helpHand/petwalking.jpg')
-      },
-    ];
-const lookBetter = [
-      {
-        name: 'Hair Dresser',
-        id: 'hair',
-        image: require('../../assets/images/subCategories/lookBetter/hairdresser.jpg')
-      },
-      {
-        name: 'Nail Artist',
-        id: 'nail',
-        image: require('../../assets/images/subCategories/lookBetter/nailArt.jpg')
-      },
-      {
-        name: 'Others',
-        id: 'others',
-        image: require('../../assets/images/subCategories/lookBetter/others.jpg')
-      },
-    ];    
+  
 class RenderItem extends React.Component {
      navigate = (id) => {
          let data = [];
         switch (id) {
-        case 'comfy':
-            data = compy;
+        case 'service':
+            data = service;
             break;
-        case 'enKnowledge':
-            data = enKnowledge;
+        case 'learn':
+            data = learn;
             break;
-        case 'enEvent':
-            data = enEvent;
+        case 'provide':
+            data = service;
             break;
-        case 'Care':
-            data = care;
-            break;
-        case 'fillTummy':
-            data = fillTummy;
-            break;
-        case 'health':
-            data = health;
-            break;
-        case 'helpHand':
-            data = helpHand;
-            break;
-        case 'lookBetter':
-            data = lookBetter;
+        case 'teach':
+            data = learn;
             break;
         default:
             break;
@@ -192,7 +146,7 @@ const styles = StyleSheet.create({
   	justifyContent: 'center',
   	alignItems: 'center',
   	width: (width / 2) - HORIZONTAL_PADDING,
-  	height: 180,
+  	flex:0.5
   },
   placeholderItemNameStyle: {
   	textAlign: 'center',

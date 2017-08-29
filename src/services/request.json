@@ -1,83 +1,61 @@
 [
   {
     "id": 0,
-    "Name": "Cindy Lim",
-    "Title": "Photographer/Videographer",
-    "Message": "Will you be free next tuesday?",
+    "Name": "John Lim",
+    "Service": "Photography",
+    "tags":"Freelance Photographer",
     "Dist": "0.2 km",
-    "offered": "true",
-    "price": "$30"
+    "Message": "Need your assistance now!",
+    "price":39,
+    "rate":4
   },
   {
     "id": 1,
     "Name": "Xiao Hei",
-    "Title": "Photographer/Videographer",
-    "Message": "Hi, I am looking to book you for tmr.",
+    "Service": "Education",
+    "tags":"Math Tutor",
     "Dist": "0.3 km",
-    "offered": "true",
-    "price": "$42"
+    "Message": "Need your assistance now!",
+    "price":30,
+    "rate":4.5
   },
   {
     "id": 2,
     "Name": "Muhd Asraf",
-    "Title": "Photographer/Videographer",
-    "Message": "Hello, how much discount?",
+    "Service": "Beauty",
+    "tags":"Make Up Artist",
     "Dist": "0.4 km",
-    "offered": "false",
-    "price": "$0"
+    "Message": "Need your assistance now!",
+    "price":29,
+    "rate":3.5
   },
   {
     "id": 3,
-    "Name": "Ben Tan",
-    "Title": "Photographer/Videographer",
-    "Message": "Open to nego?",
-    "Dist": "0.5 km",
-    "offered": "true",
-    "price": "$20"
+    "Name": "John Lim",
+    "Service": "Photography",
+    "tags":"Freelance Photographer",
+    "Dist": "0.2 km",
+    "Message": "Need your assistance now!",
+    "price":39,
+    "rate":4
   },
   {
     "id": 4,
-    "Name": "Lee Wei Men",
-    "Title": "Photographer/Videographer",
-    "Message": "Hey neighbour!! Are you free tmr?",
-    "Dist": "0.8 km",
-    "offered": "true",
-    "price": "$33"
+    "Name": "Xiao Hei",
+    "Service": "Education",
+    "tags":"Math Tutor",
+    "Dist": "0.3 km",
+    "Message": "Need your assistance now!",
+    "price":30,
+    "rate":4.5
   },
   {
     "id": 5,
-    "Name": "Jayden Chan",
-    "Title": "Photographer/Videographer",
-    "Message": "Sup are you open to nego?",
-    "Dist": "1 km",
-    "offered": "false",
-    "price": "$0"
-  },
-  {
-    "id": 6,
-    "Name": "Ng Jun Hao",
-    "Title": "Photographer/Videographer",
-    "Message": "$25 for 2hrs?",
-    "Dist": "1.5 km",
-    "offered": "true",
-    "price": "$25"
-  },
-  {
-    "id": 7,
-    "Name": "Ang Wei Wei",
-    "Title": "Photographer/Videographer",
-    "Message": "Need your assistance now!",
-    "Dist": "1.8 km",
-    "offered": "true",
-    "price": "$99"
-  },
-  {
-    "id": 8,
-    "Name": "Lim Jun Kai",
-    "Title": "Photographer/Videographer",
-    "Message": "I need your service next month.",
-    "Dist": "2 km",
-    "offered": "true",
-    "price": "$30"
+    "Name": "Muhd Asraf",
+    "Service": "Beauty",
+    "tags":"Make Up Artist",
+    "Dist": "0.4 km",
+    "price":29,
+    "rate":3.5
   }
 ]
