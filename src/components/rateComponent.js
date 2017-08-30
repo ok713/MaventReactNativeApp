@@ -16,6 +16,7 @@ const RateComponent = (props) => {
       rating={props.data.rate}
       starSize={20}
       starColor="#FFA838"
+      starStyle={{paddingHorizontal:2}}
     />
   </View>
 };

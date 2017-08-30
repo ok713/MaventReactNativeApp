@@ -22,6 +22,7 @@ const ItemRow = (props) => {
               rating={props.data.rate}
               starSize={15}
               starColor="#FFA838"
+              starStyle={{paddingHorizontal:2}}
             />
             <Text style={{ color:'#b5b5b5'}}>({props.data.rate})</Text>
           </View>

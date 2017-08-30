@@ -47,6 +47,7 @@ class MySkills extends Component {
                         rating={provider.rate}
                         starSize={15}
                         starColor="#FFA838"
+                        starStyle={{paddingHorizontal:2}}
                       />
                       <Text style={{ color:'#b5b5b5'}}>({provider.rate})</Text>
                     </View>

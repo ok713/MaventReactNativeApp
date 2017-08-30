@@ -153,5 +153,6 @@ const styles = StyleSheet.create({
   	fontSize: 18,
   	color: '#fff',
   	fontWeight: 'bold',
+    backgroundColor:'transparent'
   },
 });
