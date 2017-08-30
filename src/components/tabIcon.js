@@ -12,7 +12,7 @@ const TabIcon = (props) => {
   }
   else {
     return <View style={{
-      width: 120, height: 150, 
+      width: 120, height: 30, 
         justifyContent:'center', alignItems:'center'
     }}>
       <Text style={{ fontSize:14, fontWeight:'bold', textAlign: 'center', color: props.focused ? '#fff' : '#fff' }}> {props.title} </Text>

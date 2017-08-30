@@ -61,6 +61,8 @@ class MySkills extends Component {
                     <View style={{ justifyContent:'center', alignItems:'center'}}>
                       <TouchableOpacity>
                         <Icon name="ios-checkmark-circle" style={{ color:'#00B356' }}/>
+                      </TouchableOpacity>
+                      <TouchableOpacity>
                         <Icon name="ios-close-circle" style={{ color:'#F52422' }}/>
                       </TouchableOpacity>
                     </View>                    

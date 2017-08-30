@@ -80,7 +80,7 @@ const RouterComponent = () => {
             showIcon={true} showLabel={false} tabBarPosition='top' activeBackgroundColor='#f4f4f4'
             tabBarStyle={{backgroundColor:"#0B486B" }} tabStyle={{ padding:0, paddingTop:20 }}
             activeTintColor="#fff" inactiveTintColor="#fff"  labelStyle={{fontWeight:'bold'}} indicatorStyle={{backgroundColor:'#0B486B'}}
-             rightButtonImage={null} renderRightButton={null} animationEnabled>
+             rightButtonImage={null} renderRightButton={null} animationEnabled iconStyle={{ width: 120, height: 30 }} >
             <Scene key="MySkills" component={MySkills} tabBarLabel='My Skills' back={false} 
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon1}
             />
