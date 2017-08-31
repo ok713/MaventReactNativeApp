@@ -32,8 +32,8 @@ class MySkills extends Component {
             data.map((provider) => {
               return (
                 <View key={provider.id} style = {{ paddingHorizontal:10, backgroundColor:'#fff' }}>
-                <View key={provider.id} style={{ paddingVertical:5, flexDirection: 'row', borderBottomWidth:1, borderBottomColor: '#ececec' }}>
-                  <View style={{ justifyContent: 'flex-start', flex: 1, alignItems: 'center' }}>
+                <View key={provider.id} style={{ paddingVertical:10, flexDirection: 'row', borderBottomWidth:1, borderBottomColor: '#ececec' }}>
+                  <View style={{ justifyContent: 'flex-start', flex: 1, alignItems: 'center', paddingTop:5 }}>
                     <Image source={require('../../../assets/images/profile.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
                   </View>
                   <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>

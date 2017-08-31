@@ -44,7 +44,7 @@ const AcitivityIcon2 = (props) => {
   return <TabIcon  {...props} title={'Requested Skills'} type='activity' />
 };
 const AcitivityIcon3 = (props) => {
-  return <TabIcon  {...props} title={'ALL'} type='activity' />
+  return <TabIcon  {...props} title={'Archived'} type='activity' />
 };
 
 const renderRightButton = ()=>{

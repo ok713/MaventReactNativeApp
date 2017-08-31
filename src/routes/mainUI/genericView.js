@@ -8,7 +8,8 @@ import {
   FlatList,
   ActivityIndicator,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import {Icon, Container, Content, Card} from 'native-base'
 import { Actions } from 'react-native-router-flux';
@@ -97,13 +98,14 @@ class GenericView extends Component {
   };
 
   renderHeader = () => {
-   return <View style={{backgroundColor:'#0B486B', padding:3}}>
+   return <View style={{backgroundColor:'#f8f8f8', padding:3}}>
                         <Search
-                            backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
-                                placeholderTextColor="#d3d3d3"
-                                tintColorSearch="#fff"
-                                tintColorDelete="#fff"
-                            onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
+                                backgroundColor={'#f8f8f8'} inputStyle={{ backgroundColor:'#fff', borderWidth:1, borderColor:'#ececec'}}  
+                                placeholderTextColor="#a4a4a4"
+                                tintColorSearch="#a4a4a4"
+                                tintColorDelete="#e5e5e5"
+                                titleCancelColor="#a4a4a4"
+                                onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
                     </View>
  };
 
@@ -140,35 +142,26 @@ class GenericView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ height: 0.09 * SCREEN_HEIGHT, justifyContent: 'center', borderBottomWidth: 1, borderColor: '#CED0CE' }}>
+        <View style={{ height: 0.09 * SCREEN_HEIGHT, justifyContent: 'center' }}>
           <View style={{ height: 0.065 * SCREEN_HEIGHT, flexDirection: 'row' }}>
 
-            <View style={{ flex: 0.3, borderRightWidth: 1, borderColor: '#CED0CE', paddingLeft: 10, justifyContent: 'center' }}>
-              <Text style={{ color: '#8C8C8C' }}>Tag</Text>
-              <Text>Event: Wedding</Text>
+            <View style={ styles.topView }>
+              <Text style={ styles.titleText }>Categories</Text>
+              <Text style={ styles.valueText } >Event: Wedding</Text>
             </View>
 
-            <View style={{ flex: 0.3, borderRightWidth: 1, borderColor: '#CED0CE', paddingLeft: 10, justifyContent: 'center' }}>
-              <Text style={{ color: '#8C8C8C' }}>Distance</Text>
-              <Text>2 km radius</Text>
+            <View style={styles.topView }>
+              <Text style={ styles.titleText }>Distance</Text>
+              <Text style={ styles.valueText }>2 km radius</Text>
             </View>
 
-            <View style={{ flex: 0.3, paddingLeft: 10, justifyContent: 'center' }}>
-              <Text style={{ color: '#8C8C8C' }}>Filter</Text>
-              <Text>Nearest</Text>
+            <View style={ styles.topView }>
+              <Text style={ styles.titleText }>Filter</Text>
+              <Text style={ styles.valueText }>Nearest</Text>
             </View>
 
           </View>
         </View>
-        {/*<View style={{backgroundColor:'#0B486B', padding:3}}>
-                        <Search
-                             backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
-                                placeholderTextColor="#d3d3d3"
-                                tintColorSearch="#fff"
-                                tintColorDelete="#fff"
-                            onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
-                    </View>*/}
-
         <Container>
           <Content>
             {/*{this.state.data.map((item, index)=>{
@@ -215,40 +208,41 @@ class GenericView extends Component {
           <FlatList
             data={this.state.data}
             renderItem={({ item }) => (
-              <View style={{ height: 100, width: SCREEN_WIDTH, flexDirection: 'row' }}>
-                <View style={{ flex: 1.2, justifyContent: 'center', alignItems: 'center' }}>
-                  <Image source={{ uri: item.picture.thumbnail }} style={{ height: 60, width: 60, borderRadius: 30 }} />
-                  <Text>x.x km</Text>
-                </View>
-
-                <View style={{ flex: 3, paddingLeft: 3, paddingTop: 10 }}>
-                  <Text style={{ fontSize: 14, color: '#8C8C8C' }}>{`${item.name.first} ${item.name.last}`}</Text>
-                  <View style={{ height: 2 }}></View>
-                  <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.props.cat}</Text>
-                  <View style={{ height: 8 }}></View>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <StarRating
-                      disabled
-                      maxStars={5}
-                      rating={3.5}
-                      starSize={20}
-                      starColor="#FFDD44"
-                    />
-                   <View style={{ backgroundColor: '#00CCE4', marginLeft: 8, borderRadius: 4, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                      <Text style={{ color: 'white' }}>Event: Wedding</Text>
+              <View style = {{ paddingHorizontal:10, backgroundColor:'#fff' }}>
+                <View style={{ paddingVertical:5, flexDirection: 'row' }}>
+                  <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
+                    <Image source = {{ uri: item.picture.thumbnail }} style={{ height: 70, width: 70, borderRadius: 25 }} />
+                  </View>
+                  <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>
+                    <TextInput defaultValue="Wedding Photographer" editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
+                    <TextInput defaultValue="Photographer" editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
+                    <Text style={{ fontSize: 12, color:'#b5b5b5' }}>{`${item.name.first} ${item.name.last}`}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+                      <StarRating
+                        disabled
+                        maxStars={5}
+                        rating={3.5}
+                        starSize={15}
+                        starColor="#FFA838"
+                        starStyle={{paddingHorizontal:2}}
+                      />
+                      <Text style={{ color:'#b5b5b5'}}>({"3.5"})</Text>
                     </View>
                   </View>
-                </View>
-
-                <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center' }}>
-
-                  <View style={{ marginTop: 4, flexDirection: 'row', justifyContent: 'space-around', }}>
-                      <TouchableOpacity onPress={() => Actions.genericBooking({ title: `${item.name.first} ${item.name.last}` })}>
-                        <Icon name='md-chatboxes' style={{fontSize:34, paddingRight:15}}  />
-                      </TouchableOpacity>
-                      <Icon name='ios-arrow-forward' style={{fontSize:30}}/>
+                  <View style={{ justifyContent: 'space-around', flex: 1, alignItems: 'flex-end', paddingHorizontal:10 }}>
+                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                      <Text style={{color:'#FFA838', fontWeight:"700", fontSize:15}}>$39</Text>
+                      <Text style={{ color:'#b5b5b5', fontWeight:'400', fontSize:12 }}>/hr</Text>
+                    </View>
+                    <TouchableOpacity style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}} onPress={() => Actions.genericBooking({ title: `${item.name.first} ${item.name.last}` })}>
+                      <Icon name = "ios-chatbubbles-outline" style={{ fontSize: 29, color:'#3F6A86', paddingRight:5 }}/>
+                      <Icon name = "ios-arrow-forward" style={{ fontSize: 18, color:'#BFD9E7', paddingLeft:5 }}/>
+                    </TouchableOpacity>
+                    <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                      <Icon name='md-pin' style={{fontSize:15, paddingRight:2, color:'#BFD9E7'}} />
+                      <Text style={{ fontSize: 15, color:'#b5b5b5', }}>0.2k</Text>
+                    </View>
                   </View>
-
                 </View>
               </View>
             )}
@@ -272,17 +266,12 @@ class GenericView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1, backgroundColor:'#fff'
   },
-  offered: {
-    height: 40,
-    width: 80,
-    borderRadius: 3,
-    marginTop: 4,
-    backgroundColor: '#4CAF50',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
+  
+  titleText: { color:'#515151', fontSize:16 },
+  valueText: { color:'#b5b5b5' },
+  topView:{ flex: 1, paddingLeft: 10, justifyContent: 'center', borderRightWidth: 1, borderColor: '#ececec', alignItems:'center' }
 });
 
 export default GenericView;

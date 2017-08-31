@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import StarRating from 'react-native-star-rating';
 import RateComponent from './rateComponent';
 
