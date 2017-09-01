@@ -27,7 +27,9 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const data = [
             { key: '0', section: true, label: 'Category' },
             { key: '1', label: 'Get a Service' },
-            { key: '2', label: 'Learn a Skill' }
+            { key: '2', label: 'Learn a Skill' },
+            { key: '1', label: 'Provide a Service' },
+            { key: '2', label: 'Teach a Skill' }
         ];
 
 const service = [
@@ -57,27 +59,35 @@ const skill = [
 
 
 class SkillList extends Component {
-
-  state = {
-         categoryShowModal:false,
-          category: '',
-          subcategory: '',
-          textInputValue: '',
-          Mon: false,
-          Tue: false,
-          Wed: false,
-          Thu: false,
-          Fri: false,
-          Sat: false,
-          Sun: false,
-          morning: false,
-          afternoon: false,
-          evening: false,
-          night: false,
-          modalData:data,
-          showPicker:false,
-          offSet: new Animated.Value(SCREEN_HEIGHT),
-  };
+  constructor(props) {
+      super(props);
+      let subData = [];
+      if(this.props.category){
+        if(this.props.category === 'Provide a Service') subData = service;
+        else subData = skill;
+      }
+      this.state = {
+            categoryShowModal:false,
+              category: this.props.category?this.props.category:'',
+              subData: subData,
+              subcategory: '',
+              textInputValue: '',
+              Mon: false,
+              Tue: false,
+              Wed: false,
+              Thu: false,
+              Fri: false,
+              Sat: false,
+              Sun: false,
+              morning: false,
+              afternoon: false,
+              evening: false,
+              night: false,
+              modalData:data,
+              showPicker:false,
+              offSet: new Animated.Value(SCREEN_HEIGHT),
+      };
+  }
 
   onPressMon = () => {
     this.setState({ Mon: !this.state.Mon });
@@ -131,6 +141,12 @@ class SkillList extends Component {
                     subData = service;
                     break;
                 case 'Learn a Skill':
+                    subData = skill;
+                    break;
+                case 'Provide a Service':
+                    subData = service;
+                    break;
+                case 'Teach a Skill':
                     subData = skill;
                     break;
                 default:
@@ -364,12 +380,12 @@ class SkillList extends Component {
                   </View>
                 </View>
                 <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 15 }}>
-                  <Text style={{ fontSize: 16, fontWeight: '600' }}>ID Pictures</Text>
                   <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                         <View style={{flex:1, borderBottomWidth:1, borderColor:'#a9a9a9'}} />
                         <Text style={{padding:10, color:'#808080'}}>OPTIONAL</Text>
                         <View style={{flex:1, borderBottomWidth:1, borderColor:'#a9a9a9'}} />
-                    </View>
+                  </View>
+                  <Text style={{ fontSize: 16, fontWeight: '600' }}>ID Verification</Text>
                   <View style={{ marginTop: 3,  flexDirection:'row' }}>
                     <TouchableOpacity style={ styles.photoView } onPress={(e)=>this.setState({ picNumber:3, showPicker:true})} >
                       {

@@ -10,6 +10,7 @@ export default class PickerModal extends React.Component {
         console.log("sdfsdfsdfsdfsdfsdfsdfsd",props);
         this.state = {
             showModal: props.show,
+            value: 0
         };
     }
 

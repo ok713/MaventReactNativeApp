@@ -122,7 +122,11 @@ class RenderItem extends React.Component {
         default:
             break;
         }
-        Actions.subCategory({data:data, title:this.props.data.name});
+        if(id === 'service' || id === 'learn' ){
+          Actions.subCategory({data:data, title:this.props.data.name});
+        }else{
+          Actions.skillList({data:data, category: id === 'provide'?'Provide a Service':'Teach a Skill'});
+        }
     }
     render(){
         return (

@@ -81,27 +81,11 @@ class GenericBookingPage extends Component {
               </View>
 
               <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 15 }}>
-                <Text style={{ fontSize: 16, fontWeight: '600' }}>Address: Postal Code</Text>
+                <Text style={{ fontSize: 16, fontWeight: '600' }}>Optional Message</Text>
                 <View style={{ marginTop: 3, width: 0.85 * SCREEN_WIDTH, backgroundColor: 'white', borderRadius: 3, alignItems: 'center', padding: 8 }}>
                   <TextInput
                     placeholderTextColor="rgba(0,0,0,0.3)"
-                    placeholder="6-Digits postal code"
-                    returnKeyType='go'
-                    keyboardType="numeric"
-                    maxLength={6}
-                    // ref={(input) => this.postal = input}
-                    underlineColorAndroid='transparent'
-                    style={{ height: 40, width: 0.8 * SCREEN_WIDTH, padding: 8, fontSize: 16 }}
-                  />
-                </View>
-              </View>
-
-              <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 15 }}>
-                <Text style={{ fontSize: 16, fontWeight: '600' }}>Service Description</Text>
-                <View style={{ marginTop: 3, width: 0.85 * SCREEN_WIDTH, backgroundColor: 'white', borderRadius: 3, alignItems: 'center', padding: 8 }}>
-                  <TextInput
-                    placeholderTextColor="rgba(0,0,0,0.3)"
-                    placeholder="Additional Information"
+                    placeholder="Optional Message"
                     keyboardType="default"
                     autoCorrect
                     autoCapitalize="sentences"
@@ -110,13 +94,13 @@ class GenericBookingPage extends Component {
                     ref={(input) => this.desc = input}
                     maxLength={140}
                     autoCorrect={false}
-                    style={{ height: 100, width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
+                    style={{ height: 200, width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
                     underlineColorAndroid="transparent"
                   />
                 </View>
               </View>
 
-              <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 20, paddingBottom: 12, flexDirection: 'row', justifyContent: 'space-around' }}>
+              <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 23, paddingBottom: 18, flexDirection: 'row', justifyContent: 'space-around' }}>
                  <TouchableOpacity onPress={(e)=>{}} style={[styles.btn,{ backgroundColor:'#ccc'}]}>
                     <Text style={{fontSize:20}}>Cancel</Text>
                 </TouchableOpacity>
@@ -135,7 +119,8 @@ class GenericBookingPage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'white',
   },
   viewContainer: {
     flex: 1,

@@ -164,51 +164,10 @@ class GenericView extends Component {
         </View>
         <Container>
           <Content>
-            {/*{this.state.data.map((item, index)=>{
-              return <Card key={index} style={{marginTop:0}}>
-              <View  style={{ height: 100, width: SCREEN_WIDTH, flexDirection: 'row' }}>
-                <View style={{ flex: 1.2, justifyContent: 'center', alignItems: 'center' }}>
-                  <Image source={{ uri: item.picture.thumbnail }} style={{ height: 60, width: 60, borderRadius: 30 }} />
-                  <Text>x.x km</Text>
-                </View>
-
-                <View style={{ flex: 3, paddingLeft: 3, paddingTop: 10 }}>
-                  <Text style={{ fontSize: 14, color: '#8C8C8C' }}>{`${item.name.first} ${item.name.last}`}</Text>
-                  <View style={{ height: 2 }}></View>
-                  <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.props.data.name}</Text>
-                  <View style={{ height: 8 }}></View>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <StarRating
-                      disabled
-                      maxStars={5}
-                      rating={3.5}
-                      starSize={20}
-                      starColor="#FFDD44"
-                    />
-                    <View style={{ backgroundColor: '#00CCE4', marginLeft: 8, borderRadius: 4, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                      <Text style={{ color: 'white' }}>Event: Wedding</Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center' }}>
-
-                  <View style={{ marginTop: 4, flexDirection: 'row', justifyContent: 'center'}}>
-                      <TouchableOpacity onPress={() => Actions.genericBooking({ title: `${item.name.first} ${item.name.last}` })}>
-                        <Icon name='md-chatboxes' style={{fontSize:34, paddingRight:10}}  />
-                      </TouchableOpacity>
-                      <Icon name='ios-arrow-forward' style={{fontSize:30}}/>
-                  </View>
-
-                </View>
-              </View>
-              </Card>
-            })
-            }*/}
           <FlatList
             data={this.state.data}
             renderItem={({ item }) => (
-              <View style = {{ paddingHorizontal:10, backgroundColor:'#fff' }}>
+              <TouchableOpacity style = {{ paddingHorizontal:10, backgroundColor:'#fff' }} onPress={() => Actions.skillPage({ title: 'Photographer' })}>
                 <View style={{ paddingVertical:5, flexDirection: 'row' }}>
                   <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
                     <Image source = {{ uri: item.picture.thumbnail }} style={{ height: 70, width: 70, borderRadius: 25 }} />
@@ -244,7 +203,7 @@ class GenericView extends Component {
                     </View>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
             keyExtractor={item => item.email}
             ItemSeparatorComponent={this.renderSeparator}

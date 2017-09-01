@@ -15,7 +15,7 @@ import MySkills from './mainUI/mySkills';
 import SkillList from './mainUI/skillList';
 import GenericView from './mainUI/genericView';
 import GenericBooking from './mainUI/genericBookingPage';
-
+import SkillPage from './mainUI/skillPage';
 import TabIcon from '../components/tabIcon';
 
 
@@ -77,8 +77,7 @@ const RouterComponent = () => {
             <Scene key="profile" hideNavBar tabBarLabel="Profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
           <Scene key="ActivityPage" back={Platform.OS==="android"?false:true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
-            showIcon={true} showLabel={false} tabBarPosition='top' activeBackgroundColor='#f4f4f4'
-            tabBarStyle={{backgroundColor:"#0B486B" }} tabStyle={{ padding:0, paddingTop:20 }}
+            showIcon={true} showLabel={false} tabBarPosition='top' tabBarStyle={{backgroundColor:"#0B486B" }} tabStyle={{ padding:0, paddingTop:20 }}
             activeTintColor="#fff" inactiveTintColor="#fff"  labelStyle={{fontWeight:'bold'}} indicatorStyle={{backgroundColor:'#0B486B'}}
              rightButtonImage={null} renderRightButton={null} animationEnabled iconStyle={{ width: 120, height: 30 }} >
             <Scene key="MySkills" component={MySkills} tabBarLabel='My Skills' back={false} 
@@ -95,6 +94,7 @@ const RouterComponent = () => {
           <Scene key="subCategory" component={SubCategory} title="Subcategory" />
           <Scene key="genericView" component={GenericView} back={Platform.OS==="android"?false:true} title="GenericView" />
           <Scene key="genericBooking" component={GenericBooking} back={Platform.OS==="android"?false:true} title="GenericBookingPage" />
+          <Scene key="skillPage" component={SkillPage} back={Platform.OS==="android"?false:true} title="Skill" />
         </Scene>
       </Scene>
     </Router>
