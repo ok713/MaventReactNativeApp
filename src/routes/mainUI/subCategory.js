@@ -11,7 +11,6 @@ import {
 import {Actions} from 'react-native-router-flux';
 import {Container, Content, Icon} from 'native-base';
 import Search from 'react-native-search-box';
-import CarouselComponent from '../../components/carouselComponent';
 const SCREEN_WIDTH = Dimensions
   .get('window')
   .width;
@@ -62,7 +61,8 @@ onChangeText = (text) => {
                   <Icon name="ios-people-outline" style={{ color:'#FFA838', marginRight:5}} />
                   <Text style={{ color:'#FFA838' }}>12</Text>
                 </View>
-                <TouchableOpacity style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:12, justifyContent:'center', alignItems:'center', borderRadius:3}}>
+                <TouchableOpacity onPress={(e)=>Actions.chatPage()}
+                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:12, justifyContent:'center', alignItems:'center', borderRadius:3}}>
                   <Text style={{ color:'#fff'}} >Chat</Text>
                 </TouchableOpacity>
               </View>

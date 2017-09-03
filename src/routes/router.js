@@ -17,7 +17,7 @@ import GenericView from './mainUI/genericView';
 import GenericBooking from './mainUI/genericBookingPage';
 import SkillPage from './mainUI/skillPage';
 import TabIcon from '../components/tabIcon';
-
+import Chat from '../components/chatComponent';
 
 const reducerCreate = params => {
   const defaultReducer = Reducer(params);
@@ -95,6 +95,7 @@ const RouterComponent = () => {
           <Scene key="genericView" component={GenericView} back={Platform.OS==="android"?false:true} title="GenericView" />
           <Scene key="genericBooking" component={GenericBooking} back={Platform.OS==="android"?false:true} title="GenericBookingPage" />
           <Scene key="skillPage" component={SkillPage} back={Platform.OS==="android"?false:true} title="Skill" />
+          <Scene key="chatPage" component={Chat} back={Platform.OS==="android"?false:true} title="ChatPage" />
         </Scene>
       </Scene>
     </Router>
