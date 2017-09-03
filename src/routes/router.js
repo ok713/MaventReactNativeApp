@@ -79,7 +79,7 @@ const RouterComponent = () => {
           <Scene key="ActivityPage" back={Platform.OS==="android"?false:true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
             showIcon={true} showLabel={false} tabBarPosition='top' tabBarStyle={{backgroundColor:"#0B486B" }} tabStyle={{ padding:0, paddingTop:20 }}
             activeTintColor="#fff" inactiveTintColor="#fff"  labelStyle={{fontWeight:'bold'}} indicatorStyle={{backgroundColor:'#0B486B'}}
-             rightButtonImage={null} renderRightButton={null} animationEnabled iconStyle={{ width: 120, height: 30 }} >
+             rightButtonImage={null} renderRightButton={null} animationEnabled iconStyle={{ width: 120, height: 30 }} backBehavior="none" >
             <Scene key="MySkills" component={MySkills} tabBarLabel='My Skills' back={false} 
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon1}
             />

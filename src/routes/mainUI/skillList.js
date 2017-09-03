@@ -166,7 +166,7 @@ class SkillList extends Component {
   }
 
   _openCameraRoll = async () => {
-    let image = await ImagePicker.launchImageLibraryAsync();
+    let image = await ImagePicker.launchImageLibraryAsync({allowsEditing:true, aspect:[4,3]});
     if(!image.cancelled) {
       if(this.state.picNumber === 0) this.setState({picUrl0:{uri:image.uri}});
       if(this.state.picNumber === 1) this.setState({picUrl1:{uri:image.uri}});
@@ -177,7 +177,7 @@ class SkillList extends Component {
   }
 
   takePhoto = async () => {
-      let image = await ImagePicker.launchCameraAsync();
+      let image = await ImagePicker.launchCameraAsync({allowsEditing:true, aspect:[4,3]});
       if(!image.cancelled) {
         if(this.state.picNumber === 0) this.setState({picUrl0:{uri:image.uri}});
         if(this.state.picNumber === 1) this.setState({picUrl1:{uri:image.uri}});
