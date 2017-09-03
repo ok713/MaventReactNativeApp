@@ -80,7 +80,7 @@ onChangeText = (text) => {
                     tintColorSearch="#fff"
                     tintColorDelete="#fff"
                 onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
-        <CarouselComponent/>
+        <Image source={require('../../../assets/images/Announcement_banner.jpg')} style={{ width: width, height: height / 4 }}/>
         <Container>
           <Content style={{
             width: width

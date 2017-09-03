@@ -134,7 +134,8 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     LogoImage: {
         height: 180,
-        width: 180
+        width: 180,
+        resizeMode:'contain'
     },
     loginBtn:{
         padding:5, marginTop:15, flexDirection:'row', width:'78%', alignSelf:'center', alignItems:'center',
