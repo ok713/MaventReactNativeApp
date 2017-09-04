@@ -26,8 +26,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const data = [
             { key: '0', section: true, label: 'Category' },
-            { key: '1', label: 'Get a Service' },
-            { key: '2', label: 'Learn a Skill' },
             { key: '1', label: 'Provide a Service' },
             { key: '2', label: 'Teach a Skill' }
         ];
@@ -137,12 +135,6 @@ class SkillList extends Component {
         if(this.state.isCategory) {
             let subData ;
             switch (category) {
-                case 'Get a Service':
-                    subData = service;
-                    break;
-                case 'Learn a Skill':
-                    subData = skill;
-                    break;
                 case 'Provide a Service':
                     subData = service;
                     break;
