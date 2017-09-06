@@ -15,8 +15,8 @@ class Profile extends Component {
     this.state = {
       id: 1,
       details: { name: 'Harvey Lawrence', email: 'person@example.com'},
-      rateData: [ { category:"Learn a Skill", data:[{ name: 'Photographer', rate: 3.5 }]},
-       { category:"Get a Service", data:[{ name: 'Angular 2/4', rate: 4.5 }, { name: 'React', rate: 4.0 }]} ],
+      rateData: [ { category:"My Skill", data:[{ name: 'Photographer', rate: 3.5 }]},
+       { category:"My Service", data:[{ name: 'Angular 2/4', rate: 4.5 }, { name: 'React', rate: 4.0 }]} ],
       reviewData: data.slice(0, 4),
     };
   }
@@ -45,7 +45,7 @@ class Profile extends Component {
     return (
       <Container>
         <Content>
-          <View style={{ paddingHorizontal: 10, marginTop:Platform.OS==="android"?23:0 }} >
+          <View style={{ paddingHorizontal: 10 }} >
             <Image source={require('../../../assets/images/CarouselView/Image1.jpg')} style={{ position:'absolute',flex:1, width: width}}>
               <View style={{ backgroundColor:'rgba(11, 72, 107, 0.9)', width:'100%', height:'100%'}}/>
             </Image>

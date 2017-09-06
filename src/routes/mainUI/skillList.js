@@ -20,6 +20,7 @@ import { Icon } from 'native-base';
 import {ImagePicker} from 'expo';
 import ListModal from '../../components/listModal';
 import PickerModal from '../../components/picker';
+import { Actions } from 'react-native-router-flux';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -399,7 +400,7 @@ class SkillList extends Component {
                 </View>
 
                 <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 15, paddingBottom: 12, flexDirection: 'row', justifyContent: 'space-around' }}>
-                  <TouchableOpacity onPress={(e)=>{}} style={[styles.btn,{ backgroundColor:'#ccc'}]}>
+                  <TouchableOpacity onPress={(e)=>{ Actions.pop() }} style={[styles.btn,{ backgroundColor:'#ccc'}]}>
                       <Text style={{fontSize:20}}>Cancel</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={(e)=>{}} style={[styles.btn,{ backgroundColor:'#0B486B'}]}>

@@ -8,7 +8,7 @@ const SkillRowComponent = (props) => {
   return <View style={styles.wrapper}>
                 <View style={{ paddingBottom: 3, flexDirection:'row', alignItems:'center', justifyContent:'space-between' }}>
                   <Text style={{ fontSize: 16, color:'#515151' }}>{props.data.category}</Text>
-                  <TouchableOpacity  onPress={() => Actions.skillList()}>
+                  <TouchableOpacity  onPress={() => Actions.skillList({category: props.data.category === 'My Service'?'Provide a Service':'Teach a Skill' })}>
                     <Text style={{ color:'#FFA838' }} >Add</Text>
                   </TouchableOpacity>
                 </View>

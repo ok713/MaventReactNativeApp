@@ -2,11 +2,12 @@ import React from 'react';
 import { Icon } from 'native-base';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import StarRating from 'react-native-star-rating';
+import { Actions } from 'react-native-router-flux';
 
 const ItemRow = (props) => {
   let provider = props.data;
   return (
-    <View style = {{ paddingHorizontal:10, backgroundColor:'#fff' }}>
+    <TouchableOpacity style = {{ paddingHorizontal:10, backgroundColor:'#fff' }} onPress={() => Actions.skillPage({ title: 'Photographer' })}>
       <View key={provider.id} style={{ paddingVertical:5, flexDirection: 'row', borderBottomWidth:1, borderBottomColor: '#ececec' }}>
         <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
           <Image source={require('../../assets/images/profile.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
@@ -44,7 +45,7 @@ const ItemRow = (props) => {
           <Icon name='md-chatbubbles' size={40} />*/}
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'native-base';
-import { StyleSheet, Text, View, Animated, Picker, Dimensions, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Animated, Picker, Dimensions, TouchableHighlight, Platform } from 'react-native';
 
 var deviceHeight = Dimensions.get('window').height;
 var PickerItem = Picker.Item; 
@@ -26,20 +26,34 @@ export default class PickerModal extends React.Component {
             toValue: deviceHeight
         }).start(this.props.closeModal);
     }
+
+    onChange = (value) => {
+        if(Platform.OS==="ios"){
+            this.setState({value:value});
+        }
+        else{
+            this.props.changeValue(value);
+            this.closeModal()
+        }
+    }
     render() {
         return (
             <Animated.View style={{ transform: [{ translateY: this.props.offSet }],backgroundColor:'#d3d4d9' }}>
                 <View style={styles.closeButtonContainer}>
-                    <TouchableHighlight onPress={this.closeModal} underlayColor="transparent" style={styles.closeButton}>
-                        <Text style={styles.closeButtonText}>Cancel</Text>
-                    </TouchableHighlight>
+                <TouchableHighlight onPress={this.closeModal} underlayColor="transparent" style={styles.closeButton}>
+                    <Text style={styles.closeButtonText}>Cancel</Text>
+                </TouchableHighlight>
+                {
+                    Platform.OS==="ios" &&
                     <TouchableHighlight onPress={(e)=>{this.props.changeValue(this.state.value);this.closeModal()}} underlayColor="transparent" style={styles.closeButton}>
                         <Text style={styles.closeButtonText}>Select</Text>
                     </TouchableHighlight>
-                </View>
+                }
+            </View>
+
                 <Picker itemStyle={{ justifyContent:'center', height:150, color:'#027afe'}}
                     selectedValue={this.state.value}
-                    onValueChange={(value) => { this.setState({value:value})}}>
+                    onValueChange={(value) => { this.onChange(value) }}>
                     {this.props.data.map((value, index) => (
                         <PickerItem
                             key={index}
