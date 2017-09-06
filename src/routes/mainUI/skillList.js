@@ -56,6 +56,8 @@ const skill = [
             { key: '4', label: 'Others' },
         ];
 
+const pickerData = Platform.OS==="android"?['Please Select...','Take photo...','Choose from Library...']:['Take photo...','Choose from Library...'];
+
 
 class SkillList extends Component {
   constructor(props) {
@@ -154,8 +156,14 @@ class SkillList extends Component {
   }
 
   changeValue = (value) => {
-    if(value === 1) this.takePhoto();
-    else if(value === 2) this._openCameraRoll();
+    if(Platform.OS==="android"){
+      if(value === 1) this.takePhoto();
+      else if(value === 2) this._openCameraRoll();
+    }
+    else{
+      if(value === 0) this.takePhoto();
+      else if(value === 1) this._openCameraRoll();
+    }
   }
 
   _openCameraRoll = async () => {
@@ -410,7 +418,7 @@ class SkillList extends Component {
               </View>
             </View>
           </ScrollView>
-           {this.state.showPicker ? <PickerModal closeModal={() => this.setState({ showPicker: false })} data={['Please Select...','Take photo...','Choose from Library...']} offSet={this.state.offSet}  changeValue={this.changeValue} /> : null}
+           {this.state.showPicker ? <PickerModal closeModal={() => this.setState({ showPicker: false })} data={pickerData} offSet={this.state.offSet}  changeValue={this.changeValue} /> : null}
         </View>  
     );
   }

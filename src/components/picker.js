@@ -28,11 +28,11 @@ export default class PickerModal extends React.Component {
     }
 
     onChange = (value) => {
-        if(value==0) return;
         if(Platform.OS==="ios"){
             this.setState({value:value});
         }
         else{
+            if(value==0) return;
             this.props.changeValue(value);
             this.closeModal()
         }
