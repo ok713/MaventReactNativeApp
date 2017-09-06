@@ -154,8 +154,8 @@ class SkillList extends Component {
   }
 
   changeValue = (value) => {
-    if(value === 0) this.takePhoto();
-    else this._openCameraRoll();
+    if(value === 1) this.takePhoto();
+    else if(value === 2) this._openCameraRoll();
   }
 
   _openCameraRoll = async () => {
@@ -410,7 +410,7 @@ class SkillList extends Component {
               </View>
             </View>
           </ScrollView>
-           {this.state.showPicker ? <PickerModal closeModal={() => this.setState({ showPicker: false })} data={['Take photo...','Choose from Library...']} offSet={this.state.offSet}  changeValue={this.changeValue} /> : null}
+           {this.state.showPicker ? <PickerModal closeModal={() => this.setState({ showPicker: false })} data={['Please Select...','Take photo...','Choose from Library...']} offSet={this.state.offSet}  changeValue={this.changeValue} /> : null}
         </View>  
     );
   }
