@@ -249,10 +249,10 @@ class SkillList extends Component {
                       placeholderTextColor="rgba(0,0,0,0.3)"
                       placeholder="Please keep it within 140 characters"
                       keyboardType="default"
-                      autoCorrect
+                      returnKeyType="next"
                       autoCapitalize="sentences"
-                      multiline
-                      returnKeyType='next'
+                      multiline={true}
+                      numberOfLines={4}
                       ref={(input) => this.desc = input}
                       maxLength={140}
                       autoCorrect={false}

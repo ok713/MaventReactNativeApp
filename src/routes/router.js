@@ -70,11 +70,11 @@ const RouterComponent = () => {
         </Scene>
 
         <Scene key='home'  >
-          <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#fff' tabBarStyle={{ backgroundColor: '#fff', paddingVertical:3,  marginTop:Platform.OS==="android"?23:0 }}
-          indicatorStyle={{backgroundColor:'#084E70'}} activeTintColor="#084E70" inactiveTintColor="#bbbbbb" animationEnabled showIcon={true} showLabel={true} hideNavBar >
-            <Scene key="categoryView" navigationBarStyle={{ marginTop: 0, backgroundColor:"#0B486B" }} tabBarLabel="Home"  component={CategoryView} icon={TabIcon1} title="M A V E N T" initial />
-            <Scene key="discovery" navigationBarStyle={{ marginTop: 0, backgroundColor:"#0B486B" }} tabBarLabel="Discovery" component={Discovery} icon={TabIcon2} title="Discovery" />
-            <Scene key="profile" navigationBarStyle={{ marginTop: 0, backgroundColor:"#0B486B" }} hideNavBar tabBarLabel="Profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
+          <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#fff' tabBarStyle={{ backgroundColor: '#fff', paddingVertical:3 }}
+          title="M A V E N T" renderLeftButton={null} navigationBarStyle={{ marginTop:Platform.OS==="android"?23:0, backgroundColor:"#0B486B" }} indicatorStyle={{backgroundColor:'#084E70'}} activeTintColor="#084E70" inactiveTintColor="#bbbbbb" animationEnabled showIcon={true} showLabel={true} hideNavBar={false} >
+            <Scene key="categoryView" navigationBarStyle={{ height: 0 }} tabBarLabel="Home"  component={CategoryView} icon={TabIcon1} title="M A V E N T" initial />
+            <Scene key="discovery" navigationBarStyle={{ height: 0 }} tabBarLabel="Discovery" component={Discovery} icon={TabIcon2} title="Discovery" />
+            <Scene key="profile" navigationBarStyle={{ height: 0 }}  tabBarLabel="Profile" component={Profile} icon={TabIcon3} title="M A V E N T" />
           </Scene>
           <Scene key="ActivityPage" back={Platform.OS==="android"?false:true} title="Activity"  gestureEnabled={false} tabs hideNavBar={false}
             showIcon={true} showLabel={false} tabBarPosition='top' tabBarStyle={{backgroundColor:"#0B486B" }} tabStyle={{ padding:0, paddingTop:20 }}

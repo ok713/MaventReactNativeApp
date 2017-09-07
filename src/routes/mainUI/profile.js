@@ -49,11 +49,11 @@ class Profile extends Component {
             <Image source={require('../../../assets/images/CarouselView/Image1.jpg')} style={{ position:'absolute',flex:1, width: width}}>
               <View style={{ backgroundColor:'rgba(11, 72, 107, 0.9)', width:'100%', height:'100%'}}/>
             </Image>
-            <View style={{flexDirection:'row', justifyContent:'flex-end', paddingTop:Platform.OS==="android"?10:30}}>
+            {/* <View style={{flexDirection:'row', justifyContent:'flex-end', paddingTop:Platform.OS==="android"?10:30}}>
               <TouchableOpacity onPress={(e)=> Actions.ActivityPage()}>
                 <Icon name = "md-mail" style={{ fontSize: 25, color:'#fff' }}/>
               </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
               <Image source={require('../../../assets/images/profile.png')} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
             </View>
