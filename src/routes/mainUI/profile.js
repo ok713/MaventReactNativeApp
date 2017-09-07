@@ -54,7 +54,7 @@ class Profile extends Component {
                 <Icon name = "md-mail" style={{ fontSize: 25, color:'#fff' }}/>
               </TouchableOpacity>
             </View> */}
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
               <Image source={require('../../../assets/images/profile.png')} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
             </View>
             <View style={{ flexDirection:'row', alignItems: 'center', justifyContent:'center', paddingTop: 2 }}>
