@@ -27,8 +27,13 @@ class SubCategory extends Component {
 
   navigate = (data) => {
     Actions.genericView({data: data, title: data.name});
-
   }
+
+  goTopic = (data) => {
+    Actions.topicPage({title: data.name});
+  }
+
+
 
   onSearch = (text) => {
     return new Promise((resolve, reject) => {
@@ -61,7 +66,7 @@ onChangeText = (text) => {
                   <Icon name="ios-people-outline" style={{ color:'#FFA838', marginRight:5}} />
                   <Text style={{ color:'#FFA838' }}>12</Text>
                 </View>
-                <TouchableOpacity onPress={(e)=>Actions.chatPage()}
+                <TouchableOpacity onPress={(e)=>{this.goTopic(data)}}
                   style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:12, justifyContent:'center', alignItems:'center', borderRadius:3}}>
                   <Text style={{ color:'#fff'}} >Chat</Text>
                 </TouchableOpacity>

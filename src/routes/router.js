@@ -16,6 +16,8 @@ import SkillList from './mainUI/skillList';
 import GenericView from './mainUI/genericView';
 import GenericBooking from './mainUI/genericBookingPage';
 import SkillPage from './mainUI/skillPage';
+import TopicPage from './mainUI/topicPage';
+import CommentsPage from './mainUI/commentsPage';
 import TabIcon from '../components/tabIcon';
 import Chat from '../components/chatComponent';
 
@@ -92,11 +94,13 @@ const RouterComponent = () => {
             />
           </Scene>
           <Scene key="skillList" component={SkillList} title="Monetizing" renderRightButton={null} rightButtonImage={null} />
-          <Scene key="subCategory" component={SubCategory} title="Subcategory" />
+          <Scene key="subCategory" component={SubCategory} back={Platform.OS==="android"?false:true} title="Subcategory" />
           <Scene key="genericView" component={GenericView} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="GenericView" />
           <Scene key="genericBooking" component={GenericBooking} back={Platform.OS==="android"?false:true} title="GenericBookingPage" />
           <Scene key="skillPage" component={SkillPage} back={Platform.OS==="android"?false:true} title="Skill" />
           <Scene key="chatPage" component={Chat} back={Platform.OS==="android"?false:true} title="ChatPage" />
+          <Scene key="topicPage" component={TopicPage} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="topicPage" />
+          <Scene key="commentsPage" component={CommentsPage} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="Comments" />
         </Scene>
       </Scene>
     </Router>
