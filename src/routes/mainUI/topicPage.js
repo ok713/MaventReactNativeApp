@@ -17,11 +17,11 @@ const SCREEN_WIDTH = Dimensions
   .width;
 const {width, height} = Dimensions.get('window');
 const HORIZONTAL_PADDING = 8;
-const data = [{pic: require('../../../assets/images/profile.png'), name: 'Laura', day: '4d ago', comments: 1, likes:14,
+const data = [{pic: require('../../../assets/images/profile.png'), name: 'Laura Lee', day: '4d ago', comments: 1, likes:14,
               topic: 'I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills' },
-              {pic: require('../../../assets/images/profile.png'), name: 'John', day: '4d ago', comments: 1, likes:14,
+              {pic: require('../../../assets/images/profile.png'), name: 'John David', day: '4d ago', comments: 1, likes:14,
               topic: 'I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills' },
-              {pic: require('../../../assets/images/profile.png'), name: 'Eric', day: '4d ago', comments: 1, likes:14,
+              {pic: require('../../../assets/images/profile.png'), name: 'Eric Lou', day: '4d ago', comments: 1, likes:14,
               topic: 'I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills' },                            
             ]
 
