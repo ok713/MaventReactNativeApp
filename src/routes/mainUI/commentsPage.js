@@ -10,9 +10,10 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  ScrollView
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {Container, Content, Icon} from 'native-base';
+import {Icon} from 'native-base';
 import Search from 'react-native-search-box';
 const SCREEN_WIDTH = Dimensions
   .get('window')
@@ -84,18 +85,17 @@ class CommentsPage extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior = 'padding' style ={{ flex: 1}} contentContainerStyle = {{flex: 1}} >
-        <View style = {{ flex: 1, marginBottom: 5}}>
-          <Container style={{backgroundColor: '#fff'}}>
-            <Content>
-            <View style = {{flexDirection: "row", alignItems: 'center', padding: 20}}>
+        <View style = {{ flex: 1, marginBottom: 5, backgroundColor: '#fff'}}>
+          <ScrollView>
+            <View style = {{flexDirection: "row", alignItems: 'center', padding: 20, paddingBottom: 0}}>
               <Image source = {this.props.data.pic} style = {{ width: 60, height: 60, borderRadius: 30 }}/>
               <View style = {{paddingHorizontal: 10, justifyContent: 'space-between', height: 40}} >
-                <Text style = {{fontSize:18}} >{this.props.data.name}</Text>
+                <Text style = {{fontSize:16}} >{this.props.data.name}</Text>
                 <Text style = {{color: '#515151', fontSize:12}}>{this.props.data.day}</Text>
               </View>
             </View>
             <View style = {{ paddingVertical: 10, paddingHorizontal: 20}}>
-              <Text style = {{ fontSize:20 }}>
+              <Text style = {{ fontSize:18 }}>
                 {this.props.data.topic}
               </Text>
             </View>
@@ -122,8 +122,7 @@ class CommentsPage extends Component {
               <Icon name = "ios-happy-outline" style={{ color: '#b5b5b5' }}/>
               </TouchableOpacity>
             </View>
-            </Content>
-          </Container>
+            </ScrollView>
         </View>
       </KeyboardAvoidingView>
     );
