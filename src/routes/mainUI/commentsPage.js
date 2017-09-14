@@ -13,7 +13,7 @@ import {
   ScrollView
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {Icon} from 'native-base';
+import {Icon, Container, Content} from 'native-base';
 import Search from 'react-native-search-box';
 const SCREEN_WIDTH = Dimensions
   .get('window')
@@ -85,45 +85,47 @@ class CommentsPage extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior = 'padding' style ={{ flex: 1}} contentContainerStyle = {{flex: 1}} >
-        <View style = {{ flex: 1, marginBottom: 5, backgroundColor: '#fff'}}>
-          <ScrollView>
-            <View style = {{flexDirection: "row", alignItems: 'center', padding: 20, paddingBottom: 0}}>
-              <Image source = {this.props.data.pic} style = {{ width: 60, height: 60, borderRadius: 30 }}/>
-              <View style = {{paddingHorizontal: 10, justifyContent: 'space-between', height: 40}} >
-                <Text style = {{fontSize:16}} >{this.props.data.name}</Text>
-                <Text style = {{color: '#515151', fontSize:12}}>{this.props.data.day}</Text>
-              </View>
-            </View>
-            <View style = {{ paddingVertical: 10, paddingHorizontal: 20}}>
-              <Text style = {{ fontSize:18 }}>
-                {this.props.data.topic}
-              </Text>
-            </View>
-            <View style = {{ padding: 10}}>
-              <View style = {{paddingVertical:10, paddingHorizontal:20, flexDirection: 'row', alignItems:'center', borderColor: '#ececec', borderBottomWidth: 1, borderTopWidth: 1 }}>
-                <TouchableOpacity onPress={(e)=>this.onclickLike()} >
-                  <Icon style={{ fontSize:27, color: '#515151' }} name = {this.state.isLike?'ios-thumbs-up':'ios-thumbs-up-outline'} />
-                </TouchableOpacity>
-                <Text style ={{ color: '#515151', fontSize: 17, paddingHorizontal: 10}} >Like</Text>
-              </View>
-            </View>
-            
-          {
-            this.state.data.map((item, index)=>{
-              return <View key={index}>
-                {this.renderItem(item, index)}
+        <Container style = {{ marginBottom: 5, backgroundColor: '#fff'}}>
+          <Content>
+            <ScrollView>
+              <View style = {{flexDirection: "row", alignItems: 'center', padding: 20, paddingBottom: 0}}>
+                <Image source = {this.props.data.pic} style = {{ width: 60, height: 60, borderRadius: 30 }}/>
+                <View style = {{paddingHorizontal: 10, justifyContent: 'space-between', height: 40}} >
+                  <Text style = {{fontSize:16}} >{this.props.data.name}</Text>
+                  <Text style = {{color: '#515151', fontSize:12}}>{this.props.data.day}</Text>
                 </View>
-            })
-          }
-          
-          <View style = {{flexDirection: 'row', alignItems: 'center', borderWidth: 1, paddingHorizontal:10, borderColor: '#b5b5b5'}}>
-            <TextInput returnKeyType="next" multiline={true} placeholder = "Write a comments..." style = {{ fontSize:15, flex: 1, height:50 }}/>
-            <TouchableOpacity onPress = {(e)=>{}}>
-              <Icon name = "ios-happy-outline" style={{ color: '#b5b5b5' }}/>
-              </TouchableOpacity>
-            </View>
+              </View>
+              <View style = {{ paddingVertical: 10, paddingHorizontal: 20}}>
+                <Text style = {{ fontSize:18 }}>
+                  {this.props.data.topic}
+                </Text>
+              </View>
+              <View style = {{ padding: 10}}>
+                <View style = {{paddingVertical:10, paddingHorizontal:20, flexDirection: 'row', alignItems:'center', borderColor: '#ececec', borderBottomWidth: 1, borderTopWidth: 1 }}>
+                  <TouchableOpacity onPress={(e)=>this.onclickLike()} >
+                    <Icon style={{ fontSize:27, color: '#515151' }} name = {this.state.isLike?'ios-thumbs-up':'ios-thumbs-up-outline'} />
+                  </TouchableOpacity>
+                  <Text style ={{ color: '#515151', fontSize: 17, paddingHorizontal: 10}} >Like</Text>
+                </View>
+              </View>
+              
+            {
+              this.state.data.map((item, index)=>{
+                return <View key={index}>
+                  {this.renderItem(item, index)}
+                  </View>
+              })
+            }
+            
+            <View style = {{flexDirection: 'row', alignItems: 'center', borderWidth: 1, paddingHorizontal:10, borderColor: '#b5b5b5'}}>
+              <TextInput returnKeyType="next" multiline={true} placeholder = "Write a comments..." style = {{ fontSize:15, flex: 1, height:50 }}/>
+              <TouchableOpacity onPress = {(e)=>{}}>
+                <Icon name = "ios-happy-outline" style={{ color: '#b5b5b5' }}/>
+                </TouchableOpacity>
+              </View>
             </ScrollView>
-        </View>
+          </Content>
+        </Container>
       </KeyboardAvoidingView>
     );
   }
