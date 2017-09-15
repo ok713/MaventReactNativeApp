@@ -103,7 +103,7 @@ class CommentsPage extends Component {
               <View style = {{ padding: 10}}>
                 <View style = {{paddingVertical:10, paddingHorizontal:20, flexDirection: 'row', alignItems:'center', borderColor: '#ececec', borderBottomWidth: 1, borderTopWidth: 1 }}>
                   <TouchableOpacity onPress={(e)=>this.onclickLike()} >
-                    <Icon style={{ fontSize:27, color: '#515151' }} name = {this.state.isLike?'ios-thumbs-up':'ios-thumbs-up-outline'} />
+                    <Icon style={{ fontSize:27, color: '#515151', marginTop: 2 }} name = {this.state.isLike?'ios-thumbs-up':'ios-thumbs-up-outline'} />
                   </TouchableOpacity>
                   <Text style ={{ color: '#515151', fontSize: 17, paddingHorizontal: 10}} >Like</Text>
                 </View>
