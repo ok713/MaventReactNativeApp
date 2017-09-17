@@ -1,15 +1,26 @@
 {
   "expo": {
     "name": "Mavent",
-    "icon": "./assets/images/mavent_logo.png",
+    "icon": "./assets/images/mavent_logo3.png",
     "version": "1.0.0",
     "slug": "mavent-app-slug",
     "sdkVersion": "18.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#0B486B",
     "ios": {
       "bundleIdentifier": "com.okdev.mavent"
     },
     "android": {
       "package": "com.okdev.mavent"
+    },
+    "loading":{
+      "icon": "./assets/images/mavent_logo3.png",
+      "hideExponentText": true,
+      "backgroundColor": "white"
+    },
+    "androidStatusBar":{
+      "barStyle": "dark-content",
+      "backgroundColor": "#0A3E5C"
     }
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Expo from 'expo';
 import { View, ActivityIndicator, Text, Image, Dimensions, StyleSheet } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
 import { Container, Content, Icon } from 'native-base';
@@ -7,11 +8,13 @@ import ItemRow from '../../components/discoveryItem'
 import data from '../../services/provider.json';
 
 const SCREEN_H = Dimensions.get('window').height;
+const { width, height } = Dimensions.get('window');
 
 class Discovery extends React.Component {
     constructor() {
         super();
         this.state = {
+            statusBarHeight: 1,
             mapLoaded: false,
             errorMessage: null,
             location: null,
@@ -25,6 +28,7 @@ class Discovery extends React.Component {
     }
     componentWillMount() {
         this.getLocationAsync();
+        setTimeout(()=>this.setState({statusBarHeight: Expo.Constants.statusBarHeight-23}),500);
     }
     async getLocationAsync() {
 
@@ -65,9 +69,9 @@ class Discovery extends React.Component {
 
     render() {
         return (
-            <View style={styles.mapContainer}>
+            <View style={{ flex: 1, paddingTop: this.state.statusBarHeight }}>
                <MapView
-                    // provider="google"
+                    provider="google"
                     region={this.state.region}
                     showsMyLocationButton
                     showsUserLocation
@@ -78,7 +82,7 @@ class Discovery extends React.Component {
                 <View style={styles.listContainer}>
                     <View style={{backgroundColor:'#f8f8f8', padding:3}}>
                         <Search
-                            ref="search_box" backgroundColor={'#f8f8f8'} inputStyle={{ backgroundColor:'#fff', borderWidth:1, borderColor:'#ececec'}}  
+                            ref="search_box" backgroundColor={'#f8f8f8'} inputStyle={{ backgroundColor:'#fff', borderWidth:1, borderColor:'#ececec'}}
                                 placeholderTextColor="#a4a4a4"
                                 tintColorSearch="#a4a4a4"
                                 tintColorDelete="#e5e5e5"

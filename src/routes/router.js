@@ -60,20 +60,20 @@ const RouterComponent = () => {
   return (
     <Router createReducer={reducerCreate}>
       <Scene key='root' hideNavBar onRight={() => { Actions.ActivityPage() }}
-        navigationBarStyle={{marginTop:Platform.OS==="android"?23:0, backgroundColor: '#0B486B', borderBottomWidth: 0}}
+        navigationBarStyle={{ backgroundColor: '#0B486B', borderBottomWidth: 0}}
         titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
          renderRightButton={renderRightButton} >
 
         <Scene key='auth' >
           <Scene key="login" component={Login} hideNavBar />
           <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} renderRightButton={null} />
-          <Scene key="OTP"  component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true} 
+          <Scene key="OTP"  component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true}
            renderRightButton={null} hideNavBar={false} rightButtonImage={null} />
         </Scene>
 
         <Scene key='home'  >
           <Scene key="main" gestureEnabled={false} tabs activeBackgroundColor='#fff' tabBarStyle={{ backgroundColor: '#fff', paddingVertical:3 }}
-          title="M A V E N T" renderLeftButton={null} navigationBarStyle={{ marginTop:Platform.OS==="android"?23:0, backgroundColor:"#0B486B" }} indicatorStyle={{backgroundColor:'#084E70'}} activeTintColor="#084E70" inactiveTintColor="#bbbbbb" 
+          title="M A V E N T" renderLeftButton={null} navigationBarStyle={{ backgroundColor:"#0B486B" }} indicatorStyle={{backgroundColor:'#084E70'}} activeTintColor="#084E70" inactiveTintColor="#bbbbbb"
           animationEnabled showIcon={true} showLabel={true} hideNavBar={Platform.OS==="android"?false:true} >
             <Scene key="categoryView" navigationBarStyle={{ height: Platform.OS==="android"?0:60, backgroundColor:"#0B486B" }} tabBarLabel="Home"  component={CategoryView} icon={TabIcon1} title="M A V E N T" initial />
             <Scene key="discovery" navigationBarStyle={{ height: Platform.OS==="android"?0:60, backgroundColor:"#0B486B" }} tabBarLabel="Discovery" component={Discovery} icon={TabIcon2} title="Discovery" />
@@ -83,17 +83,17 @@ const RouterComponent = () => {
             showIcon={true} showLabel={false} tabBarPosition='top' tabBarStyle={{backgroundColor:"#0B486B" }} tabStyle={{ padding:0, paddingTop:20 }}
             activeTintColor="#fff" inactiveTintColor="#fff"  labelStyle={{fontWeight:'bold'}} indicatorStyle={{backgroundColor:'#0B486B'}}
              rightButtonImage={null} renderRightButton={null} animationEnabled iconStyle={{ width: 120, height: 30 }} backBehavior="none" >
-            <Scene key="MySkills" component={MySkills} tabBarLabel='My Skills' back={false} 
+            <Scene key="MySkills" component={MySkills} tabBarLabel='My Skills' back={false}
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon1}
             />
-            <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills' back={false} 
+            <Scene key="RequestedSkills" component={MySkills} tabBarLabel='Requested Skills' back={false}
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon2}
             />
-            <Scene key="Archived" component={MySkills} tabBarLabel='Archived' back={false} 
+            <Scene key="Archived" component={MySkills} tabBarLabel='Archived' back={false}
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon3}
             />
           </Scene>
-          <Scene key="skillList" component={SkillList} title="Monetizing" renderRightButton={null} rightButtonImage={null} />
+          <Scene key="skillList" component={SkillList} title="Registration" renderRightButton={null} rightButtonImage={null} />
           <Scene key="subCategory" component={SubCategory} back={Platform.OS==="android"?false:true} title="Subcategory" />
           <Scene key="genericView" component={GenericView} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="GenericView" />
           <Scene key="genericBooking" component={GenericBooking} back={Platform.OS==="android"?false:true} title="GenericBookingPage" />

@@ -55,7 +55,7 @@ export default class Login extends Component {
 
   render() {
     return (
-        <View style={{flex: 1, justifyContent:'center', marginTop:Platform.OS==="android"?23:0}}>
+        <View style={{flex: 1, justifyContent:'center' }}>
             <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
                 <Image source={require('../../../assets/images/CarouselView/Image2.jpg')} style={{ flex: 1, height: SCREEN_HEIGHT / 2 , width: SCREEN_WIDTH }}/>
                 <View style={{ position: 'absolute' }}>
