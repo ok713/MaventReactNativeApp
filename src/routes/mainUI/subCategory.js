@@ -80,12 +80,12 @@ onChangeText = (text) => {
     return (
       <View style={styles.container}>
         <Search
-                ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}  
+                ref="search_box" backgroundColor={'#0B486B'} inputStyle={{ backgroundColor:'#032d44'}}
                     placeholderTextColor="#d3d3d3"
                     tintColorSearch="#fff"
                     tintColorDelete="#fff"
                 onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
-        <Image source={require('../../../assets/images/Announcement_banner.jpg')} style={{ width: width, height: height / 4 }}/>
+        <Image source={require('../../../assets/images/Announcement_banner.jpg')} style={{ width: width, height: height / 3.65 }}/>
         <Container>
           <Content style={{
             width: width

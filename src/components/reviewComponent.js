@@ -22,7 +22,7 @@ const ReviewComponent = (props) => {
       </View>
       <Text style={{ color:'#b5b5b5', fontSize:14 }}>{props.data.content}</Text>
     </View>
-    
+
   </View>
 };
 const styles = StyleSheet.create({

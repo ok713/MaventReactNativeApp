@@ -23,7 +23,7 @@ const data = [{pic: require('../../../assets/images/profile.png'), name: 'Laura 
               image: require('../../../assets/images/Announcement_banner.jpg')
              },
               {pic: require('../../../assets/images/profile.png'), name: 'Eric Lou', day: '4d ago', comments: 1, likes:14,
-              topic: 'I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills' },                            
+              topic: 'I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills' },
             ]
 
 class TopicPage extends Component {
@@ -57,7 +57,7 @@ class TopicPage extends Component {
     this.setState({moreList: list});
   }
 
-  
+
   onclickLike = (index) =>{
     let temp = this.state.likeList;
     temp[index] = !temp[index];
@@ -73,6 +73,7 @@ class TopicPage extends Component {
               <Image source = {item.pic} style = {{ width: 55, height: 55, borderRadius: 17 }}/>
               <View style = {{paddingHorizontal: 10}} >
                 <Text style = {styles.nameText} >{item.name}</Text>
+                <View style={{ height: 5 }}></View>
                 <Text style ={{ color: '#a4a4a4', fontSize: 15}} >{item.day}</Text>
               </View>
             </View>
@@ -113,7 +114,7 @@ class TopicPage extends Component {
                   <Icon style={{ fontSize:27, marginTop: 3, color: '#515151' }} name = {'ios-send-outline'} />
                 </TouchableOpacity>
               </View>
-              
+
             </View>
 
           </View>

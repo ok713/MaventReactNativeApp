@@ -62,7 +62,7 @@ const service = [
         id: 'others',
         image: require('../../assets/images/subCategories/get_a_service/Others.jpeg')
       },
-      
+
     ];
 const learn = [
       {
@@ -100,9 +100,9 @@ const learn = [
         id: 'others',
         image: require('../../assets/images/subCategories/Learn_a_skill/Other_skills.jpeg')
       },
-      
+
     ];
-  
+
 class RenderItem extends React.Component {
      navigate = (id) => {
          let data = [];
@@ -144,7 +144,7 @@ class RenderItem extends React.Component {
 export default RenderItem;
 
 const styles = StyleSheet.create({
-  
+
   itemImageStyle: {
   	flexDirection: 'row',
   	justifyContent: 'center',

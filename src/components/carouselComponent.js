@@ -25,10 +25,10 @@ const CarouselComponent = (props) => {
 };
 const styles = StyleSheet.create({
   carouselItem: {
-    width: width, height: height / 4
+    width: width, height: height / 3
   },
   carouselImage: {
-      width: width, height:height / 4
+      width: width, height:height / 3
   },
 })
 
