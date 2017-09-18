@@ -117,12 +117,10 @@ class TopicPage extends Component {
           </TouchableOpacity>
         </View>
         { this.state.reportList[index] &&
-          <View style={{ position: 'absolute', right: 0, top: 45}}>
-            <TouchableOpacity style={styles.innerPostModal}>
+            <TouchableOpacity style={[styles.innerPostModal, {position: 'absolute', right: 0, top: 45, width: null}]}>
               <Icon name={'ios-alert-outline'} style={{fontSize: 17}} />
               <Text style={{fontSize: 15, paddingLeft: 5}}>Report Post</Text>
             </TouchableOpacity>
-          </View>
           }
         <View style = {{ paddingBottom: 5}}>
           {
@@ -234,7 +232,7 @@ class TopicPage extends Component {
                 <View style={{ marginBottom:50,  width: '90%', padding: 20, borderRadius: 10, backgroundColor: '#fff', alignItems: 'center'}}>
                   <TextInput multiline={true} placeholder = "Write a description..." 
                     onChangeText={(text) => this.setState({postText: text})}
-                    style = {{ padding: 5, fontSize:15, height:70, borderWidth: 1, borderColor: '#515151', borderRadius: 3 }}/>
+                    style = {{ width: '100%', padding: 5, fontSize:15, height:70, borderWidth: 1, borderColor: '#515151', borderRadius: 3 }}/>
                   <TouchableOpacity onPress = {(e) => this.onUploadImage()}  style = {{ marginTop: 10, height:150, width: '100%', borderWidth: 1, borderColor: '#515151', borderRadius: 3, justifyContent: 'center', alignItems: 'center' }}>
                     {
                       this.state.picUrl ? 
@@ -264,7 +262,7 @@ class TopicPage extends Component {
                 <View style={{ width: '90%', padding: 20, borderRadius: 10, backgroundColor: '#fff', alignItems: 'center'}}>
                   <TextInput multiline={true} placeholder = "Write a description..." 
                     onChangeText={(text) => this.setState({postText: text})}
-                    style = {{ padding: 5, fontSize:15, height:150, borderWidth: 1, borderColor: '#515151', borderRadius: 3 }}/>
+                    style = {{ width: '100%', padding: 5, fontSize:15, height:150, borderWidth: 1, borderColor: '#515151', borderRadius: 3 }}/>
                   <View style = {{ flexDirection: 'row', width: '100%', paddingTop: 20, justifyContent: 'space-around'}}>
                     <TouchableOpacity onPress = {(e) => this.onPost()} style = {styles.postBtn} >
                       <Text style = {styles.PostBtnText}>Post</Text>
