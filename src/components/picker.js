@@ -7,7 +7,6 @@ var PickerItem = Picker.Item;
 export default class PickerModal extends React.Component {
     constructor(props) {
         super(props);
-        console.log("sdfsdfsdfsdfsdfsdfsdfsd",props);
         this.state = {
             showModal: props.show,
             value: 0
