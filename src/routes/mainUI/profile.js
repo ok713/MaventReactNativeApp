@@ -3,9 +3,13 @@ import { StyleSheet, View, Platform, Text, Image, TouchableOpacity, Dimensions }
 import { Container, Content, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import moment from 'moment';
+import * as actions from '../../actions';
 import SkillRowComponent from '../../components/skillRowComponent';
 import ReviewComponent from '../../components/reviewComponent';
 import data from '../../services/reviews.json';
+import LoadingComponent from '../../components/loadingComponent';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,10 +18,10 @@ class Profile extends Component {
     super();
     this.state = {
       id: 1,
-      details: { name: 'Harvey Lawrence', email: 'person@example.com'},
       rateData: [ { category:"My Skill", data:[{ name: 'Photographer', rate: 3.5 }]},
        { category:"My Service", data:[{ name: 'Angular 2/4', rate: 4.5 }, { name: 'React', rate: 4.0 }]} ],
       reviewData: data.slice(0, 4),
+      requestLoading: true
     };
   }
   componentWillMount() {
@@ -25,45 +29,36 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-
+    this.props.getProfileInfo(this.props.auth.token);
   }
-
-  fetchdetails = () => {
-    const getID = 'https://graph.facebook.com/me?access_token=' + this.props.token;
-    fetch(getID)
-      .then((response) => response.json())
-      .then((responseData) => this.setState({ id: responseData.id }, () => {
-        const fetchdetails = 'https://graph.facebook.com/v2.9/' + this.state.id + '?fields=name,first_name,last_name,gender,age_range,email&access_token=' + this.props.token;
-        fetch(fetchdetails)
-          .then((response) => response.json())
-          .then((responseData1) => this.setState({ details: responseData1 }));
-      }
-      ));
+  componentWillReceiveProps(nextProps) {
+    if(this.props.profile.loading !== nextProps.profile.loading && nextProps.profile.loading){
+      console.log("nextProps=>",nextProps)
+      this.setState({requestLoading: false});
+    }
   }
 
   render() {
     return (
+      this.state.requestLoading ?
+      <LoadingComponent/>
+      :
       <Container>
         <Content>
           <View style={{ paddingHorizontal: 10 }} >
             <Image source={require('../../../assets/images/CarouselView/Image1.jpg')} style={{ position:'absolute',flex:1, width: width}}>
               <View style={{ backgroundColor:'rgba(11, 72, 107, 0.9)', width:'100%', height:'100%'}}/>
             </Image>
-            {/* <View style={{flexDirection:'row', justifyContent:'flex-end', paddingTop:Platform.OS==="android"?10:30}}>
-              <TouchableOpacity onPress={(e)=> Actions.ActivityPage()}>
-                <Icon name = "md-mail" style={{ fontSize: 25, color:'#fff' }}/>
-              </TouchableOpacity>
-            </View> */}
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
-              <Image source={require('../../../assets/images/profile.png')} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
+              <Image source={{uri: this.props.profile.user.displayPicture}} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
             </View>
             <View style={{ flexDirection:'row', alignItems: 'center', justifyContent:'center', paddingTop: 2 }}>
-              <Text style={{ fontSize: 20, color: 'white', fontWeight: '500' }}>{this.state.details.name}</Text>
+              <Text style={{ fontSize: 20, color: 'white', fontWeight: '500' }}>{this.props.profile.user.firstName + ' ' + this.props.profile.user.lastName}</Text>
               <Icon name="md-checkmark-circle" style={{ fontSize:15, color:'#FFA838', marginLeft:5, marginTop:4}} />
             </View>
             <View style={{ flexDirection: 'row', justifyContent:'center' }}>
               <Text style={{ fontSize: 13, color:'#fff' }}>Member since </Text>
-              <Text style={{ fontSize: 13, color:'#fff' }}>12 Jun 2017</Text>
+              <Text style={{ fontSize: 13, color:'#fff' }}>{moment(new Date(this.props.profile.user.createdDate)).format('D MMM YYYY ')}</Text>
             </View>
             <View style={{ flexDirection: 'row', marginTop:20 }}>
               <View style={styles.socialView}>
@@ -148,10 +143,15 @@ const styles = StyleSheet.create({
   wrapper: { padding: 10, borderBottomWidth: 1, borderColor: '#EDF4F7' }
 });
 
-function mapStateToProps({ auth }) {
-  return { token: auth.token };
-}
+const mapStateToProps = (state) =>({
+    auth: state.auth,
+    profile: state.profile
+});
+const mapDispatchToProps = (dispatch) =>({
+    getProfileInfo: (token) =>dispatch(actions.getProfileInfo(token)),
+    actions: bindActionCreators(actions, dispatch)
+});
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 

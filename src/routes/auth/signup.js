@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Form, Item, Icon, Container, Content, Input } from 'native-base';
-import * as ractions from '../../actions';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
 import IconBadge from 'react-native-icon-badge';
 import {ImagePicker} from 'expo';
 import DatePicker from 'react-native-datepicker'
@@ -22,7 +23,7 @@ class Signup extends Component {
   constructor(props) {
      super(props);
      this.state = {
-         profileUrl:require('../../../assets/images/avatar.png'),
+         profileUrl: '',
          showLoginModal: false,
          email:'',
          password:'',
@@ -41,13 +42,13 @@ class Signup extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      console.log("sdfsdfsdfsdf",nextProps)
+      console.log("NEXT PROPS=>",nextProps);
   }
 
   _openCameraRoll = async () => {
     let image = await ImagePicker.launchImageLibraryAsync();
     if(!image.cancelled) {
-          this.setState({profileUrl:{uri:image.uri}});
+          this.setState({profileUrl: image.uri});
       }
   }
 
@@ -65,8 +66,30 @@ class Signup extends Component {
   }
 
   register = () => {
-      this.props.registerUser({ email:this.state.email, password:this.state.password });
-      Actions.OTP();
+      
+    let data = {
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        dob: this.state.birthDay,
+        gender: this.state.gender === 'male' ? 1: 0,
+        phoneNumber: this.state.phoneNumber,
+        pic: this.state.profileUrl
+    }
+    // const url = `user/register?email=${email}&password=${password}&firstName=${firstName}&lastName=${lastName}&dob=${dob}&gender=${gender}&phoneNumber=${phoneNumber}`;
+    // request(url, 'POST', {photo: null})
+    // .then(res => {   
+    // console.log("RES=>", res); 
+    // if (res.status === 200) dispatch({ type: REG_USER_SUCCESS });    
+    // else dispatch({ type: REG_USER_FAIL });
+    // })
+    // .catch(err => {
+    // console.log("ERROR=>", err);
+    // dispatch({ type: REG_USER_FAIL });  
+    // })  
+    this.props.requestSignup(data);
+    //   Actions.OTP();
       
   }
  
@@ -79,7 +102,7 @@ class Signup extends Component {
                             <IconBadge
                                 MainElement={
                                     <TouchableOpacity onPress={this._openCameraRoll}>
-                                        <Image source={this.state.profileUrl} style={styles.profileImage} />
+                                        <Image source={{uri:this.state.profileUrl}} style={styles.profileImage} />
                                     </TouchableOpacity>
                                 }
                                 BadgeElement={
@@ -108,6 +131,7 @@ class Signup extends Component {
                         placeholder="First name"
                         onChangeText={(text) => this.setState({firstName:text})}
                         onSubmitEditing={(e)=>{this.refs.lastName.focus()}}
+                        autoCapitalize="none"
                         value={this.state.firstName}
                     />
                     <TextInput
@@ -115,6 +139,7 @@ class Signup extends Component {
                         returnKeyType="next"
                         style={[styles.textInput,{}]}
                         placeholder="Last name"
+                        autoCapitalize="none"
                         onChangeText={(text) => this.setState({lastName:text})}
                         onSubmitEditing={(e)=>{this.refs.email.focus()}}
                         value={this.state.lastName}
@@ -125,6 +150,7 @@ class Signup extends Component {
                         keyboardType="email-address"
                         style={[styles.textInput,{marginTop:10}]}
                         placeholder="Email address"
+                        autoCapitalize="none"
                         onChangeText={(text) => this.setState({email:text})}
                         onSubmitEditing={(e)=>{this.refs.password.focus()}}
                         value={this.state.email}
@@ -135,6 +161,7 @@ class Signup extends Component {
                         returnKeyType="next"
                         style={[styles.textInput,{marginTop:5}]}
                         placeholder="Password"
+                        autoCapitalize="none"
                         secureTextEntry 
                         onChangeText={(text) => this.setState({password:text})}
                         onSubmitEditing={(e)=>{this.refs.phoneNumber.focus()}}
@@ -144,6 +171,7 @@ class Signup extends Component {
                     <TextInput
                         ref='phoneNumber'
                         keyboardType="phone-pad"
+                        autoCapitalize="none"
                         style={[styles.textInput,{marginTop:10}]}
                         placeholder="Your mobile number"
                         onChangeText={(text) => this.setState({phoneNumber:text})}
@@ -208,13 +236,17 @@ class Signup extends Component {
     );
   }
 }
-export default connect(( state ) => {
-	return {
-		auth: state.auth,
-    reg:state.reg
-		
-	}
-},ractions )(Signup);
+const mapStateToProps = (state) =>({
+    auth: state.auth
+});
+const mapDispatchToProps = (dispatch) =>({
+    requestSignup: (userData) =>dispatch(actions.requestSignup(userData)),
+    actions: bindActionCreators(actions, dispatch)
+});
+export default connect(
+    mapStateToProps, mapDispatchToProps
+)(Signup)
+
 const styles = StyleSheet.create({
     profileImage: {
         height: 66,

@@ -16,7 +16,7 @@
     "loading":{
       "icon": "./assets/images/mavent_logo3.png",
       "hideExponentText": true,
-      "backgroundColor": "white"
+      "backgroundColor": "#ffffff"
     },
     "androidStatusBar":{
       "barStyle": "dark-content",

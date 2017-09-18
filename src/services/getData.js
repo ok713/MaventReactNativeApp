@@ -1,36 +1,34 @@
-const serverUrl = 'https://loyalty.collectapps.io/api/v1/';
-export function query(apiName, method, body){
-    var param = {
-        method: method, 
-        headers: {
+const serverUrl = 'http://ec2-54-179-160-81.ap-southeast-1.compute.amazonaws.com:3000/';
+export default function request(apiName, method, body, token){
+    let headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': ''
-        },
+            'Content-Type': 'x-www-form-urlencorded',
+    }
+    if(token){
+        headers = { ...headers, 'Authorization': token };
+    }
+    let param = {
+        method: method, 
+        headers: headers,
         body: JSON.stringify(body)
     }
-    if (method === 'GET') param = {headers: {
-            'Authorization': 'ApiKey hu0BgORHLmFGYbsJpY8vUuSIoa9aBc'
-        }
-    }
+    if (method === 'GET') param = { headers: headers };
+    let myRequest = new Request(serverUrl + apiName, param);
 
-    var myRequest = new Request(serverUrl + apiName, param);
-
-    return new Promise(function(resolve, reject){
+    return new Promise((resolve, reject) => {
         fetch(myRequest)
-            .then(function(response) {           
-                // console.log(response.json())
+            .then((response) => {           
                  if(response.status == 200) return response.json(); 
                  else{
                      return reject(response) ;
                  }
             })
 
-            .then(function(response) { 
+            .then((response) => { 
                 return resolve(response);
             })           
 
-            .catch(function(error) {   
+            .catch((error) => {   
                 console.error(error);           
                 return reject(error) ;         
             })

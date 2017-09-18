@@ -12,14 +12,17 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Form, Item, Icon, Container, Content, Input } from 'native-base';
-import * as ractions from '../../actions';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
+import LoadingComponent from '../../components/loadingComponent';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default class Login extends Component {
-  constructor() {
-     super();
+class Login extends Component {
+  constructor(props) {
+     super(props);
      this.state = {
        showLoginModal: false,
        email:'',
@@ -28,12 +31,16 @@ export default class Login extends Component {
    }
 
   componentWillMount() {
-    if (Platform.OS === 'android') {
-
-    }
+    
   }
 
   componentWillReceiveProps(nextProps) {
+      if(this.props.auth.loggedIn !== nextProps.auth.loggedIn && nextProps.auth.loggedIn){
+        Actions.main();
+      }
+      if(this.props.auth.loggedIn !== nextProps.auth.loggedIn && !nextProps.auth.loading && !nextProps.auth.loggedIn){
+          alert('Invalid User');
+      }
 
   }
 
@@ -42,17 +49,22 @@ export default class Login extends Component {
   }
 
   onLogin = () => {
-      Actions.main();
+      if(this.state.email.length<1) {
+          alert('Please enter email');
+          return;
+      }
+      if(this.state.password.length<1) {
+          alert('Please enter password');
+          return;
+      }
       this.setState({showLoginModal:false});
+      this.props.requestLogin(this.state.email, this.state.password);
   }
 
 
   onForgotPassword = () => {
 
   }
-
-
-
   render() {
     return (
         <View style={{flex: 1, justifyContent:'center' }}>
@@ -128,6 +140,10 @@ export default class Login extends Component {
                 </Content>
             </Container>
             <Text style={{alignSelf:'center', padding:10}}>Beta v 1.0.0</Text>
+            {
+             this.props.auth.loading &&
+                <LoadingComponent/>
+            }
         </View>
 
     );
@@ -161,3 +177,14 @@ const styles = StyleSheet.create({
     },
 
 });
+
+const mapStateToProps = (state) =>({
+    auth: state.auth
+});
+const mapDispatchToProps = (dispatch) =>({
+    requestLogin: (email, password) =>dispatch(actions.requestLogin(email, password)),
+    actions: bindActionCreators(actions, dispatch)
+});
+export default connect(
+    mapStateToProps, mapDispatchToProps
+)(Login)

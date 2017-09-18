@@ -93,7 +93,7 @@ const RouterComponent = () => {
               navigationBarStyle={{ height: 0 }} renderRightButton={null} title='' icon={AcitivityIcon3}
             />
           </Scene>
-          <Scene key="skillList" component={SkillList} title="Registration" renderRightButton={null} rightButtonImage={null} />
+          <Scene key="skillList" component={SkillList} back={Platform.OS==="android"?false:true} title="Registration" renderRightButton={null} rightButtonImage={null} />
           <Scene key="subCategory" component={SubCategory} back={Platform.OS==="android"?false:true} title="Subcategory" />
           <Scene key="genericView" component={GenericView} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="GenericView" />
           <Scene key="genericBooking" component={GenericBooking} back={Platform.OS==="android"?false:true} title="GenericBookingPage" />
