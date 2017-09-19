@@ -54,7 +54,9 @@ class Signup extends Component {
 
   takePhoto = async () => {
       let image = await ImagePicker.launchCameraAsync();
-
+      if(!image.cancelled) {
+            this.setState({profileUrl: image.uri});
+        }
   }
 
   onPrivacy = () => {
@@ -62,11 +64,11 @@ class Signup extends Component {
   }
 
   onTerms = () => {
-      
+
   }
 
   register = () => {
-      
+
     let data = {
         email: this.state.email,
         password: this.state.password,
@@ -79,20 +81,20 @@ class Signup extends Component {
     }
     // const url = `user/register?email=${email}&password=${password}&firstName=${firstName}&lastName=${lastName}&dob=${dob}&gender=${gender}&phoneNumber=${phoneNumber}`;
     // request(url, 'POST', {photo: null})
-    // .then(res => {   
-    // console.log("RES=>", res); 
-    // if (res.status === 200) dispatch({ type: REG_USER_SUCCESS });    
+    // .then(res => {
+    // console.log("RES=>", res);
+    // if (res.status === 200) dispatch({ type: REG_USER_SUCCESS });
     // else dispatch({ type: REG_USER_FAIL });
     // })
     // .catch(err => {
     // console.log("ERROR=>", err);
-    // dispatch({ type: REG_USER_FAIL });  
-    // })  
+    // dispatch({ type: REG_USER_FAIL });
+    // })
     this.props.requestSignup(data);
     //   Actions.OTP();
-      
+
   }
- 
+
   render() {
     return (
         <View style={{flex:1, justifyContent:'center', padding:10}}>
@@ -134,6 +136,7 @@ class Signup extends Component {
                         autoCapitalize="none"
                         value={this.state.firstName}
                     />
+                    <View style={{ height: 3 }}></View>
                     <TextInput
                         ref='lastName'
                         returnKeyType="next"
@@ -162,7 +165,7 @@ class Signup extends Component {
                         style={[styles.textInput,{marginTop:5}]}
                         placeholder="Password"
                         autoCapitalize="none"
-                        secureTextEntry 
+                        secureTextEntry
                         onChangeText={(text) => this.setState({password:text})}
                         onSubmitEditing={(e)=>{this.refs.phoneNumber.focus()}}
                         value={this.state.password}
@@ -180,11 +183,7 @@ class Signup extends Component {
                         value={this.state.phoneNumber}
                     />
                     <Text style={styles.text}>We'll need this to activate your account and keep it secured.</Text>
-                    <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                        <View style={{flex:1, borderBottomWidth:1, borderColor:'#a9a9a9'}} />
-                        <Text style={{padding:10, color:'#808080'}}>OPTIONAL</Text>
-                        <View style={{flex:1, borderBottomWidth:1, borderColor:'#a9a9a9'}} />
-                    </View>
+
                     <DatePicker
                         style={{width: '100%'}}
                         date={this.state.birthDay}
@@ -200,7 +199,7 @@ class Signup extends Component {
                             }
                         }}
                     />
-                    <Text style={styles.text}>We'll give you a sweat birthday treat.</Text>
+                    <Text style={styles.text}>We'll give you a birthday treat. Promise!</Text>
                     <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                         <TouchableOpacity style={[styles.genderItemView,{borderRightWidth:1, borderColor:'#a9a9a9'}]}
                             onPress={(e)=>this.setState({gender:'male'})}>
@@ -212,27 +211,27 @@ class Signup extends Component {
                             <Text style={this.state.gender==='female'?styles.genderSelItem:styles.genderItem}>FEMALE</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.text}>We'll give you better recommendations.</Text>
+                    <View style={{ height: 10 }}></View>
                     <TouchableOpacity style={styles.btn} onPress={(e)=>this.register()}>
                         <Text style={{color:'#fff', fontWeight:'bold'}}>JOIN MAVENT</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection:'row', justifyContent:"center", alignItems:'center', marginTop:10}}>
-                        <Text style={{fontSize:12}}>By joining Mavent, you agree with the Bear's </Text>
-                        <TouchableOpacity style={{borderBottomWidth:1, borderColor:'#000'}} onPress={(e)=>this.onPrivacy()}>
-                            <Text style={{fontSize:12, fontWeight:'bold'}}>Priacy Policy</Text>
-                        </TouchableOpacity>
-                        <Text style={{fontSize:12}}> and</Text>
+                        <Text style={{fontSize:12}}>By joining Mavent, you agree with our </Text>
                     </View>
-                    <View style={{flexDirection:'row', marginTop:5}}>
+                    <View style={{flexDirection:'row', marginTop:5, justifyContent: 'center' }}>
+                      <TouchableOpacity style={{borderBottomWidth:1, borderColor:'#000'}} onPress={(e)=>this.onPrivacy()}>
+                          <Text style={{fontSize:12, fontWeight:'bold'}}>Privacy Policy</Text>
+                      </TouchableOpacity>
+                      <Text style={{fontSize:12}}> and</Text>
                         <TouchableOpacity style={{borderBottomWidth:1, borderColor:'#000'}} onPress={(e)=>this.onTerms()}>
-                                <Text style={{fontSize:12, fontWeight:'bold'}}>Terms and Conditions</Text>
+                                <Text style={{fontSize:12, fontWeight:'bold' }}> Terms and Conditions</Text>
                         </TouchableOpacity>
                     </View>
                 </Content>
             </Container>
 
         </View>
-      
+
     );
   }
 }
@@ -256,7 +255,7 @@ const styles = StyleSheet.create({
         borderRadius:33
     },
     textInput:{backgroundColor:'#fff', paddingHorizontal:10, height: 40, borderColor: '#a9a9a9', borderWidth: 0.5, borderRadius:5},
-    text:{paddingVertical:10, fontSize:12, color:'#808080'},
+    text:{paddingVertical: 8, fontSize:12, color:'#808080'},
     genderItemView:{ flexDirection:'row',
         flex:1, backgroundColor:'#fff', padding:5, justifyContent:'center', alignItems:'center'
     },
@@ -273,10 +272,7 @@ const styles = StyleSheet.create({
         shadowOffset: {
         width: 0,
         height: 1
-        } 
+        }
     },
- 
+
 });
-
-
-
