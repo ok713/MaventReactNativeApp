@@ -8,19 +8,14 @@ import moment from 'moment';
 import * as actions from '../../actions';
 import SkillRowComponent from '../../components/skillRowComponent';
 import ReviewComponent from '../../components/reviewComponent';
-import data from '../../services/reviews.json';
 import LoadingComponent from '../../components/loadingComponent';
 
 const { width, height } = Dimensions.get('window');
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      id: 1,
-      rateData: [ { category:"My Skill", data:[{ name: 'Photographer', rate: 3.5 }]},
-       { category:"My Service", data:[{ name: 'Angular 2/4', rate: 4.5 }, { name: 'React', rate: 4.0 }]} ],
-      reviewData: data.slice(0, 4),
       requestLoading: true
     };
   }
@@ -33,12 +28,12 @@ class Profile extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if(this.props.profile.loading !== nextProps.profile.loading && nextProps.profile.loading){
-      console.log("nextProps=>",nextProps)
-      this.setState({requestLoading: false});
+      this.setState({requestLoading: false, reviewData: nextProps.profile.user.reviews.slice(0, 4),});
     }
   }
 
   render() {
+    const {profile: {user}} = this.props;
     return (
       this.state.requestLoading ?
       <LoadingComponent/>
@@ -50,15 +45,18 @@ class Profile extends Component {
               <View style={{ backgroundColor:'rgba(11, 72, 107, 0.9)', width:'100%', height:'100%'}}/>
             </Image>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
-              <Image source={{uri: this.props.profile.user.displayPicture}} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
+              <Image source={ user.displayPicture ? {uri: user.displayPicture} : require('../../../assets/images/avatar.png')} style={{ height: 150, width: 150, borderRadius: 50, borderWidth:3, borderColor:'#fff' }} />
             </View>
             <View style={{ flexDirection:'row', alignItems: 'center', justifyContent:'center', paddingTop: 2 }}>
-              <Text style={{ fontSize: 20, color: 'white', fontWeight: '500' }}>{this.props.profile.user.firstName + ' ' + this.props.profile.user.lastName}</Text>
-              <Icon name="md-checkmark-circle" style={{ fontSize:15, color:'#FFA838', marginLeft:5, marginTop:4}} />
+              <Text style={{ fontSize: 20, color: 'white', fontWeight: '500' }}>{user.firstName + ' ' + user.lastName}</Text>
+              {
+                user.idVerified && 
+                  <Icon name="md-checkmark-circle" style={{ fontSize:15, color:'#FFA838', marginLeft:5, marginTop:4}} />
+              }
             </View>
             <View style={{ flexDirection: 'row', justifyContent:'center' }}>
               <Text style={{ fontSize: 13, color:'#fff' }}>Member since </Text>
-              <Text style={{ fontSize: 13, color:'#fff' }}>{moment(new Date(this.props.profile.user.createdDate)).format('D MMM YYYY ')}</Text>
+              <Text style={{ fontSize: 13, color:'#fff' }}>{moment(new Date(user.createdDate)).format('D MMM YYYY ')}</Text>
             </View>
             <View style={{ flexDirection: 'row', marginTop:20 }}>
               <View style={styles.socialView}>
@@ -81,7 +79,7 @@ class Profile extends Component {
                 <Text style={{ fontSize: 13, color:"#b5b5b5" }}>I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills....</Text>
               </View>
                 {
-                  this.state.rateData.map((item, index) => {
+                  user.mavens.map((item, index) => {
                     return <SkillRowComponent key={index} data={item} />
                   })
                 }
@@ -90,9 +88,9 @@ class Profile extends Component {
                   <View style={{ padding: 10, flexDirection:'row', alignItems:'center', justifyContent:'space-between' }}>
                     <View style={{  flexDirection: 'row', alignItems:'center' }}>
                       <Text style={{ fontSize: 16, color:'#515151' }}>Reviews</Text>
-                      <Text style={{color:'#b5b5b5'}}> (</Text><Text style={{color:'#b5b5b5'}}>{data.length}</Text><Text style={{color:'#b5b5b5'}}>)</Text>
+                      <Text style={{color:'#b5b5b5'}}> (</Text><Text style={{color:'#b5b5b5'}}>{user.reviews.length}</Text><Text style={{color:'#b5b5b5'}}>)</Text>
                     </View>
-                    <TouchableOpacity onPress={() => this.setState({ reviewData: data })}>
+                    <TouchableOpacity onPress={() => this.setState({ reviewData: user.reviews })}>
                       <Text style={{ color:'#FFA838' }} >View all</Text>
                     </TouchableOpacity>
                   </View>  

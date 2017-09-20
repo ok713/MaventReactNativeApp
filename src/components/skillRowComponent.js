@@ -7,16 +7,12 @@ import RateComponent from './rateComponent';
 const SkillRowComponent = (props) => {
   return <View style={styles.wrapper}>
                 <View style={{ paddingBottom: 3, flexDirection:'row', alignItems:'center', justifyContent:'space-between' }}>
-                  <Text style={{ fontSize: 16, color:'#515151' }}>{props.data.category}</Text>
-                  <TouchableOpacity  onPress={() => Actions.skillList({category: props.data.category === 'My Service'?'Provide a Service':'Teach a Skill' })}>
+                  <Text style={{ fontSize: 16, color:'#515151' }}>{ props.mainCategory === 0 ? "My Service" : "My Skill" }</Text>
+                  <TouchableOpacity  onPress={() => Actions.skillList({category: props.mainCategory === 0 ? 'Provide a Service' : 'Teach a Skill' })}>
                     <Text style={{ color:'#FFA838' }} >Add</Text>
                   </TouchableOpacity>
                 </View>
-                {
-                  props.data.data.map((item, index) => {
-                    return <RateComponent key={index} data={item} />
-                  })
-                }
+                <RateComponent {...props} />
               </View>
 };
 const styles = StyleSheet.create({

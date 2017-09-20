@@ -71,8 +71,9 @@ const generateOTP = (phoneNumber) => {
   let option = { 
     method: 'GET',
   };
+  let realPhoneNumber = '65' + phoneNumber;
   return dispatch => {
-    const url = `user/generateOtp?phoneNumber=${phoneNumber}`;
+    const url = `user/generateOtp?phoneNumber=${realPhoneNumber}`;
     request(url, option)
     .then(res => {   
       if (res.status === 200) {
