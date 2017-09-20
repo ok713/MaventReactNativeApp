@@ -6,9 +6,6 @@ import {
   REG_LASTNAME_CHANGED,
   REG_GENDER_CHANGED,
   REG_DOB_CHANGED,
-  REG_USER_SUCCESS,
-  REG_USER_FAIL,
-  REG_USER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -47,15 +44,6 @@ export default function (state = INITIAL_STATE, action) {
     case REG_DOB_CHANGED:
       // console.log(action);
       return { ...state, dob: action.payload };
-    case REG_USER_SUCCESS:
-      alert('success');
-      return { ...state, userID: action.payload.user_id, token: action.payload.token, email: '', password: '' };
-    case REG_USER_FAIL:
-      // alert('failed');
-      return { email: '', password: '' };
-    case REG_USER:
-      console.log(state);
-      return state;
     default:
       return state;
 

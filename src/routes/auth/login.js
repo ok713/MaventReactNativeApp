@@ -35,10 +35,10 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      if(this.props.auth.loggedIn !== nextProps.auth.loggedIn && nextProps.auth.loggedIn){
+      if(this.props.auth.loginLoading !== nextProps.auth.loginLoading && !nextProps.auth.loginLoading && nextProps.auth.loggedIn){
         Actions.main();
       }
-      if(this.props.auth.loggedIn !== nextProps.auth.loggedIn && !nextProps.auth.loading && !nextProps.auth.loggedIn){
+      if(this.props.auth.loginLoading !== nextProps.auth.loginLoading && !nextProps.auth.loginLoading && !nextProps.auth.loggedIn){
           alert('Invalid User');
       }
 
@@ -65,6 +65,10 @@ class Login extends Component {
   onForgotPassword = () => {
 
   }
+
+  onFacebookLogin = () => {
+      this.props.facebookLogin();
+  }
   render() {
     return (
         <View style={{flex: 1, justifyContent:'center' }}>
@@ -83,7 +87,7 @@ class Login extends Component {
                         <Icon name='mail' style={{color:'#fff', paddingRight:10}} />
                         <Text style={styles.btnText}>Login with Email</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.loginBtn,{backgroundColor:'#3B5895'}]}>
+                    <TouchableOpacity onPress = {(e) => this.onFacebookLogin()} style={[styles.loginBtn,{backgroundColor:'#3B5895'}]}>
                         <Icon name='logo-facebook' style={{color:'#fff', paddingRight:10}} />
                         <Text style={styles.btnText}>Continue with Facebook</Text>
                     </TouchableOpacity>
@@ -141,7 +145,7 @@ class Login extends Component {
             </Container>
             <Text style={{alignSelf:'center', padding:10}}>Beta v 1.0.0</Text>
             {
-             this.props.auth.loading &&
+             this.props.auth.loginLoading &&
                 <LoadingComponent/>
             }
         </View>
@@ -182,7 +186,8 @@ const mapStateToProps = (state) =>({
     auth: state.auth
 });
 const mapDispatchToProps = (dispatch) =>({
-    requestLogin: (email, password) =>dispatch(actions.requestLogin(email, password)),
+    requestLogin: (email, password) => dispatch(actions.requestLogin(email, password)),
+    facebookLogin: () => dispatch(actions.facebookLogin()),
     actions: bindActionCreators(actions, dispatch)
 });
 export default connect(

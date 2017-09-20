@@ -18,12 +18,12 @@ import IconBadge from 'react-native-icon-badge';
 import {ImagePicker} from 'expo';
 import DatePicker from 'react-native-datepicker'
 import {connect} from 'react-redux';
+import LoadingComponent from '../../components/loadingComponent';
 
 class Signup extends Component {
   constructor(props) {
      super(props);
      this.state = {
-         profileUrl: '',
          showLoginModal: false,
          email:'',
          password:'',
@@ -42,7 +42,12 @@ class Signup extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      console.log("NEXT PROPS=>",nextProps);
+      if(this.props.auth.signupLoading !== nextProps.auth.signupLoading && !nextProps.auth.signupLoading && nextProps.auth.signedUp){
+        Actions.OTP();
+      }
+      if(this.props.auth.signupLoading !== nextProps.auth.signupLoading && !nextProps.auth.signupLoading && !nextProps.auth.signedUp){
+        alert(nextProps.auth.signupMsg);
+      }
   }
 
   _openCameraRoll = async () => {
@@ -68,31 +73,21 @@ class Signup extends Component {
   }
 
   register = () => {
-
+      let gender = ''
+    if(this.state.gender.length > 1) {
+        gender = this.state.gender === 'male' ? 1: 0;
+    }
     let data = {
         email: this.state.email,
         password: this.state.password,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         dob: this.state.birthDay,
-        gender: this.state.gender === 'male' ? 1: 0,
+        gender: gender,
         phoneNumber: this.state.phoneNumber,
-        pic: this.state.profileUrl
+        photo: this.state.profileUrl
     }
-    // const url = `user/register?email=${email}&password=${password}&firstName=${firstName}&lastName=${lastName}&dob=${dob}&gender=${gender}&phoneNumber=${phoneNumber}`;
-    // request(url, 'POST', {photo: null})
-    // .then(res => {
-    // console.log("RES=>", res);
-    // if (res.status === 200) dispatch({ type: REG_USER_SUCCESS });
-    // else dispatch({ type: REG_USER_FAIL });
-    // })
-    // .catch(err => {
-    // console.log("ERROR=>", err);
-    // dispatch({ type: REG_USER_FAIL });
-    // })
     this.props.requestSignup(data);
-    //   Actions.OTP();
-
   }
 
   render() {
@@ -104,7 +99,7 @@ class Signup extends Component {
                             <IconBadge
                                 MainElement={
                                     <TouchableOpacity onPress={this._openCameraRoll}>
-                                        <Image source={{uri:this.state.profileUrl}} style={styles.profileImage} />
+                                        <Image source={ this.state.profileUrl ? {uri:this.state.profileUrl} : require('../../../assets/images/avatar.png')} style={styles.profileImage} />
                                     </TouchableOpacity>
                                 }
                                 BadgeElement={
@@ -229,7 +224,10 @@ class Signup extends Component {
                     </View>
                 </Content>
             </Container>
-
+            {
+             this.props.auth.signupLoading &&
+                <LoadingComponent/>
+            }
         </View>
 
     );

@@ -12,6 +12,11 @@ export const REQUESTED_LOGIN_FAILED = 'REQUESTED_LOGIN_FAILED';
 export const REQUEST_USER_REG = 'REQUEST_USER_REG';
 export const REG_USER_SUCCESS = 'reg_user_success';
 export const REG_USER_FAIL = 'reg_user_fail';
+export const GENERATE_OTP_SUCCESS = 'generate_otp_success';
+export const GENERATE_OTP_FAIL = 'generate_otp_fail';
+export const REQUEST_VERIFY_OTP = 'Request_verify_otp';
+export const VERIFY_OTP_SUCCESS = 'verify_otp_success';
+export const VERIFY_OTP_FAIL = 'verify_otp_fail';
 
 //PROFILE PAGE
 export const GET_PROFILE_INFO = 'get_profile_info';

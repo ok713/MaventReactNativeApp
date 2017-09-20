@@ -2,8 +2,12 @@ import React from 'react';
 import { Icon, Card } from 'native-base';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
+import LoadingComponent from '../../components/loadingComponent';
 
-export default class Otp extends React.Component {
+class Otp extends React.Component {
   constructor(props) {
      super(props);
      this.state = {
@@ -13,6 +17,15 @@ export default class Otp extends React.Component {
          value4:'',
      };
    }
+
+   componentWillReceiveProps(nextProps) {
+      if(this.props.auth.verifyLoading !== nextProps.auth.verifyLoading && !nextProps.auth.verifyLoading && nextProps.auth.verifyOtp){
+        alert(nextProps.auth.verifyMsg);
+      }
+      if(this.props.auth.verifyLoading !== nextProps.auth.verifyLoading && !nextProps.auth.verifyLoading && !nextProps.auth.verifyOtp){
+        alert(nextProps.auth.verifyMsg);
+      }
+  }
 
    componentDidMount(){
 
@@ -35,9 +48,19 @@ export default class Otp extends React.Component {
            case 4:
             this.setState({value4:text});
             if(text.length) this.refs.text4.blur();
+            this.onVerify();
             break;
             
        }
+   }
+
+   onVerify = () => {
+       if(this.state.value1.length < 1 || this.state.value2.length < 1 || this.state.value3.length < 1) {
+            alert("please fill");
+            return;
+       }
+       let otp = this.state.value1 + this.state.value2 + this.state.value3 + this.state.value4;
+       this.props.verifyOtp(this.props.auth.phoneNumber, otp);
    }
 
    render() {
@@ -46,7 +69,7 @@ export default class Otp extends React.Component {
             <Text style={{fontWeight:'bold', textAlign:'center'}} >JUST ONE MORE STEP... </Text>
             <View style={{paddingVertical:30}} >
                 <Text style={{fontSize:12, textAlign:'center'}} >Type your activation code sent to</Text>
-                <Text style={{fontWeight:'bold', paddingTop:10, textAlign:'center'}}> +65 93376217 </Text>
+                <Text style={{fontWeight:'bold', paddingTop:10, textAlign:'center'}}> +65 {this.props.auth.phoneNumber} </Text>
             </View>
             <View style={{paddingHorizontal:10, flexDirection:'row', justifyContent:'space-around', alignItems:'center', width:'100%'}}>
                 <Card>
@@ -66,19 +89,33 @@ export default class Otp extends React.Component {
                     onChangeText={(text)=>this.onChange(text,4)} style={styles.textInput}/>
                 </Card>
             </View>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress = {(e) => this.onVerify()} >
                 <Text style={{color:'#fff', fontWeight:'bold', textAlign:'center'}} >RESEND CODE</Text>
             </TouchableOpacity>
+            {
+             this.props.auth.verifyLoading &&
+                <LoadingComponent/>
+            }
         </View>
      
     )}
 };
+const mapStateToProps = (state) =>({
+    auth: state.auth
+});
+const mapDispatchToProps = (dispatch) =>({
+    verifyOtp: (phoneNumber, otp) =>dispatch(actions.verifyOtp(phoneNumber, otp)),
+    actions: bindActionCreators(actions, dispatch)
+});
+export default connect(
+    mapStateToProps, mapDispatchToProps
+)(Otp)
 
 const styles = StyleSheet.create({
     container:{
         flex:1, justifyContent:'flex-start', alignItems:'center', padding:20
     },
-    textInput:{ height:40, paddingHorizontal:5 , textAlign:'center'},
+    textInput:{ height:40, paddingHorizontal:5 , textAlign:'center', width: '100%'},
     btn:{backgroundColor:'#0B486B', padding:10, width:'100%', marginTop:30, borderRadius:5,
             shadowOpacity: 0.8,
             shadowRadius: 2,
