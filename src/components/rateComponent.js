@@ -3,7 +3,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import StarRating from 'react-native-star-rating';
 
 const RateComponent = (props) => {
-  console.log(props)
   return <View style={styles.container}>
     <View style={{ flexDirection:'row', alignItems:'center' }}>
       <View style={{ backgroundColor: 'rgba(196, 219, 231, 0.9)', justifyContent:'center', alignItems:'center', width:50, height:50, borderRadius:17 }}>

@@ -35,9 +35,11 @@ class Discovery extends React.Component {
     componentWillMount() {
         this.getLocationAsync();
         setTimeout(()=>this.setState({statusBarHeight: Expo.Constants.statusBarHeight-23}),500);
+        // this.props.getNearbyList(this.state.region, this.props.auth.token);
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log("discoverNextProps=>", nextProps);
         if(this.props.explore.loading !== nextProps.explore.loading && nextProps.explore.loading){
         this.setState({requestLoading: false});
         }
@@ -45,10 +47,8 @@ class Discovery extends React.Component {
     async getLocationAsync() {
 
         const { status } = await Permissions.askAsync(Permissions.LOCATION);
-        // console.log({ status });
         if (status === 'granted') {
             Location.getCurrentPositionAsync({ enableHighAccuracy: true, maximumAge: 600000 }).then((position) => {
-                // console.log({ position });
                 const userLocation = {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
@@ -82,6 +82,8 @@ class Discovery extends React.Component {
     }
 
     render() {
+        const {explore:{nearbyList}} = this.props;
+        console.log("nearbyList=>", nearbyList);
         return (
             this.state.requestLoading ?
             <LoadingComponent/>
@@ -109,7 +111,7 @@ class Discovery extends React.Component {
                     <Container>
                         <Content>
                             {
-                                data.map((item, index)=>{
+                                nearbyList.map((item, index)=>{
                                     return <ItemRow key={index} data={item}/>
                                 })
                             }
@@ -142,7 +144,7 @@ const mapStateToProps = (state) =>({
 });
 const mapDispatchToProps = (dispatch) =>({
     setLocation: (location) => dispatch(actions.setLocation(location)),
-    getNearbyList: (location) => dispatch(actions.getNearbyList(location)),
+    getNearbyList: (location, token) => dispatch(actions.getNearbyList(location, token)),
     actions: bindActionCreators(actions, dispatch)
 });
 
