@@ -58,6 +58,7 @@ onChangeText = (text) => {
 }
 
   renderItem(data) {
+    var rand = Math.floor((Math.random() * 500));
     return (
           <View style={{ width:'50%', alignItems:'center', justifyContent:'center'}}>
             <View style={{ borderRadius:5, borderWidth:1, borderColor:'#b5b5b5', backgroundColor:'#fff'}}>
@@ -72,11 +73,11 @@ onChangeText = (text) => {
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', padding:10}}>
                 <View style={{ flexDirection:'row', justifyContent:'center', alignItems:'center' }}>
                   <Icon name="ios-people-outline" style={{ color:'#FFA838', marginRight:5}} />
-                  <Text style={{ color:'#FFA838' }}>12</Text>
+                  <Text style={{ color:'#FFA838' }}>{rand}</Text>
                 </View>
                 <TouchableOpacity onPress={(e)=>{this.goTopic(data)}}
-                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:12, justifyContent:'center', alignItems:'center', borderRadius:3}}>
-                  <Text style={{ color:'#fff'}} >Chat</Text>
+                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:12, justifyContent:'center', alignItems:'center', borderRadius:3, height: 30}}>
+                  <Text style={{ color:'#fff'}} >Sharing Corner</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -93,11 +94,11 @@ onChangeText = (text) => {
                     tintColorSearch="#fff"
                     tintColorDelete="#fff"
                 onSearch={this.onSearch}  onChangeText={this.onChangeText}     />
-        <Image source={require('../../../assets/images/Announcement_banner.jpg')} style={{ width: width, height: height / 3.65 }}/>
         <Container>
           <Content style={{
             width: width
           }}>
+            <Image source={require('../../../assets/images/Announcement_banner.jpg')} style={{ width: width, height: height / 3.65 }}/>
             <View style={{
               flex: 1
             }}>
