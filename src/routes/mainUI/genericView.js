@@ -11,10 +11,12 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-import {Icon, Container, Content, Card} from 'native-base'
+import {Icon, Container, Content, Card} from 'native-base';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import StarRating from 'react-native-star-rating';
 import Search from 'react-native-search-box';
+// import LoadingComponent from '../../components/loadingComponent';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -24,7 +26,7 @@ class GenericView extends Component {
     super(props);
 
     this.state = {
-      loading: false,
+      requestLoading: true,
       data: [],
       page: 1,
       seed: 1,
@@ -34,54 +36,22 @@ class GenericView extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.state);
-    this.makeRemoteRequest();
+
   }
 
-  makeRemoteRequest = () => {
-    const { page, seed } = this.state;
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=30`;
-    this.setState({ loading: true });
-    data = this.state.data;
-
-    fetch(url)
-      .then(res => res.json())
-      .then(res => {
-
-        this.setState({
-          data: page === 1 ? res.results : [...data, ...res.results],
-          error: res.error || null,
-          loading: false,
-          refreshing: false
-        });
-      })
-      .catch(error => {
-        this.setState({ error, loading: false });
-      });
-  };
+  componentWillReceiveProps(nextProps) {
+    console.log("subcategoryNextProps=>", nextProps);
+    if(this.props.explore.catList !== nextProps.explore.catList && nextProps.explore.loading){
+    this.setState({requestLoading: false});
+    }
+  }
 
   handleRefresh = () => {
-    this.setState(
-      {
-        page: 1,
-        seed: this.state.seed + 1,
-        refreshing: true
-      },
-      () => {
-        this.makeRemoteRequest();
-      }
-    );
+    
   };
 
   handleLoadMore = () => {
-    // this.setState(
-    //   {
-    //     page: this.state.page + 1
-    //   },
-    //   () => {
-    //     this.makeRemoteRequest();
-    //   }
-    // );
+
   };
 
   renderSeparator = () => {
@@ -110,7 +80,7 @@ class GenericView extends Component {
  };
 
   renderFooter = () => {
-    if (!this.state.loading) return null;
+    if (!this.state.requestLoading) return null;
 
     return (
       <View
@@ -120,7 +90,12 @@ class GenericView extends Component {
           borderColor: '#CED0CE'
         }}
       >
-        <ActivityIndicator animating size="large" />
+      <ActivityIndicator
+                    animating = {true}
+                    style = {styles.activityIndicator}
+                    color = '#0000ff'
+                    size = 'large'
+                />
       </View>
     );
   };
@@ -165,41 +140,41 @@ class GenericView extends Component {
         <Container>
           <Content>
           <FlatList
-            data={this.state.data}
+            data={this.props.explore.catList}
             renderItem={({ item }) => (
-              <TouchableOpacity style = {{ paddingHorizontal:10, backgroundColor:'#fff' }} onPress={() => Actions.skillPage({ title: 'Photographer' })}>
+              <TouchableOpacity key = { item.mavenID } style = {{ paddingHorizontal:10, backgroundColor:'#fff' }} onPress={() => Actions.skillPage({ title: 'Photographer' })}>
                 <View style={{ paddingVertical:5, flexDirection: 'row' }}>
                   <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
-                    <Image source = {{ uri: item.picture.thumbnail }} style={{ height: 70, width: 70, borderRadius: 25 }} />
+                    <Image source = {item.displayPicture ? {uri: item.displayPicture} : require('../../../assets/images/avatar.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
                   </View>
                   <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>
-                    <TextInput defaultValue="Wedding Photographer" editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
-                    <TextInput defaultValue="Photographer" editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
-                    <Text style={{ fontSize: 12, color:'#b5b5b5' }}>{`${item.name.first} ${item.name.last}`}</Text>
+                    <TextInput defaultValue={item.title} editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
+                    <TextInput defaultValue={item.category} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
+                    <Text style={{ fontSize: 12, color:'#b5b5b5' }}>{`${item.firstName} ${item.lastName}`}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                       <StarRating
                         disabled
                         maxStars={5}
-                        rating={3.5}
+                        rating={item.rating}
                         starSize={15}
                         starColor="#FFA838"
                         starStyle={{paddingHorizontal:2}}
                       />
-                      <Text style={{ color:'#b5b5b5'}}>({"3.5"})</Text>
+                      <Text style={{ color:'#b5b5b5'}}>({item.rating})</Text>
                     </View>
                   </View>
                   <View style={{ justifyContent: 'space-around', flex: 1, alignItems: 'flex-end', paddingHorizontal:10 }}>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
-                      <Text style={{color:'#FFA838', fontWeight:"700", fontSize:15}}>$39</Text>
+                      <Text style={{color:'#FFA838', fontWeight:"700", fontSize:15}}>${item.price}</Text>
                       <Text style={{ color:'#b5b5b5', fontWeight:'400', fontSize:12 }}>/hr</Text>
                     </View>
-                    <TouchableOpacity style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}} onPress={() => Actions.genericBooking({ title: `${item.name.first} ${item.name.last}` })}>
+                    <TouchableOpacity style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}} onPress={() => Actions.genericBooking({ title: `${item.firstName} ${item.lastName}` })}>
                       <Icon name = "ios-chatbubbles-outline" style={{ fontSize: 29, color:'#3F6A86', paddingRight:5 }}/>
                       <Icon name = "ios-arrow-forward" style={{ fontSize: 18, color:'#BFD9E7', paddingLeft:5 }}/>
                     </TouchableOpacity>
                     <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                       <Icon name='md-pin' style={{fontSize:15, paddingRight:2, color:'#BFD9E7'}} />
-                      <Text style={{ fontSize: 15, color:'#b5b5b5', }}>0.2k</Text>
+                      <Text style={{ fontSize: 15, color:'#b5b5b5', }}>{Math.round(item.distance / 100) / 10 + "Km"}</Text>
                     </View>
                   </View>
                 </View>
@@ -233,4 +208,8 @@ const styles = StyleSheet.create({
   topView:{ flex: 1, paddingLeft: 10, justifyContent: 'center', borderRightWidth: 1, borderColor: '#ececec', alignItems:'center' }
 });
 
-export default GenericView;
+const mapStateToProps = (state) =>({
+  auth: state.auth,
+  explore: state.explore
+});
+export default connect(mapStateToProps)(GenericView);

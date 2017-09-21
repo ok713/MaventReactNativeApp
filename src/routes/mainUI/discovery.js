@@ -35,12 +35,12 @@ class Discovery extends React.Component {
     componentWillMount() {
         this.getLocationAsync();
         setTimeout(()=>this.setState({statusBarHeight: Expo.Constants.statusBarHeight-23}),500);
-        // this.props.getNearbyList(this.state.region, this.props.auth.token);
+        this.props.setLocation(this.state.region);
+        this.props.getNearbyList(this.state.region, this.props.auth.token);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("discoverNextProps=>", nextProps);
-        if(this.props.explore.loading !== nextProps.explore.loading && nextProps.explore.loading){
+        if(this.props.explore.nearbyList !== nextProps.explore.nearbyList && nextProps.explore.loading){
         this.setState({requestLoading: false});
         }
     }
@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>({
     auth: state.auth,
-    profile: state.profile,
     explore: state.explore
 });
 const mapDispatchToProps = (dispatch) =>({

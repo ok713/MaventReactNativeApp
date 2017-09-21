@@ -22,7 +22,7 @@ export default class ListModal extends React.Component {
            {
              this.props.data.map((item, index)=>{
                if(index>0)
-               return <TouchableOpacity key={index} style={styles.itemWrapper} onPress={(e)=>{this.props.handler(false,item.label) ;this.setState({showModal:false})}}>
+               return <TouchableOpacity key={index} style={styles.itemWrapper} onPress={(e)=>{this.props.handler(false,item.label, item.key) ;this.setState({showModal:false})}}>
                  <Text style={{color:'#085be0', fontSize:18}} >{item.label}</Text>
                </TouchableOpacity>
              })

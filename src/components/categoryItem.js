@@ -67,12 +67,12 @@ const service = [
 const learn = [
       {
         name: 'School subjects',
-        id: 'scholl',
+        id: 'school',
         image: require('../../assets/images/subCategories/Learn_a_skill/School_Subjects.jpg')
       },
       {
         name: 'Art & Design',
-        id: 'art',
+        id: 'art_skill',
         image: require('../../assets/images/subCategories/Learn_a_skill/Art_design_class.jpeg')
       },
       {
@@ -92,12 +92,12 @@ const learn = [
       },
       {
         name: 'Cooking & Baking',
-        id: 'cooking',
+        id: 'cooking_skill',
         image: require('../../assets/images/subCategories/Learn_a_skill/cooking_baking_classes.jpg')
       },
       {
         name: 'Others',
-        id: 'others',
+        id: 'others_skill',
         image: require('../../assets/images/subCategories/Learn_a_skill/Other_skills.jpeg')
       },
 

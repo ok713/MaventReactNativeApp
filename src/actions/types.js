@@ -22,7 +22,11 @@ export const VERIFY_OTP_FAIL = 'verify_otp_fail';
 export const GET_PROFILE_INFO = 'get_profile_info';
 export const PROFILE_ERROR = 'get_profile_info';
 export const SET_LOCATION = 'set_location';
+export const REGISTER_MAVEN = 'register_maven';
+export const REGISTER_MAVEN_FAILED = 'register_maven_failed';
 
 //EXPLORE
 export const GET_NEARBY_LIST = 'get_nearby_list';
 export const GET_NEARBY_LIST_FAILED = 'get_nearby_list_failed';
+export const GET_CAT_LIST = 'get_cat_list';
+export const GET_CAT_LIST_FAILED = 'get_cat_list_failed';

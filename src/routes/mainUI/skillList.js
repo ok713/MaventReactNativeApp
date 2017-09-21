@@ -33,27 +33,27 @@ const data = [
 
 const service = [
             { key: '0', section: true, label: 'Get a Service' },
-            { key: '1', label: 'Cooking & Baking' },
-            { key: '2', label: 'Installation & reparation of gadgets' },
-            { key: '3', label: 'Home Improvement' },
-            { key: '1', label: 'Cleaning' },
-            { key: '2', label: 'Beauty' },
-            { key: '3', label: 'Photography & videography' },
-            { key: '3', label: 'Art & Design' },
-            { key: '1', label: 'Home Care' },
-            { key: '2', label: 'Pet related' },
-            { key: '3', label: 'Others' },
+            { key: 'cooking', label: 'Cooking & Baking' },
+            { key: 'gadgets', label: 'Installation & reparation of gadgets' },
+            { key: 'improvement', label: 'Home Improvement' },
+            { key: 'clean', label: 'Cleaning' },
+            { key: 'beauty', label: 'Beauty' },
+            { key: 'photography', label: 'Photography & videography' },
+            { key: 'art', label: 'Art & Design' },
+            { key: 'care', label: 'Home Care' },
+            { key: 'pet', label: 'Pet related' },
+            { key: 'others', label: 'Others' },
         ];
 
 const skill = [
-            { key: '0', section: true, label: 'Learn a Skill' },
-            { key: '1', label: 'School subjects' },
-            { key: '2', label: 'Art & Design' },
-            { key: '3', label: 'Information Technology' },
-            { key: '4', label: 'Sports & Fitness' },
-            { key: '2', label: 'Music' },
-            { key: '3', label: 'Cooking & Baking' },
-            { key: '4', label: 'Others' },
+            { key: '1', section: true, label: 'Learn a Skill' },
+            { key: 'school', label: 'School subjects' },
+            { key: 'art_skill', label: 'Art & Design' },
+            { key: 'information', label: 'Information Technology' },
+            { key: 'sports', label: 'Sports & Fitness' },
+            { key: 'music', label: 'Music' },
+            { key: 'cooking_skill', label: 'Cooking & Baking' },
+            { key: 'others_skill', label: 'Others' },
         ];
 
 const pickerData = Platform.OS==="android"?['Please Select...','Take photo...','Choose from Library...']:['Take photo...','Choose from Library...'];
@@ -63,15 +63,24 @@ class SkillList extends Component {
   constructor(props) {
       super(props);
       let subData = [];
+      let mainCategory = '';
       if(this.props.category){
-        if(this.props.category === 'Provide a Service') subData = service;
-        else subData = skill;
+        if(this.props.category === 'Provide a Service') {
+          subData = service;
+          mainCategory = 0;
+        }
+        else {
+          subData = skill;
+          mainCategory = 1;
+        }
       }
       this.state = {
             categoryShowModal:false,
               category: this.props.category?this.props.category:'',
+              mainCategory: mainCategory,
               subData: subData,
               subcategory: '',
+              categoryId: '',
               textInputValue: '',
               Mon: false,
               Tue: false,
@@ -87,6 +96,8 @@ class SkillList extends Component {
               modalData:data,
               showPicker:false,
               offSet: new Animated.Value(SCREEN_HEIGHT),
+              pictures: [],
+              idPictures: []
       };
   }
 
@@ -134,7 +145,7 @@ class SkillList extends Component {
     this.setState({ night: !this.state.night });
   }
 
-  modalHandler = (isShow, category) => {
+  modalHandler = (isShow, category, id) => {
         if(this.state.isCategory) {
             let subData ;
             switch (category) {
@@ -148,10 +159,10 @@ class SkillList extends Component {
                     subData = [];
                     break;
             }
-            this.setState({categoryShowModal:false, subData:subData, category:category, subcategory:''});
+            this.setState({categoryShowModal:false, subData:subData, category:category, subcategory:'', mainCategory: id});
         }
         else {
-            this.setState({categoryShowModal:false, subcategory:category});
+            this.setState({categoryShowModal:false, subcategory:category, categoryId: id});
         }
   }
 
@@ -168,12 +179,17 @@ class SkillList extends Component {
 
   _openCameraRoll = async () => {
     let image = await ImagePicker.launchImageLibraryAsync({allowsEditing:true, aspect:[4,3]});
+    let tempPictures = this.state.pictures;
+    let tempIdPictures = this.state.idPictures;
     if(!image.cancelled) {
       if(this.state.picNumber === 0) this.setState({picUrl0:{uri:image.uri}});
       if(this.state.picNumber === 1) this.setState({picUrl1:{uri:image.uri}});
       if(this.state.picNumber === 2) this.setState({picUrl2:{uri:image.uri}});
       if(this.state.picNumber === 3) this.setState({idPicUrl0:{uri:image.uri}});
       if(this.state.picNumber === 4) this.setState({idPicUrl1:{uri:image.uri}});
+      if(this.state.picNumber < 3) tempPictures.push(image.uri);
+      if(this.state.picNumber > 2) tempIdPictures.push(image.uri);
+      this.setState({pictures: tempPictures, idPictures: tempIdPictures});
     }
   }
 
@@ -186,8 +202,66 @@ class SkillList extends Component {
         if(this.state.picNumber === 3) this.setState({idPicUrl0:{uri:image.uri}});
         if(this.state.picNumber === 4) this.setState({idPicUrl1:{uri:image.uri}});
       }
-      
+  }
 
+  onAdd = () => {
+    if(!this.state.mainCategory || this.state.mainCategory.length < 0) {
+      alert('Please select main category.');
+      return;
+    }
+    if(!this.state.categoryId || this.state.categoryId.length < 0) {
+      alert('Please select category.');
+      return;
+    }
+    if(!this.state.title || this.state.title.length < 0) {
+      alert('Please input title.');
+      return;
+    }
+    if(!this.state.description || this.state.description.length < 0) {
+      alert('Please input description.');
+      return;
+    }
+    if(!this.state.price || this.state.price.length < 0) {
+      alert('Please input title.');
+      return;
+    }
+    let dayList = [];
+    if(this.state.Mon) dayList.push(0);
+    if(this.state.Tue) dayList.push(1);
+    if(this.state.Wed) dayList.push(2);
+    if(this.state.Thu) dayList.push(3);
+    if(this.state.Fri) dayList.push(4);
+    if(this.state.Sat) dayList.push(5);
+    if(this.state.Sun) dayList.push(6);
+
+    if(dayList.length < 0) {
+      alert('Please select available day.');
+      return;
+    }
+    let timeList = [];
+    if(this.state.morning) timeList.push(0);
+    if(this.state.afternoon) timeList.push(1);
+    if(this.state.evening) timeList.push(2);
+    if(this.state.night) timeList.push(3);
+
+    if(timeList.length < 0) {
+      alert('Please select available time.');
+      return;
+    }
+    let data = {
+      mainCategory: this.state.mainCategory,
+      category: this.state.categoryId,
+      title: this.state.title,
+      description: this.state.description,
+      postalCode: this.state.postalCode,
+      dayAvailable: dayList.join(','),
+      timeAvailable: timeList.join(','),
+      price: this.state.price,
+      idPictures: this.state.idPictures,
+      pictures: this.state.pictures
+    }
+    console.log(data);
+    
   }
 
   
@@ -234,6 +308,7 @@ class SkillList extends Component {
                       returnKeyType='next'
                       onSubmitEditing={() => this.desc.focus()}
                       ref={(input) => this.title = input}
+                      onChangeText = {title => this.setState(title)}
                       maxLength={80}
                       autoCorrect={false}
                       style={{ height: 40, width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
@@ -254,9 +329,32 @@ class SkillList extends Component {
                       multiline={true}
                       numberOfLines={4}
                       ref={(input) => this.desc = input}
+                      onChangeText = {description => this.setState(description)}
                       maxLength={140}
                       autoCorrect={false}
                       style={{ width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
+                      underlineColorAndroid="transparent"
+                    />
+                  </View>
+                </View>
+
+                <View style={{ width: 0.85 * SCREEN_WIDTH, marginTop: 15 }}>
+                  <Text style={{ fontSize: 16, fontWeight: '600' }}>Price</Text>
+                  <View style={{ marginTop: 3, width: 0.85 * SCREEN_WIDTH, backgroundColor: 'white', borderRadius: 3, alignItems: 'center', padding: 6 }}>
+                    <TextInput
+                      placeholderTextColor="rgba(0,0,0,0.3)"
+                      placeholder="Price"
+                      keyboardType="default"
+                      autoCorrect
+                      autoCapitalize="sentences"
+                      // multiline
+                      returnKeyType='next'
+                      onSubmitEditing={() => this.desc.focus()}
+                      ref={(input) => this.price = input}
+                      onChangeText = {price => this.setState(price)}
+                      maxLength={80}
+                      autoCorrect={false}
+                      style={{ height: 40, width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
                       underlineColorAndroid="transparent"
                     />
                   </View>
@@ -302,6 +400,7 @@ class SkillList extends Component {
                       keyboardType="numeric"
                       maxLength={6}
                       // ref={(input) => this.postal = input}
+                      onChangeText = {postalCode => this.setState(postalCode)}
                       underlineColorAndroid='transparent'
                       style={{ height: 40, width: 0.8 * SCREEN_WIDTH, padding: 8, fontSize: 16 }}
                     />
@@ -411,7 +510,7 @@ class SkillList extends Component {
                   <TouchableOpacity onPress={(e)=>{ Actions.pop() }} style={[styles.btn,{ backgroundColor:'#ccc'}]}>
                       <Text style={{fontSize:20}}>Cancel</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={(e)=>{}} style={[styles.btn,{ backgroundColor:'#0B486B'}]}>
+                  <TouchableOpacity onPress={(e)=> {this.onAdd()}} style={[styles.btn,{ backgroundColor:'#0B486B'}]}>
                       <Text style={{fontSize:20, color:'#fff'}}>List it!</Text>
                   </TouchableOpacity>
                 </View>

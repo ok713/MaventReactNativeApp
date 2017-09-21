@@ -2,7 +2,9 @@
 import {
   GET_PROFILE_INFO,
   PROFILE_ERROR,
-  SET_LOCATION
+  SET_LOCATION,
+  REGISTER_MAVEN,
+  REGISTER_MAVEN_FAILED,
 } from '../actions/types';
 
 const INITIAL_STATE = {

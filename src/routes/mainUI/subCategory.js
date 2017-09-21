@@ -8,9 +8,13 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-import {Actions} from 'react-native-router-flux';
 import {Container, Content, Icon} from 'native-base';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
 import Search from 'react-native-search-box';
+
 const SCREEN_WIDTH = Dimensions
   .get('window')
   .width;
@@ -20,12 +24,16 @@ const HORIZONTAL_PADDING = 8;
 class SubCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+
+    }
   }
 
   componentDidMount() {}
 
   navigate = (data) => {
+    // this.props.getCatList(data.name, this.props.profile.location, this.props.auth.token);
+    this.props.getCatList(data.id, this.props.profile.location, this.props.auth.token);
     Actions.genericView({data: data, title: data.name});
   }
 
@@ -138,4 +146,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SubCategory;
+const mapStateToProps = (state) =>({
+  auth: state.auth,
+  profile: state.profile,
+  explore: state.explore
+});
+const mapDispatchToProps = (dispatch) =>({
+  setLocation: (location) => dispatch(actions.setLocation(location)),
+  getCatList: (category, location, token) => dispatch(actions.getCatList(category, location, token)),
+  actions: bindActionCreators(actions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubCategory);
