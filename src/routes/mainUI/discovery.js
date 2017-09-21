@@ -3,9 +3,14 @@ import Expo from 'expo';
 import { View, ActivityIndicator, Text, Image, Dimensions, StyleSheet } from 'react-native';
 import { MapView, Constants, Location, Permissions } from 'expo';
 import { Container, Content, Icon } from 'native-base';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
 import Search from 'react-native-search-box';
 import ItemRow from '../../components/discoveryItem'
 import data from '../../services/provider.json';
+import LoadingComponent from '../../components/loadingComponent';
 
 const SCREEN_H = Dimensions.get('window').height;
 const { width, height } = Dimensions.get('window');
@@ -14,6 +19,7 @@ class Discovery extends React.Component {
     constructor() {
         super();
         this.state = {
+            requestLoading: true,
             statusBarHeight: 1,
             mapLoaded: false,
             errorMessage: null,
@@ -30,6 +36,12 @@ class Discovery extends React.Component {
         this.getLocationAsync();
         setTimeout(()=>this.setState({statusBarHeight: Expo.Constants.statusBarHeight-23}),500);
     }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.explore.loading !== nextProps.explore.loading && nextProps.explore.loading){
+        this.setState({requestLoading: false});
+        }
+    }
     async getLocationAsync() {
 
         const { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -44,6 +56,8 @@ class Discovery extends React.Component {
                     longitudeDelta: 0.0034,
                 };
                 this.setState({ region: userLocation });
+                this.props.setLocation(userLocation);
+                this.props.getNearbyList(userLocation, this.props.auth.token);
             }).catch((e) => {
                 // this one is firing the error instantly
                 alert(e + ' Please make sure your location (GPS) is turned on.');
@@ -69,6 +83,9 @@ class Discovery extends React.Component {
 
     render() {
         return (
+            this.state.requestLoading ?
+            <LoadingComponent/>
+            :
             <View style={{ flex: 1, paddingTop: this.state.statusBarHeight }}>
                <MapView
                     provider="google"
@@ -118,4 +135,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Discovery;
+const mapStateToProps = (state) =>({
+    auth: state.auth,
+    profile: state.profile,
+    explore: state.explore
+});
+const mapDispatchToProps = (dispatch) =>({
+    setLocation: (location) => dispatch(actions.setLocation(location)),
+    getNearbyList: (location) => dispatch(actions.getNearbyList(location)),
+    actions: bindActionCreators(actions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Discovery);

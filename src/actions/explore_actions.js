@@ -2,12 +2,11 @@ import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 import request from '../services/getData';
 import {
-  GET_PROFILE_INFO,
-  PROFILE_ERROR,
-  SET_LOCATION
+  GET_NEARBY_LIST,
+  GET_NEARBY_LIST_FAILED
 } from './types';
 
-export const getProfileInfo = (token) => {
+export const getNearbyList = (location, token) => {
   let option = { 
     method: 'GET',
     headers: {
@@ -15,25 +14,19 @@ export const getProfileInfo = (token) => {
     },
   };
   return dispatch => {
-    const url = `user/getProfileDetails`;
+    const url = `maven/getNearbyList?latitude=${location.latitude}&longitude=${location.longitude}`;
     request(url, option)
     .then(res => {   
       console.log("profile res=>", res);
       if (res.status === 200) {
-        dispatch({ type: GET_PROFILE_INFO, user: res.result });   
+        dispatch({ type: GET_NEARBY_LIST, list: res.result });   
       }
-      else dispatch({ type: PROFILE_ERROR, error: 'error' });
+      else dispatch({ type: GET_NEARBY_LIST_FAILED, error: 'error' });
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: PROFILE_ERROR, error: err });  
+      dispatch({ type: GET_NEARBY_LIST_FAILED, error: err });  
     })  
-  }
-}
-
-export const setLocation = (location) => {
-  return dispatch => {
-      dispatch({ type: SET_LOCATION, location: location });  
   }
 }
 
