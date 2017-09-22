@@ -22,6 +22,7 @@ export const VERIFY_OTP_FAIL = 'verify_otp_fail';
 export const GET_PROFILE_INFO = 'get_profile_info';
 export const PROFILE_ERROR = 'get_profile_info';
 export const SET_LOCATION = 'set_location';
+export const REQUEST_REGISTER_MAVEN = 'request_register_maven';
 export const REGISTER_MAVEN = 'register_maven';
 export const REGISTER_MAVEN_FAILED = 'register_maven_failed';
 

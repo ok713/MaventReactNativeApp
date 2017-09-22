@@ -85,9 +85,6 @@ class Discovery extends React.Component {
         const {explore:{nearbyList}} = this.props;
         console.log("nearbyList=>", nearbyList);
         return (
-            this.state.requestLoading ?
-            <LoadingComponent/>
-            :
             <View style={{ flex: 1, paddingTop: this.state.statusBarHeight }}>
                <MapView
                     provider="google"
@@ -116,6 +113,9 @@ class Discovery extends React.Component {
                                 })
                             }
                         </Content>
+                        { this.state.requestLoading &&
+                            <LoadingComponent/>
+                        }
                     </Container>
                 </View>
 

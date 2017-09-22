@@ -21,14 +21,18 @@ import {ImagePicker} from 'expo';
 import ListModal from '../../components/listModal';
 import PickerModal from '../../components/picker';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions';
+import LoadingComponent from '../../components/loadingComponent';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const data = [
-            { key: '0', section: true, label: 'Category' },
+            { key: '2', section: true, label: 'Category' },
             { key: '1', label: 'Provide a Service' },
-            { key: '2', label: 'Teach a Skill' }
+            { key: '0', label: 'Teach a Skill' }
         ];
 
 const service = [
@@ -67,11 +71,11 @@ class SkillList extends Component {
       if(this.props.category){
         if(this.props.category === 'Provide a Service') {
           subData = service;
-          mainCategory = 0;
+          mainCategory = "1";
         }
         else {
           subData = skill;
-          mainCategory = 1;
+          mainCategory = "0";
         }
       }
       this.state = {
@@ -97,8 +101,21 @@ class SkillList extends Component {
               showPicker:false,
               offSet: new Animated.Value(SCREEN_HEIGHT),
               pictures: [],
-              idPictures: []
+              idPictures: [],
+              requestLoading: false
       };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("maven=>", nextProps)
+    if(this.props.profile.mavenLoading !== nextProps.profile.mavenLoading && !nextProps.profile.mavenLoading && nextProps.profile.mavenRegSuccess){
+      this.setState({requestLoading: false});
+      Actions.pop();
+    }
+    else if(this.props.profile.mavenLoading !== nextProps.profile.mavenLoading && !nextProps.profile.mavenLoading && !nextProps.profile.mavenRegSuccess){
+      this.setState({requestLoading: false});
+      alert(nextProps.profile.msg);
+    }
   }
 
   onPressMon = () => {
@@ -205,6 +222,7 @@ class SkillList extends Component {
   }
 
   onAdd = () => {
+    console.log(this.state.mainCategory)
     if(!this.state.mainCategory || this.state.mainCategory.length < 0) {
       alert('Please select main category.');
       return;
@@ -234,7 +252,7 @@ class SkillList extends Component {
     if(this.state.Sat) dayList.push(5);
     if(this.state.Sun) dayList.push(6);
 
-    if(dayList.length < 0) {
+    if(dayList.length < 1) {
       alert('Please select available day.');
       return;
     }
@@ -244,7 +262,7 @@ class SkillList extends Component {
     if(this.state.evening) timeList.push(2);
     if(this.state.night) timeList.push(3);
 
-    if(timeList.length < 0) {
+    if(timeList.length < 1) {
       alert('Please select available time.');
       return;
     }
@@ -260,7 +278,8 @@ class SkillList extends Component {
       idPictures: this.state.idPictures,
       pictures: this.state.pictures
     }
-    console.log(data);
+    this.setState({requestLoading: true});
+    this.props.registerMaven(data, this.props.auth.token);
     
   }
 
@@ -308,7 +327,7 @@ class SkillList extends Component {
                       returnKeyType='next'
                       onSubmitEditing={() => this.desc.focus()}
                       ref={(input) => this.title = input}
-                      onChangeText = {title => this.setState(title)}
+                      onChangeText = {title => this.setState({title})}
                       maxLength={80}
                       autoCorrect={false}
                       style={{ height: 40, width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
@@ -329,7 +348,7 @@ class SkillList extends Component {
                       multiline={true}
                       numberOfLines={4}
                       ref={(input) => this.desc = input}
-                      onChangeText = {description => this.setState(description)}
+                      onChangeText = {description => this.setState({description})}
                       maxLength={140}
                       autoCorrect={false}
                       style={{ width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
@@ -344,14 +363,14 @@ class SkillList extends Component {
                     <TextInput
                       placeholderTextColor="rgba(0,0,0,0.3)"
                       placeholder="Price"
-                      keyboardType="default"
+                      keyboardType="numeric"
                       autoCorrect
                       autoCapitalize="sentences"
                       // multiline
                       returnKeyType='next'
                       onSubmitEditing={() => this.desc.focus()}
                       ref={(input) => this.price = input}
-                      onChangeText = {price => this.setState(price)}
+                      onChangeText = {price => this.setState({price})}
                       maxLength={80}
                       autoCorrect={false}
                       style={{ height: 40, width: 0.80 * SCREEN_WIDTH, alignItems: 'center', padding: 8, justifyContent: 'center', fontSize: 16, }}
@@ -400,7 +419,7 @@ class SkillList extends Component {
                       keyboardType="numeric"
                       maxLength={6}
                       // ref={(input) => this.postal = input}
-                      onChangeText = {postalCode => this.setState(postalCode)}
+                      onChangeText = {postalCode => this.setState({postalCode})}
                       underlineColorAndroid='transparent'
                       style={{ height: 40, width: 0.8 * SCREEN_WIDTH, padding: 8, fontSize: 16 }}
                     />
@@ -518,6 +537,9 @@ class SkillList extends Component {
             </View>
           </ScrollView>
            {this.state.showPicker ? <PickerModal closeModal={() => this.setState({ showPicker: false })} data={pickerData} offSet={this.state.offSet}  changeValue={this.changeValue} /> : null}
+           {this.state.requestLoading &&
+            <LoadingComponent/>         
+           }   
         </View>  
     );
   }
@@ -559,4 +581,12 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff', justifyContent:"center", alignItems:'center' }
 });
 
-export default SkillList;
+const mapStateToProps = (state) =>({
+  auth: state.auth,
+  profile: state.profile
+});
+const mapDispatchToProps = (dispatch) =>({
+  registerMaven: (mavenData, token) => dispatch(actions.registerMaven(mavenData, token)),
+  actions: bindActionCreators(actions, dispatch)
+});
+export default connect(mapStateToProps, mapDispatchToProps)(SkillList);

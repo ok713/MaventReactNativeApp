@@ -32,7 +32,6 @@ class SubCategory extends Component {
   componentDidMount() {}
 
   navigate = (data) => {
-    // this.props.getCatList(data.name, this.props.profile.location, this.props.auth.token);
     this.props.getCatList(data.id, this.props.profile.location, this.props.auth.token);
     Actions.genericView({data: data, title: data.name});
   }
@@ -72,12 +71,12 @@ onChangeText = (text) => {
               </TouchableOpacity>
               <View style={{ flexDirection:'row', justifyContent:'space-between', alignItems:'center', padding:10}}>
                 <View style={{ flexDirection:'row', justifyContent:'center', alignItems:'center' }}>
-                  <Icon name="ios-people-outline" style={{ color:'#FFA838', marginRight:5}} />
-                  <Text style={{ color:'#FFA838' }}>{rand}</Text>
+                  <Icon name="ios-people-outline" style={{ color:'#FFA838', marginRight:5, fontSize: 23}} />
+                  <Text style={{ color:'#FFA838', fontSize: 13 }}>{rand}</Text>
                 </View>
                 <TouchableOpacity onPress={(e)=>{this.goTopic(data)}}
-                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:12, justifyContent:'center', alignItems:'center', borderRadius:3, height: 30}}>
-                  <Text style={{ color:'#fff'}} >Sharing Corner</Text>
+                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:10, justifyContent:'center', alignItems:'center', borderRadius:3, height: 30}}>
+                  <Text style={{ color:'#fff', fontSize: 12}} >Sharing Corner</Text>
                 </TouchableOpacity>
               </View>
             </View>

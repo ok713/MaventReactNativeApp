@@ -34,11 +34,12 @@ export const requestSignup = (userData, token) => {
   formData.append('lastName', lastName);
   formData.append('dob', dob);
   formData.append('gender', gender);
-  formData.append('phoneNumber', phoneNumber);
+  formData.append('phoneNumber', "65" + phoneNumber);
   if(photo){
-    let uriParts = photo.split('.');
-    let fileType = uriParts[1];
-    formData.append('photo', { uri: photo, name: `photo.${fileType}`, type: `image/${fileType}`});
+    let filename = photo.split('/').pop();
+    let match = /\.(\w+)$/.exec(filename);
+    let type = match ? match[1] : '';
+    formData.append('photo', { uri: photo, name: `photo.${type}`, type: `image/${type}`});
   }
 
   let option = { 
@@ -46,7 +47,7 @@ export const requestSignup = (userData, token) => {
     body: formData,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
     },
   };
   return dispatch => {

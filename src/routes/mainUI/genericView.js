@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import StarRating from 'react-native-star-rating';
 import Search from 'react-native-search-box';
-// import LoadingComponent from '../../components/loadingComponent';
+import LoadingComponent from '../../components/loadingComponent';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -28,9 +28,6 @@ class GenericView extends Component {
     this.state = {
       requestLoading: true,
       data: [],
-      page: 1,
-      seed: 1,
-      error: null,
       refreshing: false
     };
   }
@@ -42,7 +39,7 @@ class GenericView extends Component {
   componentWillReceiveProps(nextProps) {
     console.log("subcategoryNextProps=>", nextProps);
     if(this.props.explore.catList !== nextProps.explore.catList && nextProps.explore.loading){
-    this.setState({requestLoading: false});
+    this.setState({requestLoading: false, data: this.props.explore.catList});
     }
   }
 
@@ -140,7 +137,7 @@ class GenericView extends Component {
         <Container>
           <Content>
           <FlatList
-            data={this.props.explore.catList}
+            data={this.state.data}
             renderItem={({ item }) => (
               <TouchableOpacity key = { item.mavenID } style = {{ paddingHorizontal:10, backgroundColor:'#fff' }} onPress={() => Actions.skillPage({ title: 'Photographer' })}>
                 <View style={{ paddingVertical:5, flexDirection: 'row' }}>

@@ -5,12 +5,15 @@ import {
   SET_LOCATION,
   REGISTER_MAVEN,
   REGISTER_MAVEN_FAILED,
+  REQUEST_REGISTER_MAVEN
 } from '../actions/types';
 
 const INITIAL_STATE = {
   user: {},
   error: null,
-  loading: false
+  loading: false,
+  mavenLoading: true,
+  mavenRegSuccess: false
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -21,6 +24,12 @@ export default function (state = INITIAL_STATE, action) {
         return { ...state, error: action.error, loading: false } 
     case SET_LOCATION:
       return { ...state, location: action.location };
+    case REQUEST_REGISTER_MAVEN:
+      return { ...state, mavenLoading: true };
+    case REGISTER_MAVEN:
+      return { ...state, mavenLoading: false, msg: action.msg, mavenRegSuccess: true };
+      case REGISTER_MAVEN_FAILED:      
+      return { ...state, mavenLoading: false, msg: action.msg, mavenRegSuccess: false } 
 
     default:
       return state;

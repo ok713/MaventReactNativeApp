@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, Modal, ScrollView, TouchableOpacity} from 'reac
 export default class ListModal extends React.Component {
   constructor(props) {
      super(props);
-     console.log("sdfsdfsdfsdfsdfsfsdfs",props);
      this.state = {
        showModal: props.show,
      };

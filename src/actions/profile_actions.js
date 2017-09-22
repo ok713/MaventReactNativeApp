@@ -7,6 +7,7 @@ import {
   SET_LOCATION,
   REGISTER_MAVEN,
   REGISTER_MAVEN_FAILED,
+  REQUEST_REGISTER_MAVEN
 } from './types';
 
 export const getProfileInfo = (token) => {
@@ -60,47 +61,50 @@ export const registerMaven = (mavenData, token) => {
   formData.append('timeAvailable', timeAvailable);
   formData.append('price', price);
   if(pictures && pictures.length > 0){
-    let files = [];
-    pictures.map((e) => {
-      let uriParts = e.split('.');
-      let fileType = uriParts[1];
-      let file = { uri: e, name: _generateUUID() + `.${fileType}`, type: `image/${fileType}`};
-      files.push(file)
+    pictures.map((e, index) => {
+      let filename = e.split('/').pop();
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? match[1] : '';
+      let file = { uri: e, name: _generateUUID() + `.${type}`, type: `image/${type}`};
+      formData.append(`picture${index + 1}`, file);
     })
-    formData.append('pictures', files);
+    
   }
   if(idPictures && idPictures.length > 0){
-    let files = [];
-    idPictures.map((e) => {
-      let uriParts = e.split('.');
-      let fileType = uriParts[1];
-      let file = { uri: e, name: _generateUUID() + `.${fileType}`, type: `image/${fileType}`};
-      files.push(file)
+    idPictures.map((e, index) => {
+      let filename = e.split('/').pop();
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? match[1] : '';
+      let file = { uri: e, name: _generateUUID() + `.${type}`, type: `image/${type}`};
+      formData.append(`idPicture${index + 1}`, file);
     })
-    formData.append('idPictures', files);
   }
   let option = { 
     method: 'POST',
     body: formData,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'Authorization': `JWT ${token}`,
     },
   };
   return dispatch => {
+    dispatch({type: REQUEST_REGISTER_MAVEN});
     const url = `maven/registerMaven`;
     request(url, option)
     .then(res => {   
       console.log("maven res=>", res);
       if (res.status === 200) {
-        dispatch({ type: REGISTER_MAVEN, user: res.result });   
+        dispatch({ type: REGISTER_MAVEN, msg: res.msg });   
+        dispatch(getProfileInfo(token));
       }
-      else dispatch({ type: REGISTER_MAVEN_FAILED, error: res.msg });
+      else {
+        dispatch({ type: REGISTER_MAVEN_FAILED, msg: res.msg });
+      }
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: REGISTER_MAVEN_FAILED, error: err });  
+      dispatch({ type: REGISTER_MAVEN_FAILED, msg: err });  
     })  
   }
 }

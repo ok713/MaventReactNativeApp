@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         opacity: 0.7,
         width,
-        height
     },
     activityIndicator: {
         flex: 1,

@@ -20,6 +20,7 @@ import TopicPage from './mainUI/topicPage';
 import CommentsPage from './mainUI/commentsPage';
 import TabIcon from '../components/tabIcon';
 import Chat from '../components/chatComponent';
+import BlankPage from './mainUI/BlankView';
 
 const reducerCreate = params => {
   const defaultReducer = Reducer(params);
@@ -101,6 +102,7 @@ const RouterComponent = () => {
           <Scene key="chatPage" component={Chat} back={Platform.OS==="android"?false:true} title="ChatPage" />
           <Scene key="topicPage" component={TopicPage} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="topicPage" />
           <Scene key="commentsPage" component={CommentsPage} rightButtonImage={null} renderRightButton={null} back={Platform.OS==="android"?false:true} title="Comments" />
+          <Scene key="blankView" component={BlankPage} back={Platform.OS==="android"?false:true} title="ChatPage" />
         </Scene>
       </Scene>
     </Router>

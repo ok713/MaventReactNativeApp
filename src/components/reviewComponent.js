@@ -4,10 +4,10 @@ import StarRating from 'react-native-star-rating';
 
 const ReviewComponent = (props) => {
   return <View key={props.data.id} style={styles.container}>
-    <Image source={require('../../assets/images/profile.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
+    <Image source={props.data.reviewUserID.displayPicture ? {uri: props.data.reviewUserID.displayPicture} : require('../../assets/images/avatar.png')} style={{ height: 70, width: 70, borderRadius: 25 }} />
     <View style={{marginLeft:10, width:'100%'}} >
       <Text style={{ fontSize: 16, paddingRight: 5, color:'#515151' }}>
-        {props.data.Reviewer_Name}
+        {props.data.reviewUserID.firstName + " " + props.data.reviewUserID.lastName}
       </Text>
       <View style={{flexDirection:'row', paddingVertical:5}} >
         <StarRating
@@ -20,7 +20,7 @@ const ReviewComponent = (props) => {
         />
         <Text style={{ color:'#b5b5b5'}}>({props.data.rating})</Text>
       </View>
-      <Text style={{ color:'#b5b5b5', fontSize:14 }}>{props.data.content}</Text>
+      <Text style={{ color:'#b5b5b5', fontSize:14 }}>{props.data.description}</Text>
     </View>
 
   </View>

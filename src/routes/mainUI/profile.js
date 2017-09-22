@@ -27,13 +27,24 @@ class Profile extends Component {
     this.props.getProfileInfo(this.props.auth.token);
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props.profile.loading !== nextProps.profile.loading && nextProps.profile.loading){
-      this.setState({requestLoading: false, reviewData: nextProps.profile.user.reviews.slice(0, 4),});
+    if(this.props.profile.user !== nextProps.profile.user && nextProps.profile.loading){
+      this.setState({requestLoading: false, reviewData: nextProps.profile.user.reviews ? nextProps.profile.user.reviews.slice(0, 4) : []});
     }
   }
 
   render() {
     const {profile: {user}} = this.props;
+    let mavenList = [];
+    if(user && user.mavens && user.mavens.length >  0){
+      let serviceList = user.mavens.filter((e) => e.mainCategory === 0);
+      let skillList = user.mavens.filter((e) => e.mainCategory === 1);
+      if(serviceList.length > 0){
+        mavenList.push({ mainCategory: 0, data: serviceList});
+      }
+      if(skillList.length > 0){
+        mavenList.push({ mainCategory: 1, data: skillList});
+      }
+    }
     return (
       this.state.requestLoading ?
       <LoadingComponent/>
@@ -79,7 +90,7 @@ class Profile extends Component {
                 <Text style={{ fontSize: 13, color:"#b5b5b5" }}>I am a dedicated person. I enjoy reading, and the knowledge and perspective that my reading gives me has strengthened my teaching skills....</Text>
               </View>
                 {
-                  user.mavens.map((item, index) => {
+                  mavenList.map((item, index) => {
                     return <SkillRowComponent key={index} data={item} />
                   })
                 }
@@ -146,7 +157,7 @@ const mapStateToProps = (state) =>({
     profile: state.profile
 });
 const mapDispatchToProps = (dispatch) =>({
-    getProfileInfo: (token) =>dispatch(actions.getProfileInfo(token)),
+    getProfileInfo: (token) => dispatch(actions.getProfileInfo(token)),
     actions: bindActionCreators(actions, dispatch)
 });
 
