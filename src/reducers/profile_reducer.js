@@ -28,7 +28,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, mavenLoading: true };
     case REGISTER_MAVEN:
       return { ...state, mavenLoading: false, msg: action.msg, mavenRegSuccess: true };
-      case REGISTER_MAVEN_FAILED:      
+    case REGISTER_MAVEN_FAILED:      
       return { ...state, mavenLoading: false, msg: action.msg, mavenRegSuccess: false } 
 
     default:

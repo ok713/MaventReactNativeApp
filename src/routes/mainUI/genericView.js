@@ -37,10 +37,7 @@ class GenericView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("subcategoryNextProps=>", nextProps);
-    if(this.props.explore.catList !== nextProps.explore.catList && nextProps.explore.loading){
-    this.setState({requestLoading: false, data: this.props.explore.catList});
-    }
+      this.setState({requestLoading: false, data: nextProps.catList});
   }
 
   handleRefresh = () => {
@@ -138,7 +135,7 @@ class GenericView extends Component {
           <Content>
           <FlatList
             data={this.state.data}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity key = { item.mavenID } style = {{ paddingHorizontal:10, backgroundColor:'#fff' }} onPress={() => Actions.skillPage({ title: 'Photographer' })}>
                 <View style={{ paddingVertical:5, flexDirection: 'row' }}>
                   <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
@@ -177,7 +174,7 @@ class GenericView extends Component {
                 </View>
               </TouchableOpacity>
             )}
-            keyExtractor={item => item.email}
+            keyExtractor={item => item.mavenID}
             ItemSeparatorComponent={this.renderSeparator}
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
@@ -207,6 +204,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>({
   auth: state.auth,
-  explore: state.explore
+  catList: state.explore.catList
 });
 export default connect(mapStateToProps)(GenericView);

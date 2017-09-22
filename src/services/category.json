@@ -1,0 +1,19 @@
+{
+  "cooking_service": "Cooking & Baking",
+  "gadgets": "Installation & reparation of gadgets",
+  "improvement": "Home Improvement",
+  "cleaning": "Cleaning",
+  "beauty": "Beauty",
+  "photography": "Photography & videography",
+  "art_service": "Art & Design",
+  "care": "Home Care",
+  "pet": "Pet related",
+  "others_service": "Others",
+  "school": "School subjects",
+  "art_skill": "Art & Design",
+  "information": "Information Technology",
+  "sports": "Sports & Fitness",
+  "music": "Music",
+  "cooking_skill": "Cooking & Baking",
+  "Cooking & Baking": "Others"
+}

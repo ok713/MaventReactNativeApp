@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   nearbyList: [],
   catList: [],
   error: null,
-  loading: false
+  loading: false,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -19,9 +19,9 @@ export default function (state = INITIAL_STATE, action) {
     case GET_NEARBY_LIST_FAILED:
       return { ...state, error: action.error };
     case GET_CAT_LIST:
-      return { ...state, catList: action.list, loading: true };
+      return { ...state, catList: action.list};
     case GET_CAT_LIST_FAILED:
-      return { ...state, error: action.error };
+      return { ...state, error: action.error};
     default:
       return state;
 

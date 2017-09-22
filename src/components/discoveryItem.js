@@ -3,6 +3,7 @@ import { Icon } from 'native-base';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import { Actions } from 'react-native-router-flux';
+import categoryData from '../services/category.json';
 
 const ItemRow = (props) => {
   let provider = props.data;
@@ -14,7 +15,7 @@ const ItemRow = (props) => {
         </View>
         <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>
           <TextInput defaultValue={provider.title} editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
-          <TextInput defaultValue={provider.category} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
+          <TextInput defaultValue={categoryData[provider.category]} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
           <Text style={{ fontSize: 12, color:'#b5b5b5' }}>{provider.firstName + " " + provider.lastName}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center'}}>
             <StarRating

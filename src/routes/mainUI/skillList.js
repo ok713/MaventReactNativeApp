@@ -37,16 +37,16 @@ const data = [
 
 const service = [
             { key: '0', section: true, label: 'Get a Service' },
-            { key: 'cooking', label: 'Cooking & Baking' },
+            { key: 'cooking_service', label: 'Cooking & Baking' },
             { key: 'gadgets', label: 'Installation & reparation of gadgets' },
             { key: 'improvement', label: 'Home Improvement' },
-            { key: 'clean', label: 'Cleaning' },
+            { key: 'cleaning', label: 'Cleaning' },
             { key: 'beauty', label: 'Beauty' },
             { key: 'photography', label: 'Photography & videography' },
-            { key: 'art', label: 'Art & Design' },
+            { key: 'art_service', label: 'Art & Design' },
             { key: 'care', label: 'Home Care' },
             { key: 'pet', label: 'Pet related' },
-            { key: 'others', label: 'Others' },
+            { key: 'others_service', label: 'Others' },
         ];
 
 const skill = [

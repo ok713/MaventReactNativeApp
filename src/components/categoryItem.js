@@ -14,7 +14,7 @@ const { width, height } = Dimensions.get('window');
 const service = [
       {
         name: 'Cooking & Baking',
-        id: 'cooking',
+        id: 'cooking_service',
         image: require('../../assets/images/subCategories/get_a_service/Cooking_Baking.jpeg')
       },
       {
@@ -29,7 +29,7 @@ const service = [
       },
       {
         name: 'Cleaning',
-        id: 'clean',
+        id: 'cleaning',
         image: require('../../assets/images/subCategories/get_a_service/cleaning.jpg')
       },
       {
@@ -44,7 +44,7 @@ const service = [
       },
       {
         name: 'Art & Design',
-        id: 'art',
+        id: 'art_service',
         image: require('../../assets/images/subCategories/get_a_service/Art_Design.jpeg')
       },
       {
@@ -59,7 +59,7 @@ const service = [
       },
       {
         name: 'Others',
-        id: 'others',
+        id: 'others_service',
         image: require('../../assets/images/subCategories/get_a_service/Others.jpeg')
       },
 

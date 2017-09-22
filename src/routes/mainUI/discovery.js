@@ -9,15 +9,14 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions';
 import Search from 'react-native-search-box';
 import ItemRow from '../../components/discoveryItem'
-import data from '../../services/provider.json';
 import LoadingComponent from '../../components/loadingComponent';
 
 const SCREEN_H = Dimensions.get('window').height;
 const { width, height } = Dimensions.get('window');
 
 class Discovery extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             requestLoading: true,
             statusBarHeight: 1,
@@ -40,9 +39,7 @@ class Discovery extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.explore.nearbyList !== nextProps.explore.nearbyList && nextProps.explore.loading){
         this.setState({requestLoading: false});
-        }
     }
     async getLocationAsync() {
 
@@ -82,8 +79,7 @@ class Discovery extends React.Component {
     }
 
     render() {
-        const {explore:{nearbyList}} = this.props;
-        console.log("nearbyList=>", nearbyList);
+        const {nearbyList} = this.props;
         return (
             <View style={{ flex: 1, paddingTop: this.state.statusBarHeight }}>
                <MapView
@@ -139,7 +135,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) =>({
     auth: state.auth,
-    explore: state.explore
+    nearbyList: state.explore.nearbyList,
 });
 const mapDispatchToProps = (dispatch) =>({
     setLocation: (location) => dispatch(actions.setLocation(location)),

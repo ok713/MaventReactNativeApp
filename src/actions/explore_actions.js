@@ -41,6 +41,7 @@ export const getCatList = (category, location, token) => {
   };
   return dispatch => {
     const url = `maven/getCatListing?category=${category}&latitude=${location.latitude}&longitude=${location.longitude}&filter=0&rating=&availableToday=`;
+    console.log("cat url=>", url);
     request(url, option)
     .then(res => {   
       console.log("catList res=>", res);
