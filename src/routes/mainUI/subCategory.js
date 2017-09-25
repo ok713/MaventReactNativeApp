@@ -75,7 +75,7 @@ onChangeText = (text) => {
                   <Text style={{ color:'#FFA838', fontSize: 13 }}>{rand}</Text>
                 </View>
                 <TouchableOpacity onPress={(e)=>{this.goTopic(data)}}
-                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:10, justifyContent:'center', alignItems:'center', borderRadius:3, height: 30}}>
+                  style={{ backgroundColor: '#FFA838', paddingVertical:3, paddingHorizontal:5, justifyContent:'center', alignItems:'center', borderRadius:3, height: 30}}>
                   <Text style={{ color:'#fff', fontSize: 12}} >Sharing Corner</Text>
                 </TouchableOpacity>
               </View>

@@ -119,7 +119,7 @@ class Signup extends Component {
 
                         <View style={{marginLeft:10}}>
                             <Text style={{fontSize:12}}>Smile, add a photo!</Text>
-                            <Text style={{fontSize:12, color:'#808080'}}>We'll attach your photo with the gifts you send</Text>
+                            <Text style={{fontSize:12, color:'#808080'}}>Show everyone your beautiful face!</Text>
                         </View>
                     </View>
                     <TextInput
@@ -198,11 +198,11 @@ class Signup extends Component {
                     <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                         <TouchableOpacity style={[styles.genderItemView,{borderRightWidth:1, borderColor:'#a9a9a9'}]}
                             onPress={(e)=>this.setState({gender:'male'})}>
-                            <Icon name='man' style={this.state.gender==='male'?{color:'#ff0000'}:{color:'#808080'}}/>
+                            <Icon name='man' style={this.state.gender==='male'?{color:'#FFA838'}:{color:'#808080'}}/>
                             <Text style={this.state.gender==='male'?styles.genderSelItem:styles.genderItem}>MALE</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.genderItemView} onPress={(e)=>this.setState({gender:'female'})}>
-                            <Icon name='woman' style={this.state.gender==='female'?{color:'#ff0000'}:{color:'#808080'}}/>
+                            <Icon name='woman' style={this.state.gender==='female'?{color:'#FFA838'}:{color:'#808080'}}/>
                             <Text style={this.state.gender==='female'?styles.genderSelItem:styles.genderItem}>FEMALE</Text>
                         </TouchableOpacity>
                     </View>

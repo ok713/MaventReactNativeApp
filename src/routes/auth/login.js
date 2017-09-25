@@ -31,7 +31,7 @@ class Login extends Component {
    }
 
   componentWillMount() {
-    
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,11 +73,11 @@ class Login extends Component {
     return (
         <View style={{flex: 1, justifyContent:'center' }}>
             <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-                <Image source={require('../../../assets/images/CarouselView/Image2.jpg')} style={{ flex: 1, height: SCREEN_HEIGHT / 2 , width: SCREEN_WIDTH }}/>
+                <Image source={require('../../../assets/images/CarouselView/Image2.jpg')} style={{ flex: 1, height: SCREEN_HEIGHT / 2 , width: SCREEN_WIDTH, opacity: 0.4 }} blurRadius={3} />
                 <View style={{ position: 'absolute' }}>
-                  <Image source={require('../../../assets/images/mavent_logo3.png')} style={styles.LogoImage} />
+                  <Image source={require('../../../assets/images/mavent_logo.png')} style={styles.LogoImage} />
                   <View style={{ alignItems: 'center', width: '100%', paddingTop: 10 }}>
-                      <Text style={{ textAlign: 'center', fontSize: 28, color: 'white', backgroundColor: 'rgba(0,0,0,0.5)', fontWeight: 'bold' }}>M A V E N T</Text>
+                      <Text style={{ textAlign: 'center', fontSize: 30, color: '#0B486B', backgroundColor: 'rgba(0,0,0,0)', fontWeight: '700' }}>M A V E N T</Text>
                   </View>
                 </View>
             </View>
@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
     LogoImage: {
         height: 200,
         width: 200,
-        resizeMode:'contain'
+        resizeMode:'contain',
+        marginLeft: 20
     },
     loginBtn:{
         padding:5, marginTop:15, flexDirection:'row', width:'78%', alignSelf:'center', alignItems:'center',

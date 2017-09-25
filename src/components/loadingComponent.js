@@ -18,7 +18,7 @@ export default class LoadingComponent extends React.Component {
             <View style = {styles.container}>
                 <ActivityIndicator
                     style = {styles.activityIndicator}
-                    color = '#0000ff'
+                    color = 'black'
                     size = 'large'
                 />
             </View>

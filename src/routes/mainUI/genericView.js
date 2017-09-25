@@ -17,6 +17,7 @@ import { Actions } from 'react-native-router-flux';
 import StarRating from 'react-native-star-rating';
 import Search from 'react-native-search-box';
 import LoadingComponent from '../../components/loadingComponent';
+import categoryData from '../../services/category.json';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -41,7 +42,7 @@ class GenericView extends Component {
   }
 
   handleRefresh = () => {
-    
+
   };
 
   handleLoadMore = () => {
@@ -64,7 +65,7 @@ class GenericView extends Component {
   renderHeader = () => {
    return <View style={{backgroundColor:'#f8f8f8', padding:3}}>
                         <Search
-                                backgroundColor={'#f8f8f8'} inputStyle={{ backgroundColor:'#fff', borderWidth:1, borderColor:'#ececec'}}  
+                                backgroundColor={'#f8f8f8'} inputStyle={{ backgroundColor:'#fff', borderWidth:1, borderColor:'#ececec'}}
                                 placeholderTextColor="#a4a4a4"
                                 tintColorSearch="#a4a4a4"
                                 tintColorDelete="#e5e5e5"
@@ -143,7 +144,7 @@ class GenericView extends Component {
                   </View>
                   <View style={{ flex: 2, justifyContent:'center', paddingHorizontal:5 }}>
                     <TextInput defaultValue={item.title} editable={false} style={{ fontSize:13, color:'#515151', fontWeight:'400', height:17, width:150}}></TextInput>
-                    <TextInput defaultValue={item.category} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
+                    <TextInput defaultValue={categoryData[item.category]} editable={false} style={{ color:'#145775', height:23,width:150, fontSize:12, fontWeight:'400' }}></TextInput>
                     <Text style={{ fontSize: 12, color:'#b5b5b5' }}>{`${item.firstName} ${item.lastName}`}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                       <StarRating
@@ -182,8 +183,8 @@ class GenericView extends Component {
             refreshing={this.state.refreshing}
             onEndReached={this.handleLoadMore}
             onEndReachedThreshold={0.9}
-            
-          />  
+
+          />
         </Content>
       </Container>
 
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, backgroundColor:'#fff'
   },
-  
+
   titleText: { color:'#515151', fontSize:16 },
   valueText: { color:'#b5b5b5' },
   topView:{ flex: 1, paddingLeft: 10, justifyContent: 'center', borderRightWidth: 1, borderColor: '#ececec', alignItems:'center' }

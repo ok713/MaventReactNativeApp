@@ -50,7 +50,7 @@ class TopicPage extends Component {
   }
 
   componentDidMount() {
-    Actions.refresh({rightButtonImage: require('../../../assets/icons/more.png'), onRight: ()=>{this.setModalVisible(true, 1)}})
+    Actions.refresh({rightButtonImage: require('../../../assets/icons/more.png'), rightButtonIconStyle: { width: 20, height:20}, onRight: ()=>{this.setModalVisible(true, 1)}})
     let temp = [];
     let tempMore = [];
     let tempReport = [];
@@ -238,7 +238,7 @@ class TopicPage extends Component {
             <TouchableWithoutFeedback onPress = {(e)=> this.setState({modalVisible: false})} >
               <View style={styles.postModal} >
                 <View style={{ marginBottom:50,  width: '90%', padding: 20, borderRadius: 10, backgroundColor: '#fff', alignItems: 'center'}}>
-                  <TextInput multiline={true} placeholder = "Write a description..."
+                  <TextInput multiline={true} placeholder = "What's on your mind today? Share a lobang today!"
                     onChangeText={(text) => this.setState({postText: text})}
                     style = {{ width: '100%', padding: 5, fontSize:15, height:70, borderWidth: 1, borderColor: '#515151', borderRadius: 3 }}/>
                   <TouchableOpacity onPress = {(e) => this.onUploadImage()}  style = {{ marginTop: 10, height:150, width: '100%', borderWidth: 1, borderColor: '#515151', borderRadius: 3, justifyContent: 'center', alignItems: 'center' }}>

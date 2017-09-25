@@ -42,7 +42,7 @@ export const requestSignup = (userData, token) => {
     formData.append('photo', { uri: photo, name: `photo.${type}`, type: `image/${type}`});
   }
 
-  let option = { 
+  let option = {
     method: 'POST',
     body: formData,
     headers: {
@@ -54,67 +54,67 @@ export const requestSignup = (userData, token) => {
     dispatch({ type: REQUEST_USER_REG });
     const url = `user/register`;
     request(url, option)
-    .then(res => {   
+    .then(res => {
       if (res.status === 200) {
-        dispatch({ type: REG_USER_SUCCESS, msg: res.msg });    
+        dispatch({ type: REG_USER_SUCCESS, msg: res.msg });
         dispatch(generateOTP(phoneNumber));
       }
       else dispatch({ type: REG_USER_FAIL, msg: res.msg });
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: REG_USER_FAIL, msg: 'error' });  
-    })  
+      dispatch({ type: REG_USER_FAIL, msg: 'error' });
+    })
   }
 }
 
 const generateOTP = (phoneNumber) => {
-  let option = { 
+  let option = {
     method: 'GET',
   };
   let realPhoneNumber = '65' + phoneNumber;
   return dispatch => {
     const url = `user/generateOtp?phoneNumber=${realPhoneNumber}`;
     request(url, option)
-    .then(res => {   
+    .then(res => {
       if (res.status === 200) {
-        dispatch({ type: GENERATE_OTP_SUCCESS, msg: res.msg, phoneNumber });    
+        dispatch({ type: GENERATE_OTP_SUCCESS, msg: res.msg, phoneNumber });
       }
       else dispatch({ type: GENERATE_OTP_FAIL, msg: res.msg });
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: GENERATE_OTP_FAIL, msg: 'error' });  
-    })  
+      dispatch({ type: GENERATE_OTP_FAIL, msg: 'error' });
+    })
   }
 
 }
 
 export const verifyOtp = (phoneNumber, otp) => {
-  let option = { 
+  let option = {
     method: 'GET',
   };
   return dispatch => {
     dispatch({ type: REQUEST_VERIFY_OTP });
     const url = `user/verifyOtp?phoneNumber=${phoneNumber}&otp=${otp}`;
     request(url, option)
-    .then(res => {   
+    .then(res => {
       if (res.status === 200) {
-        dispatch({ type: VERIFY_OTP_SUCCESS, msg: res.msg });    
+        dispatch({ type: VERIFY_OTP_SUCCESS, msg: res.msg });
       }
       else dispatch({ type: VERIFY_OTP_FAIL, msg: res.msg });
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: VERIFY_OTP_FAIL, msg: 'error' });  
-    })  
+      dispatch({ type: VERIFY_OTP_FAIL, msg: 'error' });
+    })
   }
 
 }
 
 export const requestLogin = (email, password) => {
   let data = {email: email, password: password};
-  let option = { 
+  let option = {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -126,14 +126,14 @@ export const requestLogin = (email, password) => {
     dispatch({ type: REQUEST_LOGIN });
     const url = `user/login`;
     request(url, option)
-    .then(res => {    
-      if (res.status === 200) dispatch({ type: REQUESTED_LOGIN_SUCCEEDED, token:res.token });    
+    .then(res => {
+      if (res.status === 200) dispatch({ type: REQUESTED_LOGIN_SUCCEEDED, token:res.token });
       else dispatch({ type: REQUESTED_LOGIN_FAILED });
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: REQUESTED_LOGIN_FAILED });  
-    })  
+      dispatch({ type: REQUESTED_LOGIN_FAILED });
+    })
   }
 }
 
@@ -142,7 +142,7 @@ export const facebookLogin = () => async dispatch => {
 };
 
 export const doFacebookLogin = async dispatch => {
-  let { type, token } = await Facebook.logInWithReadPermissionsAsync('1201211719949057', {
+  let { type, token } = await Facebook.logInWithReadPermissionsAsync('265644483900185', {
     permissions: ['public_profile', 'email']
   });
 
@@ -153,7 +153,7 @@ export const doFacebookLogin = async dispatch => {
 };
 
 const loginWithToken = (token) => {
-  let option = { 
+  let option = {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -165,18 +165,18 @@ const loginWithToken = (token) => {
     dispatch({ type: REQUEST_LOGIN });
     const url = `user/login/Facebook`;
     request(url, option)
-    .then(res => {   
+    .then(res => {
        console.log(res);
       if (res.status === 200) {
-        dispatch({ type: REQUESTED_LOGIN_SUCCEEDED, token:res.token });    
+        dispatch({ type: REQUESTED_LOGIN_SUCCEEDED, token:res.token });
       }
       else dispatch({ type: VERIFY_OTP_FAIL, msg: res.msg });
     })
     .catch(err => {
       console.log("ERROR=>", err);
-      dispatch({ type: VERIFY_OTP_FAIL, msg: 'error' });  
-    })  
+      dispatch({ type: VERIFY_OTP_FAIL, msg: 'error' });
+    })
   }
   // dispatch({ type: FACEBOOK_LOGIN_SUCCESS, token: token });
-  
+
 }
