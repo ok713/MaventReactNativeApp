@@ -66,9 +66,10 @@ export default function (state = INITIAL_STATE, action) {
     case REG_USER_SUCCESS:      
         return {                
             ...state,
-            signupLoading: true,
+            signupLoading: false,
             signedUp: true,
-            signupMsg: action.msg
+            signupMsg: action.msg,
+            phoneNumber: action.phoneNumber
         } 
 
     case REG_USER_FAIL:      
@@ -84,7 +85,6 @@ export default function (state = INITIAL_STATE, action) {
             signedUp: true,
             signupLoading: false,
             signupMsg: action.msg,
-            phoneNumber: action.phoneNumber
         }
     case GENERATE_OTP_FAIL:      
         return {                
@@ -103,8 +103,8 @@ export default function (state = INITIAL_STATE, action) {
             ...state,
             verifyOtp: true,
             verifyLoading: false,
-            verifyMsg: action.msg
-            
+            verifyMsg: action.msg,
+            token:action.token
         }
     case VERIFY_OTP_FAIL:      
         return {                

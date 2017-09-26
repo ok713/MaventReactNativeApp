@@ -67,10 +67,10 @@ class RouterComponent extends React.Component {
           titleStyle={{ color: 'white', fontSize: 20, fontWeight: '600' }}
           renderRightButton={renderRightButton} >
 
-          <Scene key='auth' >
+          <Scene key='auth'>
             <Scene key="login" component={Login} hideNavBar />
             <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} renderRightButton={null} />
-            <Scene key="OTP"  component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true}
+            <Scene key="OTP" component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true}
             renderRightButton={null} hideNavBar={false} rightButtonImage={null} />
           </Scene>
 

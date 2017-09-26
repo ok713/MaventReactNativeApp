@@ -19,6 +19,7 @@ import {ImagePicker} from 'expo';
 import DatePicker from 'react-native-datepicker'
 import {connect} from 'react-redux';
 import LoadingComponent from '../../components/loadingComponent';
+// import ImageResizer from 'react-native-image-resizer';
 
 class Signup extends Component {
   constructor(props) {
@@ -85,9 +86,41 @@ class Signup extends Component {
         dob: this.state.birthDay,
         gender: gender,
         phoneNumber: this.state.phoneNumber,
-        photo: this.state.profileUrl
+        photo:this.setState.profileUrl
     }
     this.props.requestSignup(data);
+    // if(this.state.profileUrl)
+    //     {
+    //         ImageResizer.createResizedImage(this.state.profileUrl, 20, 20, "JPEG", 10).then((response) => {
+    //             let data = {
+    //                 email: this.state.email,
+    //                 password: this.state.password,
+    //                 firstName: this.state.firstName,
+    //                 lastName: this.state.lastName,
+    //                 dob: this.state.birthDay,
+    //                 gender: gender,
+    //                 phoneNumber: this.state.phoneNumber,
+    //                 photo: response.uri
+    //             }
+    //             console.log(response.uri);
+    //             this.props.requestSignup(data);
+    //         }).catch((err) => {
+    //             console.log(err);
+    //         });
+    //     }
+    //     else {
+    //         let data = {
+    //             email: this.state.email,
+    //             password: this.state.password,
+    //             firstName: this.state.firstName,
+    //             lastName: this.state.lastName,
+    //             dob: this.state.birthDay,
+    //             gender: gender,
+    //             phoneNumber: this.state.phoneNumber,
+    //             photo:this.setState.profileUrl
+    //         }
+    //         this.props.requestSignup(data);
+    //     }
   }
 
   render() {

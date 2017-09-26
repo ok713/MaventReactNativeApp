@@ -10,17 +10,19 @@ import LoadingComponent from '../../components/loadingComponent';
 class Otp extends React.Component {
   constructor(props) {
      super(props);
+     this.count = 0;
      this.state = {
          value1:'',
          value2:'',
          value3:'',
          value4:'',
+         value5:'',
      };
    }
 
    componentWillReceiveProps(nextProps) {
       if(this.props.auth.verifyLoading !== nextProps.auth.verifyLoading && !nextProps.auth.verifyLoading && nextProps.auth.verifyOtp){
-        alert(nextProps.auth.verifyMsg);
+        Actions.main();
       }
       if(this.props.auth.verifyLoading !== nextProps.auth.verifyLoading && !nextProps.auth.verifyLoading && !nextProps.auth.verifyOtp){
         alert(nextProps.auth.verifyMsg);
@@ -28,7 +30,7 @@ class Otp extends React.Component {
   }
 
    componentDidMount(){
-
+    this.props.generateOTP(this.props.auth.phoneNumber);
    }
 
    onChange = (text, index) => {
@@ -45,13 +47,25 @@ class Otp extends React.Component {
             this.setState({value3:text});
             if(text.length) this.refs.text4.focus();
             break;
-           case 4:
+          case 4:
             this.setState({value4:text});
-            if(text.length) this.refs.text4.blur();
-            this.onVerify();
+            if(text.length) this.refs.text5.focus();
+            break;
+           case 5:
+            this.setState({value5:text});
+            if(text.length) this.refs.text5.blur();
             break;
             
        }
+   }
+
+   onGenerate = () => {
+       this.count = this.count + 1;
+       if(this.count > 3) {
+           alert("you cannot try more than 3 times.");
+           return;
+       }
+       this.props.generateOTP(this.props.auth.phoneNumber);
    }
 
    onVerify = () => {
@@ -59,7 +73,7 @@ class Otp extends React.Component {
             alert("please fill");
             return;
        }
-       let otp = this.state.value1 + this.state.value2 + this.state.value3 + this.state.value4;
+       let otp = this.state.value1 + this.state.value2 + this.state.value3 + this.state.value4 + this.state.value5;
        this.props.verifyOtp(this.props.auth.phoneNumber, otp);
    }
 
@@ -88,9 +102,16 @@ class Otp extends React.Component {
                     <TextInput ref="text4" value={this.state.value4} keyboardType="numeric" maxLength={1} 
                     onChangeText={(text)=>this.onChange(text,4)} style={styles.textInput}/>
                 </Card>
+                <Card>
+                    <TextInput ref="text5" value={this.state.value5} keyboardType="numeric" maxLength={1} 
+                    onChangeText={(text)=>this.onChange(text,5)} style={styles.textInput}/>
+                </Card>
             </View>
-            <TouchableOpacity style={styles.btn} onPress = {(e) => this.onVerify()} >
+            <TouchableOpacity style={styles.btn} onPress = {(e) => this.onGenerate()} >
                 <Text style={{color:'#fff', fontWeight:'bold', textAlign:'center'}} >RESEND CODE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress = {(e) => this.onVerify()} >
+                <Text style={{color:'#fff', fontWeight:'bold', textAlign:'center'}} >Verify OTP</Text>
             </TouchableOpacity>
             {
              this.props.auth.verifyLoading &&
@@ -104,6 +125,7 @@ const mapStateToProps = (state) =>({
     auth: state.auth
 });
 const mapDispatchToProps = (dispatch) =>({
+    generateOTP: (phoneNumber) => dispatch(actions.generateOTP(phoneNumber)),
     verifyOtp: (phoneNumber, otp) =>dispatch(actions.verifyOtp(phoneNumber, otp)),
     actions: bindActionCreators(actions, dispatch)
 });

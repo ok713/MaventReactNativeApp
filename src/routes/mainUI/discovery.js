@@ -10,6 +10,7 @@ import * as actions from '../../actions';
 import Search from 'react-native-search-box';
 import ItemRow from '../../components/discoveryItem'
 import LoadingComponent from '../../components/loadingComponent';
+// import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 const SCREEN_H = Dimensions.get('window').height;
 const { width, height } = Dimensions.get('window');
@@ -91,6 +92,12 @@ class Discovery extends React.Component {
                     loadingEnabled
                     style={{ height: 0.3 * SCREEN_H }}
                 />
+                {/* <ShimmerPlaceHolder autoRun={true} />
+                <ShimmerPlaceHolder autoRun={true} visible={true}>
+                <Text>
+                    Wow, awesome here.
+                </Text>
+                </ShimmerPlaceHolder> */}
                 <View style={styles.listContainer}>
                     <View style={{backgroundColor:'#f8f8f8', padding:3}}>
                         <Search

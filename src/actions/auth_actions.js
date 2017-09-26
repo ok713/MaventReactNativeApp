@@ -56,8 +56,7 @@ export const requestSignup = (userData, token) => {
     request(url, option)
     .then(res => {
       if (res.status === 200) {
-        dispatch({ type: REG_USER_SUCCESS, msg: res.msg });
-        dispatch(generateOTP(phoneNumber));
+        dispatch({ type: REG_USER_SUCCESS, msg: res.msg, phoneNumber });
       }
       else dispatch({ type: REG_USER_FAIL, msg: res.msg });
     })
@@ -68,7 +67,7 @@ export const requestSignup = (userData, token) => {
   }
 }
 
-const generateOTP = (phoneNumber) => {
+export const generateOTP = (phoneNumber) => {
   let option = {
     method: 'GET',
   };
@@ -77,8 +76,9 @@ const generateOTP = (phoneNumber) => {
     const url = `user/generateOtp?phoneNumber=${realPhoneNumber}`;
     request(url, option)
     .then(res => {
+      console.log(res);
       if (res.status === 200) {
-        dispatch({ type: GENERATE_OTP_SUCCESS, msg: res.msg, phoneNumber });
+        dispatch({ type: GENERATE_OTP_SUCCESS, msg: res.msg });
       }
       else dispatch({ type: GENERATE_OTP_FAIL, msg: res.msg });
     })
@@ -94,13 +94,14 @@ export const verifyOtp = (phoneNumber, otp) => {
   let option = {
     method: 'GET',
   };
+  let realPhoneNumber = '65' + phoneNumber;
   return dispatch => {
     dispatch({ type: REQUEST_VERIFY_OTP });
-    const url = `user/verifyOtp?phoneNumber=${phoneNumber}&otp=${otp}`;
+    const url = `user/verifyOtp?phoneNumber=${realPhoneNumber}&otp=${otp}`;
     request(url, option)
     .then(res => {
       if (res.status === 200) {
-        dispatch({ type: VERIFY_OTP_SUCCESS, msg: res.msg });
+        dispatch({ type: VERIFY_OTP_SUCCESS, msg: res.msg, token: res.token });
       }
       else dispatch({ type: VERIFY_OTP_FAIL, msg: res.msg });
     })
