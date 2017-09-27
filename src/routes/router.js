@@ -50,6 +50,12 @@ const renderRightButton = ()=>{
         </TouchableOpacity>
 }
 
+const renderLeftButton = ()=>{
+  return <TouchableOpacity onPress={(e)=> Actions.reset("auth")} style={{padding:10}}>
+            <Icon name = "arrow-back" style={{ fontSize: 25 }}/>
+        </TouchableOpacity>
+}
+
 class RouterComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +76,7 @@ class RouterComponent extends React.Component {
           <Scene key='auth'>
             <Scene key="login" component={Login} hideNavBar />
             <Scene key="signup" component={Signup} title="Join Mavent" hideNavBar={false} rightButtonImage={null} renderRightButton={null} />
-            <Scene key="OTP" component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true}
+              <Scene key="OTP" component={Otp} title="ACTIVATION" back={Platform.OS==="android"?false:true} renderLeftButton = {renderLeftButton}
             renderRightButton={null} hideNavBar={false} rightButtonImage={null} />
           </Scene>
 

@@ -129,7 +129,7 @@ export const requestLogin = (email, password) => {
     request(url, option)
     .then(res => {
       if (res.status === 200) dispatch({ type: REQUESTED_LOGIN_SUCCEEDED, token:res.token });
-      else dispatch({ type: REQUESTED_LOGIN_FAILED });
+      else dispatch({ type: REQUESTED_LOGIN_FAILED, status: res.status });
     })
     .catch(err => {
       console.log("ERROR=>", err);

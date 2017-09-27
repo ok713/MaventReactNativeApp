@@ -17,6 +17,7 @@ class Otp extends React.Component {
          value3:'',
          value4:'',
          value5:'',
+         phoneNumber: ''
      };
    }
 
@@ -30,7 +31,7 @@ class Otp extends React.Component {
   }
 
    componentDidMount(){
-    this.props.generateOTP(this.props.auth.phoneNumber);
+       if(this.props.phoneState === "1") this.props.generateOTP(this.props.auth.phoneNumber);
    }
 
    onChange = (text, index) => {
@@ -65,7 +66,12 @@ class Otp extends React.Component {
            alert("you cannot try more than 3 times.");
            return;
        }
-       this.props.generateOTP(this.props.auth.phoneNumber);
+       if(this.props.phoneState === "2" && this.state.phoneNumber.length < 1) {
+           alert("input phoneNumber");
+           return;
+       }
+       let phoneNumber = this.props.phoneState === "1" ? this.props.auth.phoneNumber : this.state.phoneNumber;
+       this.props.generateOTP(phoneNumber);
    }
 
    onVerify = () => {
@@ -73,8 +79,9 @@ class Otp extends React.Component {
             alert("please fill");
             return;
        }
+       let phoneNumber = this.props.phoneState === "1" ? this.props.auth.phoneNumber : this.state.phoneNumber;
        let otp = this.state.value1 + this.state.value2 + this.state.value3 + this.state.value4 + this.state.value5;
-       this.props.verifyOtp(this.props.auth.phoneNumber, otp);
+       this.props.verifyOtp(phoneNumber, otp);
    }
 
    render() {
@@ -83,7 +90,24 @@ class Otp extends React.Component {
             <Text style={{fontWeight:'bold', textAlign:'center'}} >JUST ONE MORE STEP... </Text>
             <View style={{paddingVertical:30}} >
                 <Text style={{fontSize:12, textAlign:'center'}} >Type your activation code sent to</Text>
-                <Text style={{fontWeight:'bold', paddingTop:10, textAlign:'center'}}> +65 {this.props.auth.phoneNumber} </Text>
+                <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                    <Text style={{fontWeight:'bold',textAlign:'center'}}> +65 </Text>
+                    {
+                        this.props.phoneState === "1" ?
+                            <Text style={{fontWeight:'bold', textAlign:'center'}}>{this.props.auth.phoneNumber}</Text>
+                        :
+                        <TextInput
+                            ref='phoneNumber'
+                            keyboardType="phone-pad"
+                            autoCapitalize="none"
+                            style={styles.phoneInput}
+                            placeholder="Your mobile number"
+                            maxLength={8}
+                            onChangeText={(text) => this.setState({phoneNumber:text})}
+                            value={this.state.phoneNumber}
+                        />
+                    }
+                </View>
             </View>
             <View style={{paddingHorizontal:10, flexDirection:'row', justifyContent:'space-around', alignItems:'center', width:'100%'}}>
                 <Card>
@@ -138,6 +162,9 @@ const styles = StyleSheet.create({
         flex:1, justifyContent:'flex-start', alignItems:'center', padding:20
     },
     textInput:{ height:40, paddingHorizontal:5 , textAlign:'center', width: '100%'},
+    phoneInput:{backgroundColor:'#fff', paddingHorizontal:10, height: 30,
+                flex: 1,
+                borderColor: '#a9a9a9', borderWidth: 0.5, borderRadius:5},
     btn:{backgroundColor:'#0B486B', padding:10, width:'100%', marginTop:30, borderRadius:5,
             shadowOpacity: 0.8,
             shadowRadius: 2,

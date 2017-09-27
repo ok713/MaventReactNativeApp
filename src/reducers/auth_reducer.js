@@ -55,6 +55,7 @@ export default function (state = INITIAL_STATE, action) {
             ...state,
             loginLoading: false,
             loggedIn: false,
+            status: action.status
         } 
     case REQUEST_USER_REG:      
       return {                

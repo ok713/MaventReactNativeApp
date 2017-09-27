@@ -44,7 +44,7 @@ class Signup extends Component {
 
   componentWillReceiveProps(nextProps) {
       if(this.props.auth.signupLoading !== nextProps.auth.signupLoading && !nextProps.auth.signupLoading && nextProps.auth.signedUp){
-        Actions.OTP();
+        Actions.OTP({phoneState: "1"});
       }
       if(this.props.auth.signupLoading !== nextProps.auth.signupLoading && !nextProps.auth.signupLoading && !nextProps.auth.signedUp){
         alert(nextProps.auth.signupMsg);
@@ -206,8 +206,6 @@ class Signup extends Component {
                         style={[styles.textInput,{marginTop:10}]}
                         placeholder="Your mobile number"
                         onChangeText={(text) => this.setState({phoneNumber:text})}
-
-
                         value={this.state.phoneNumber}
                     />
                     <Text style={styles.text}>We'll need this to activate your account and keep it secured.</Text>
