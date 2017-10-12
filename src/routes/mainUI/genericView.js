@@ -163,7 +163,7 @@ class GenericView extends Component {
                       <Text style={{color:'#FFA838', fontWeight:"700", fontSize:15}}>${item.price}</Text>
                       <Text style={{ color:'#b5b5b5', fontWeight:'400', fontSize:12 }}>/hr</Text>
                     </View>
-                    <TouchableOpacity style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}} onPress={() => Actions.blankView({ title: `${item.firstName} ${item.lastName}` })}>
+                    <TouchableOpacity style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}} onPress={() => Actions.chatPage({ title: `${item.firstName} ${item.lastName}` })}>
                       <Icon name = "ios-chatbubbles-outline" style={{ fontSize: 29, color:'#3F6A86', paddingRight:5 }}/>
                       <Icon name = "ios-arrow-forward" style={{ fontSize: 18, color:'#BFD9E7', paddingLeft:5 }}/>
                     </TouchableOpacity>
